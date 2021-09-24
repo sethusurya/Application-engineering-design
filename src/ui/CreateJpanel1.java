@@ -5,6 +5,7 @@
  */
 package ui;
 
+import java.util.Date;
 import javax.swing.JOptionPane;
 import model.Profile;
 
@@ -38,10 +39,10 @@ public class CreateJpanel1 extends javax.swing.JPanel {
         lblDob = new javax.swing.JLabel();
         lblAddress = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtDob = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
         saveBtn = new javax.swing.JButton();
         CancelBtn = new javax.swing.JButton();
+        dob = new com.toedter.calendar.JDateChooser();
 
         title.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -53,12 +54,6 @@ public class CreateJpanel1 extends javax.swing.JPanel {
 
         lblAddress.setText("Address:");
 
-        txtDob.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDobActionPerformed(evt);
-            }
-        });
-
         saveBtn.setText("Save");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +62,11 @@ public class CreateJpanel1 extends javax.swing.JPanel {
         });
 
         CancelBtn.setText("Cancel");
+        CancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -82,18 +82,19 @@ public class CreateJpanel1 extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(CancelBtn)
                                 .addGap(43, 43, 43)
-                                .addComponent(saveBtn))
+                                .addComponent(saveBtn)
+                                .addGap(0, 151, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblName)
                                     .addComponent(lblAddress)
                                     .addComponent(lblDob))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtName)
-                                    .addComponent(txtAddress)
-                                    .addComponent(txtDob, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 97, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dob, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                                    .addComponent(txtName))
+                                .addGap(85, 85, 85)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -105,11 +106,11 @@ public class CreateJpanel1 extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDob)
-                    .addComponent(txtDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAddress)
                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -117,35 +118,52 @@ public class CreateJpanel1 extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBtn)
                     .addComponent(CancelBtn))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtDobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDobActionPerformed
-        // TODO add your handling code here:
-        txtName.removeAll();
-    }//GEN-LAST:event_txtDobActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
         profile.setName(txtName.getText());
-        profile.setDateOfBirth(txtDob.getText());
+        profile.setDateOfBirth(dob.getDate());
         profile.setAddress(txtAddress.getText());
         
         JOptionPane.showMessageDialog(this, "Profile information is saved");
         
     }//GEN-LAST:event_saveBtnActionPerformed
 
+    private void CancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelBtnActionPerformed
+        // TODO add your handling code here:d
+        clearProfile();
+        displayProfile();
+        JOptionPane.showMessageDialog(this, "Profile information is cleared");
+    }//GEN-LAST:event_CancelBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelBtn;
+    private com.toedter.calendar.JDateChooser dob;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblDob;
     private javax.swing.JLabel lblName;
     private javax.swing.JButton saveBtn;
     private javax.swing.JLabel title;
     private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtDob;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
+
+    Date currentDate = new Date();
+
+    private void clearProfile() {
+        profile.setName("");
+        profile.setDateOfBirth(currentDate);
+        profile.setAddress("");
+    }
+    
+    private void displayProfile() {
+        txtName.setText("");
+        txtAddress.setText("");
+        System.out.println(currentDate);
+        dob.setDate(currentDate);
+    }
 }

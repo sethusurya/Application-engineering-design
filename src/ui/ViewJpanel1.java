@@ -115,7 +115,7 @@ public class ViewJpanel1 extends javax.swing.JPanel {
 
     private void display() {
         txtName.setText(profile.getName());
-        txtDob.setText(profile.getDateOfBirth());
+        txtDob.setText(profile.getDateOfBirth().toString());
         txtAddress.setText(profile.getAddress());
     }
 }
