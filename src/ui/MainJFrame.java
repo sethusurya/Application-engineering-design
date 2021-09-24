@@ -5,6 +5,7 @@
  */
 package ui;
 
+import javax.swing.JScrollPane;
 import model.Profile;
 
 /**
@@ -102,7 +103,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+            .addComponent(splitPane)
         );
 
         pack();
@@ -112,7 +113,9 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         CreateJpanel1 createPanel = new CreateJpanel1(profile);
-        splitPane.setRightComponent(createPanel);
+        JScrollPane jsp = new JScrollPane(createPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        splitPane.setRightComponent(jsp);
+        
     }//GEN-LAST:event_createBtnActionPerformed
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed

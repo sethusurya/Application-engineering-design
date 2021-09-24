@@ -6,6 +6,7 @@
 package model;
 
 import java.util.Date;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -14,9 +15,10 @@ import java.util.Date;
 public class Profile {
     
     private String name;
-    private String address;
     private Date dateOfBirth;
-    private String telephone;
+    private String address;
+    private Number telephone;
+    private ImageIcon profilePhoto;
     private String fax;
     private String emailId;
     private String ssn;
@@ -27,7 +29,6 @@ public class Profile {
     private String vehicleId;
     private String linkedInUrl;
     private String ipAddress;
-    private String profilePhoto;
 
     public String getName() {
         return name;
@@ -53,11 +54,11 @@ public class Profile {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getTelephone() {
+    public Number getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(String telephone) {
+    public void setTelephone(Number telephone) {
         this.telephone = telephone;
     }
 
@@ -141,11 +142,11 @@ public class Profile {
         this.ipAddress = ipAddress;
     }
 
-    public String getProfilePhoto() {
+    public ImageIcon getProfilePhoto() {
         return profilePhoto;
     }
 
-    public void setProfilePhoto(String profilePhoto) {
+    public void setProfilePhoto(ImageIcon profilePhoto) {
         this.profilePhoto = profilePhoto;
     }
     
