@@ -65,7 +65,6 @@ public class CreateJpanel1 extends javax.swing.JPanel {
         lblState = new javax.swing.JLabel();
         btnProfile = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
-        CancelBtn = new javax.swing.JButton();
         dateDob = new com.toedter.calendar.JDateChooser();
         imgProfile = new org.jdesktop.swingx.JXImageView();
         txtPhone = new javax.swing.JTextField();
@@ -165,13 +164,6 @@ public class CreateJpanel1 extends javax.swing.JPanel {
             }
         });
 
-        CancelBtn.setText("Cancel");
-        CancelBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelBtnActionPerformed(evt);
-            }
-        });
-
         dateDob.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         dateDob.setAlignmentY(2.0F);
         dateDob.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -201,6 +193,11 @@ public class CreateJpanel1 extends javax.swing.JPanel {
 
         txtStreet.setAlignmentY(2.0F);
         txtStreet.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtStreet.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtStreetFocusLost(evt);
+            }
+        });
         txtStreet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStreetActionPerformed(evt);
@@ -235,6 +232,11 @@ public class CreateJpanel1 extends javax.swing.JPanel {
 
         txtState.setAlignmentY(2.0F);
         txtState.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtState.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtStateFocusLost(evt);
+            }
+        });
         txtState.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStateActionPerformed(evt);
@@ -400,8 +402,7 @@ public class CreateJpanel1 extends javax.swing.JPanel {
                                     .addComponent(valLinkedin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(valIPaddr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(CancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -530,9 +531,7 @@ public class CreateJpanel1 extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(valPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveBtn)
-                    .addComponent(CancelBtn))
+                .addComponent(saveBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -558,22 +557,22 @@ public class CreateJpanel1 extends javax.swing.JPanel {
         // validate textfields
         // validate picture present
         validateName();
+        validateDob();
+        validateStreet();
         validateZipcode();
+        validateState();
         validateEmailId();
         validatePhoneNumber();
         validateHealthPlanId();
         validateMedicalRecordNumber();
         validateIpAddress();
+        validateLinkedIn();
         validateSSN();
         validatePicture();
-        if (valName.getText().length() != 0 || valZip.getText().length()!= 0 || valZip.getText().length()!=0 || valHealth.getText().length()!= 0 || valMedical.getText().length() != 0|| valPhoto.getText().length() != 0 || valSsn.getText().length() != 0 || valPhone.getText().length()!=0||valIPaddr.getText().length()!=0 || valEmail.getText().length()!=0) {
+        if (valName.getText().length() != 0 || valZip.getText().length()!= 0 || valZip.getText().length()!=0 || valHealth.getText().length()!= 0 || valMedical.getText().length() != 0|| valPhoto.getText().length() != 0 || valSsn.getText().length() != 0 || valPhone.getText().length()!=0||valIPaddr.getText().length()!=0 || valEmail.getText().length()!=0 || valDob.getText().length()!=0 || valStreet.getText().length() !=0 || valState.getText().length() !=0 || valLinkedin.getText().length()!=0) {
             return false;
         } else return true;
     };
-
-    private void CancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CancelBtnActionPerformed
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
         // TODO add your handling code here:
@@ -681,9 +680,18 @@ public class CreateJpanel1 extends javax.swing.JPanel {
         validateIpAddress();
     }//GEN-LAST:event_txtIpAddressFocusLost
 
+    private void txtStreetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStreetFocusLost
+        // TODO add your handling code here:
+        validateStreet();
+    }//GEN-LAST:event_txtStreetFocusLost
+
+    private void txtStateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStateFocusLost
+        validateState();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStateFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CancelBtn;
     private javax.swing.JButton btnProfile;
     private com.toedter.calendar.JDateChooser dateDob;
     private org.jdesktop.swingx.JXImageView imgProfile;
@@ -740,17 +748,38 @@ public class CreateJpanel1 extends javax.swing.JPanel {
         }
     };
 
-//    private void validateDob() {
-//        Date dob = dateDob.getDate();
-//        Date currentDate = new Date();
-//        System.out.println(dob);
-//        System.out.println(currentDate);
-//        if (dob.before(currentDate)) {
-//            System.out.println("is before current date");
-//        } else {
-//            System.out.println("is after current date");
-//        }
-//    }
+    private void validateDob() {
+        System.out.println(dateDob.getDate());
+        if (dateDob.getDate() == null){
+            valDob.setText("Date field is empty");
+        } else {
+            valDob.setText("");
+        }
+    }
+    
+    private void validateStreet(){
+        if (txtStreet.getText().length() == 0) {
+            valStreet.setText("Street cannot be empty");
+        } else {
+            valStreet.setText("");
+        }
+    }
+    
+    private void validateState(){
+        if (txtState.getText().length() == 0) {
+            valState.setText("State cannot be empty");
+        } else {
+            valState.setText("");
+        }
+    }
+    
+    private void validateLinkedIn() {
+        if (txtLinkedIn.getText().length() == 0){
+            valLinkedin.setText("LinkedIn cannot be empty");
+        } else {
+            valLinkedin.setText("");
+        }
+    }
 
     private void validateZipcode() {
         String zipString = txtZipcode.getText();
@@ -863,10 +892,6 @@ public class CreateJpanel1 extends javax.swing.JPanel {
         }
     }
 
-    private void validateLinkedIn() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     private void validateIpAddress() {
         String ipAddress = txtIpAddress.getText();
         String regex = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
@@ -892,7 +917,20 @@ public class CreateJpanel1 extends javax.swing.JPanel {
     }
 
     private void saveProfileInfo() {
-        System.out.println("profile info saved");
+        profile.setName(txtName.getText());
+        profile.setDob(dateDob.getDate());
+        profile.setStreet(txtStreet.getText());
+        profile.setZipCode(Integer.parseInt(txtZipcode.getText()));
+        profile.setEmailId(txtEmail.getText());
+        profile.setState(txtState.getText());
+        profile.setPhone(Long.parseLong(txtPhone.getText()));
+        profile.setSsn(Long.parseLong(txtSsn.getText()));
+        profile.setHealthId(Long.parseLong(txtHealth.getText()));
+        profile.setMedicalRecordNumber(Long.parseLong(txtMediical.getText()));
+        profile.setLinkedIn(txtLinkedIn.getText());
+        profile.setIpAddress(txtIpAddress.getText());
+       
+        System.out.println(profile);
     }
 
 }

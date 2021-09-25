@@ -121,7 +121,8 @@ public class MainJFrame extends javax.swing.JFrame {
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         // TODO add your handling code here:
         ViewJpanel1 viewPanel = new ViewJpanel1(profile);
-        splitPane.setRightComponent(viewPanel);
+        JScrollPane jsp = new JScrollPane(viewPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        splitPane.setRightComponent(jsp);
     }//GEN-LAST:event_viewBtnActionPerformed
 
     /**
