@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.awt.Image;
 import java.util.Date;
 import javax.swing.ImageIcon;
 
@@ -13,22 +14,19 @@ import javax.swing.ImageIcon;
  * @author Sethu
  */
 public class Profile {
-    
     private String name;
-    private Date dateOfBirth;
-    private String address;
-    private Number telephone;
-    private ImageIcon profilePhoto;
-    private String fax;
+    private Date dob;
+    private String street;
+    private Number zipCode;
+    private String state;
     private String emailId;
-    private String ssn;
-    private String medicalId;
-    private String healthId;
-    private String bankAccountNo;
-    private String licenseNumber;
-    private String vehicleId;
-    private String linkedInUrl;
+    private Number phone; // 10 digits all number, starting with other than 0
+    private Number ssn; // 9 digits all numbers
+    private Number healthId; // 10 digits all numbers
+    private Number medicalRecordNumber; // 7 digits all numbers
+    private String linkedIn;
     private String ipAddress;
+    private Image profilePicture;
 
     public String getName() {
         return name;
@@ -38,36 +36,36 @@ public class Profile {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public String getStreet() {
+        return street;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public Number getTelephone() {
-        return telephone;
+    public Number getZipCode() {
+        return zipCode;
     }
 
-    public void setTelephone(Number telephone) {
-        this.telephone = telephone;
+    public void setZipCode(Number zipCode) {
+        this.zipCode = zipCode;
     }
 
-    public String getFax() {
-        return fax;
+    public String getState() {
+        return state;
     }
 
-    public void setFax(String fax) {
-        this.fax = fax;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getEmailId() {
@@ -78,60 +76,44 @@ public class Profile {
         this.emailId = emailId;
     }
 
-    public String getSsn() {
+    public Number getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Number phone) {
+        this.phone = phone;
+    }
+
+    public Number getSsn() {
         return ssn;
     }
 
-    public void setSsn(String ssn) {
+    public void setSsn(Number ssn) {
         this.ssn = ssn;
     }
 
-    public String getMedicalId() {
-        return medicalId;
-    }
-
-    public void setMedicalId(String medicalId) {
-        this.medicalId = medicalId;
-    }
-
-    public String getHealthId() {
+    public Number getHealthId() {
         return healthId;
     }
 
-    public void setHealthId(String healthId) {
+    public void setHealthId(Number healthId) {
         this.healthId = healthId;
     }
 
-    public String getBankAccountNo() {
-        return bankAccountNo;
+    public Number getMedicalRecordNumber() {
+        return medicalRecordNumber;
     }
 
-    public void setBankAccountNo(String bankAccountNo) {
-        this.bankAccountNo = bankAccountNo;
+    public void setMedicalRecordNumber(Number medicalRecordNumber) {
+        this.medicalRecordNumber = medicalRecordNumber;
     }
 
-    public String getLicenseNumber() {
-        return licenseNumber;
+    public String getLinkedIn() {
+        return linkedIn;
     }
 
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
-    }
-
-    public String getVehicleId() {
-        return vehicleId;
-    }
-
-    public void setVehicleId(String vehicleId) {
-        this.vehicleId = vehicleId;
-    }
-
-    public String getLinkedInUrl() {
-        return linkedInUrl;
-    }
-
-    public void setLinkedInUrl(String linkedInUrl) {
-        this.linkedInUrl = linkedInUrl;
+    public void setLinkedIn(String linkedIn) {
+        this.linkedIn = linkedIn;
     }
 
     public String getIpAddress() {
@@ -142,15 +124,12 @@ public class Profile {
         this.ipAddress = ipAddress;
     }
 
-    public ImageIcon getProfilePhoto() {
-        return profilePhoto;
+    public Image getProfilePicture() {
+        return profilePicture;
     }
 
-    public void setProfilePhoto(ImageIcon profilePhoto) {
-        this.profilePhoto = profilePhoto;
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
     }
-    
-    
-    
     
 }

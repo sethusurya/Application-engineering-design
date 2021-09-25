@@ -5,11 +5,16 @@
  */
 package ui;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -47,33 +52,46 @@ public class CreateJpanel1 extends javax.swing.JPanel {
         title = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblDob = new javax.swing.JLabel();
-        lblAddress = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        txtAddress = new javax.swing.JTextField();
+        lblStreet = new javax.swing.JLabel();
+        lblPhoto = new javax.swing.JLabel();
+        lblLinkedIn = new javax.swing.JLabel();
+        lblPhone = new javax.swing.JLabel();
+        lblZipcode = new javax.swing.JLabel();
+        lblSsn = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblMedical = new javax.swing.JLabel();
+        lblHealth = new javax.swing.JLabel();
+        lblIpAddress = new javax.swing.JLabel();
+        lblState = new javax.swing.JLabel();
+        btnProfile = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         CancelBtn = new javax.swing.JButton();
-        dob = new com.toedter.calendar.JDateChooser();
-        lblPhone = new javax.swing.JLabel();
+        dateDob = new com.toedter.calendar.JDateChooser();
+        imgProfile = new org.jdesktop.swingx.JXImageView();
         txtPhone = new javax.swing.JTextField();
-        lblProfile = new javax.swing.JLabel();
-        uploadBtn = new javax.swing.JButton();
-        profilePic = new org.jdesktop.swingx.JXImageView();
-        txtAddress1 = new javax.swing.JTextField();
-        lblAddress1 = new javax.swing.JLabel();
-        txtAddress2 = new javax.swing.JTextField();
-        lblAddress2 = new javax.swing.JLabel();
-        txtAddress3 = new javax.swing.JTextField();
-        lblAddress3 = new javax.swing.JLabel();
-        txtAddress4 = new javax.swing.JTextField();
-        lblAddress4 = new javax.swing.JLabel();
-        txtAddress5 = new javax.swing.JTextField();
-        lblAddress5 = new javax.swing.JLabel();
-        txtAddress6 = new javax.swing.JTextField();
-        lblAddress6 = new javax.swing.JLabel();
-        txtAddress7 = new javax.swing.JTextField();
-        lblAddress7 = new javax.swing.JLabel();
-        txtAddress8 = new javax.swing.JTextField();
-        lblAddress8 = new javax.swing.JLabel();
+        txtStreet = new javax.swing.JTextField();
+        txtZipcode = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        txtState = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtSsn = new javax.swing.JTextField();
+        txtHealth = new javax.swing.JTextField();
+        txtMediical = new javax.swing.JTextField();
+        txtLinkedIn = new javax.swing.JTextField();
+        txtIpAddress = new javax.swing.JTextField();
+        valDob = new javax.swing.JLabel();
+        valName = new javax.swing.JLabel();
+        valStreet = new javax.swing.JLabel();
+        valState = new javax.swing.JLabel();
+        valZip = new javax.swing.JLabel();
+        valEmail = new javax.swing.JLabel();
+        valPhone = new javax.swing.JLabel();
+        valSsn = new javax.swing.JLabel();
+        valHealth = new javax.swing.JLabel();
+        valMedical = new javax.swing.JLabel();
+        valLinkedin = new javax.swing.JLabel();
+        valIPaddr = new javax.swing.JLabel();
+        valPhoto = new javax.swing.JLabel();
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -89,28 +107,54 @@ public class CreateJpanel1 extends javax.swing.JPanel {
         lblDob.setText("Date of Birth:");
         lblDob.setAlignmentY(2.0F);
 
-        lblAddress.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblAddress.setText("Street Address:");
-        lblAddress.setAlignmentY(2.0F);
+        lblStreet.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblStreet.setText("Street Address:");
+        lblStreet.setAlignmentY(2.0F);
 
-        txtName.setAlignmentY(2.0F);
-        txtName.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtNameFocusLost(evt);
-            }
-        });
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
+        lblPhoto.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPhoto.setText("Profile Photo:");
 
-        txtAddress.setAlignmentY(2.0F);
-        txtAddress.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtAddress.addActionListener(new java.awt.event.ActionListener() {
+        lblLinkedIn.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblLinkedIn.setText("Linkedin profile:");
+        lblLinkedIn.setAlignmentY(2.0F);
+
+        lblPhone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPhone.setText("Phone No:");
+        lblPhone.setAlignmentY(2.0F);
+
+        lblZipcode.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblZipcode.setText("Zip Code:");
+        lblZipcode.setAlignmentY(2.0F);
+
+        lblSsn.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSsn.setText("SSN:");
+        lblSsn.setAlignmentY(2.0F);
+
+        lblEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblEmail.setText("Email ID:");
+        lblEmail.setAlignmentY(2.0F);
+
+        lblMedical.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblMedical.setText("MRN:");
+        lblMedical.setAlignmentY(2.0F);
+
+        lblHealth.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblHealth.setText("Health Plan ID:");
+        lblHealth.setAlignmentY(2.0F);
+
+        lblIpAddress.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblIpAddress.setText("IPAddress:");
+        lblIpAddress.setAlignmentY(2.0F);
+
+        lblState.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblState.setText("State:");
+        lblState.setAlignmentY(2.0F);
+
+        btnProfile.setText("upload");
+        btnProfile.setToolTipText("");
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddressActionPerformed(evt);
+                btnProfileActionPerformed(evt);
             }
         });
 
@@ -128,199 +172,267 @@ public class CreateJpanel1 extends javax.swing.JPanel {
             }
         });
 
-        dob.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        dob.setAlignmentY(2.0F);
+        dateDob.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        dateDob.setAlignmentY(2.0F);
+        dateDob.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                dateDobFocusLost(evt);
+            }
+        });
 
-        lblPhone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblPhone.setText("Phone No:");
-        lblPhone.setAlignmentY(2.0F);
+        javax.swing.GroupLayout imgProfileLayout = new javax.swing.GroupLayout(imgProfile);
+        imgProfile.setLayout(imgProfileLayout);
+        imgProfileLayout.setHorizontalGroup(
+            imgProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        imgProfileLayout.setVerticalGroup(
+            imgProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         txtPhone.setAlignmentY(2.0F);
         txtPhone.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblProfile.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblProfile.setText("Profile Photo:");
-
-        uploadBtn.setText("upload");
-        uploadBtn.setToolTipText("");
-        uploadBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uploadBtnActionPerformed(evt);
+        txtPhone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPhoneFocusLost(evt);
             }
         });
 
-        javax.swing.GroupLayout profilePicLayout = new javax.swing.GroupLayout(profilePic);
-        profilePic.setLayout(profilePicLayout);
-        profilePicLayout.setHorizontalGroup(
-            profilePicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        profilePicLayout.setVerticalGroup(
-            profilePicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        txtAddress1.setAlignmentY(2.0F);
-        txtAddress1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtAddress1.addActionListener(new java.awt.event.ActionListener() {
+        txtStreet.setAlignmentY(2.0F);
+        txtStreet.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtStreet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddress1ActionPerformed(evt);
+                txtStreetActionPerformed(evt);
             }
         });
 
-        lblAddress1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblAddress1.setText("Zip Code:");
-        lblAddress1.setAlignmentY(2.0F);
-
-        txtAddress2.setAlignmentY(2.0F);
-        txtAddress2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtAddress2.addActionListener(new java.awt.event.ActionListener() {
+        txtZipcode.setAlignmentY(2.0F);
+        txtZipcode.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtZipcode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtZipcodeFocusLost(evt);
+            }
+        });
+        txtZipcode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddress2ActionPerformed(evt);
+                txtZipcodeActionPerformed(evt);
             }
         });
 
-        lblAddress2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblAddress2.setText("State:");
-        lblAddress2.setAlignmentY(2.0F);
-
-        txtAddress3.setAlignmentY(2.0F);
-        txtAddress3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtAddress3.addActionListener(new java.awt.event.ActionListener() {
+        txtName.setAlignmentY(2.0F);
+        txtName.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNameFocusLost(evt);
+            }
+        });
+        txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddress3ActionPerformed(evt);
+                txtNameActionPerformed(evt);
             }
         });
 
-        lblAddress3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblAddress3.setText("Email ID:");
-        lblAddress3.setAlignmentY(2.0F);
-
-        txtAddress4.setAlignmentY(2.0F);
-        txtAddress4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtAddress4.addActionListener(new java.awt.event.ActionListener() {
+        txtState.setAlignmentY(2.0F);
+        txtState.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtState.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddress4ActionPerformed(evt);
+                txtStateActionPerformed(evt);
             }
         });
 
-        lblAddress4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblAddress4.setText("SSN:");
-        lblAddress4.setAlignmentY(2.0F);
-
-        txtAddress5.setAlignmentY(2.0F);
-        txtAddress5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtAddress5.addActionListener(new java.awt.event.ActionListener() {
+        txtEmail.setAlignmentY(2.0F);
+        txtEmail.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEmailFocusLost(evt);
+            }
+        });
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddress5ActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
 
-        lblAddress5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblAddress5.setText("Health Plan ID:");
-        lblAddress5.setAlignmentY(2.0F);
-
-        txtAddress6.setAlignmentY(2.0F);
-        txtAddress6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtAddress6.addActionListener(new java.awt.event.ActionListener() {
+        txtSsn.setAlignmentY(2.0F);
+        txtSsn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtSsn.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSsnFocusLost(evt);
+            }
+        });
+        txtSsn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddress6ActionPerformed(evt);
+                txtSsnActionPerformed(evt);
             }
         });
 
-        lblAddress6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblAddress6.setText("Medical ID:");
-        lblAddress6.setAlignmentY(2.0F);
-
-        txtAddress7.setAlignmentY(2.0F);
-        txtAddress7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtAddress7.addActionListener(new java.awt.event.ActionListener() {
+        txtHealth.setAlignmentY(2.0F);
+        txtHealth.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtHealth.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtHealthFocusLost(evt);
+            }
+        });
+        txtHealth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddress7ActionPerformed(evt);
+                txtHealthActionPerformed(evt);
             }
         });
 
-        lblAddress7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblAddress7.setText("Linkedin profile:");
-        lblAddress7.setAlignmentY(2.0F);
-
-        txtAddress8.setAlignmentY(2.0F);
-        txtAddress8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtAddress8.addActionListener(new java.awt.event.ActionListener() {
+        txtMediical.setAlignmentY(2.0F);
+        txtMediical.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtMediical.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtMediicalFocusLost(evt);
+            }
+        });
+        txtMediical.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddress8ActionPerformed(evt);
+                txtMediicalActionPerformed(evt);
             }
         });
 
-        lblAddress8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblAddress8.setText("IPAddress:");
-        lblAddress8.setAlignmentY(2.0F);
+        txtLinkedIn.setAlignmentY(2.0F);
+        txtLinkedIn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtLinkedIn.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtLinkedInFocusLost(evt);
+            }
+        });
+        txtLinkedIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLinkedInActionPerformed(evt);
+            }
+        });
+
+        txtIpAddress.setAlignmentY(2.0F);
+        txtIpAddress.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtIpAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtIpAddressFocusLost(evt);
+            }
+        });
+        txtIpAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIpAddressActionPerformed(evt);
+            }
+        });
+
+        valDob.setForeground(new java.awt.Color(255, 0, 0));
+
+        valName.setForeground(new java.awt.Color(255, 0, 0));
+
+        valStreet.setForeground(new java.awt.Color(255, 0, 0));
+
+        valState.setForeground(new java.awt.Color(255, 0, 0));
+
+        valZip.setForeground(new java.awt.Color(255, 0, 0));
+
+        valEmail.setForeground(new java.awt.Color(255, 0, 0));
+
+        valPhone.setForeground(new java.awt.Color(255, 0, 0));
+
+        valSsn.setForeground(new java.awt.Color(255, 0, 0));
+
+        valHealth.setForeground(new java.awt.Color(255, 0, 0));
+
+        valMedical.setForeground(new java.awt.Color(255, 0, 0));
+
+        valLinkedin.setForeground(new java.awt.Color(255, 0, 0));
+
+        valIPaddr.setForeground(new java.awt.Color(255, 0, 0));
+
+        valPhoto.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(profilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(uploadBtn)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDob, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtStreet))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblZipcode, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtZipcode)
+                                    .addComponent(valStreet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(valZip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEmail))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblSsn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSsn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblHealth, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtHealth)
+                                    .addComponent(valSsn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblMedical, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMediical)
+                                    .addComponent(valHealth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblLinkedIn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtLinkedIn)
+                                    .addComponent(valMedical, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblIpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIpAddress)
+                                    .addComponent(valLinkedin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(valIPaddr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(CancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDob, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dateDob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtName)
+                                    .addComponent(txtPhone)
+                                    .addComponent(valDob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(valEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(valPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(valName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(valPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(imgProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnProfile)
+                                        .addGap(0, 43, Short.MAX_VALUE))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(lblState, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtName)
-                            .addComponent(txtPhone)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAddress))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAddress1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblAddress2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAddress2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblAddress3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAddress3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblAddress4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAddress4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblAddress5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAddress5))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblAddress6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAddress6, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblAddress7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAddress7, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblAddress8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAddress8, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(CancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(valState, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtState))))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
@@ -332,86 +444,138 @@ public class CreateJpanel1 extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(valName, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDob, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(dateDob, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addComponent(valDob, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblStreet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtStreet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addComponent(valStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblZipcode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtZipcode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(valZip, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblState, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(valState, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(valEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addComponent(valPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSsn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSsn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblProfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(profilePic, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHealth, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(uploadBtn)
-                        .addGap(41, 41, 41)))
-                .addGap(19, 19, 19)
+                        .addComponent(valSsn, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtHealth, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMedical, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(valHealth, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMediical, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLinkedIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(valMedical, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtLinkedIn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIpAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(valLinkedin, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtIpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(valIPaddr, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imgProfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnProfile)
+                                .addGap(41, 41, 41))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(valPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBtn)
                     .addComponent(CancelBtn))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblAddress, lblDob, lblName, lblPhone, lblProfile});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblDob, lblName, lblPhone, lblPhoto, lblStreet});
 
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
-        profile.setName(txtName.getText());
-        profile.setDateOfBirth(dob.getDate());
-        profile.setAddress(txtAddress.getText());
-        
+        boolean isValidData = runFullValidation();
+        if (isValidData) {
+        // save the data to profile
+        saveProfileInfo();
         JOptionPane.showMessageDialog(this, "Profile information is saved");
+        } else {
+        JOptionPane.showMessageDialog(this, "One or more errors have been found");
+        }
+        
         
     }//GEN-LAST:event_saveBtnActionPerformed
 
+    private boolean runFullValidation() {
+        // validate textfields
+        // validate picture present
+        validateName();
+        validateZipcode();
+        validateEmailId();
+        validatePhoneNumber();
+        validateHealthPlanId();
+        validateMedicalRecordNumber();
+        validateIpAddress();
+        validateSSN();
+        validatePicture();
+        if (valName.getText().length() != 0 || valZip.getText().length()!= 0 || valZip.getText().length()!=0 || valHealth.getText().length()!= 0 || valMedical.getText().length() != 0|| valPhoto.getText().length() != 0 || valSsn.getText().length() != 0 || valPhone.getText().length()!=0||valIPaddr.getText().length()!=0 || valEmail.getText().length()!=0) {
+            return false;
+        } else return true;
+    };
+
     private void CancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelBtnActionPerformed
-        // TODO add your handling code here:d
-        clearProfile();
-        displayProfile();
-        JOptionPane.showMessageDialog(this, "Profile information is cleared");
+        // TODO add your handling code here:
     }//GEN-LAST:event_CancelBtnActionPerformed
 
-    private void uploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadBtnActionPerformed
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser  = new JFileChooser(); // creating new file picker
         chooser.addChoosableFileFilter(new ImageFilter()); // adding filter to display only supported image types
@@ -419,110 +583,318 @@ public class CreateJpanel1 extends javax.swing.JPanel {
         chooser.showOpenDialog(null);
         try {
             File profilePhoto = chooser.getSelectedFile();
-            profilePic.setImage(profilePhoto);
+            imgProfile.setImage(profilePhoto);
+            profile.setProfilePicture(imgProfile.getImage());
         } catch (IOException ex) {
-//            Logger.getLogger(CreateJpanel1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateJpanel1.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_uploadBtnActionPerformed
+    }//GEN-LAST:event_btnProfileActionPerformed
 
     private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
         // TODO add your handling code here:
+        validateName();
     }//GEN-LAST:event_txtNameFocusLost
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
-    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
+    private void txtStreetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStreetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressActionPerformed
+    }//GEN-LAST:event_txtStreetActionPerformed
 
-    private void txtAddress1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddress1ActionPerformed
+    private void txtZipcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtZipcodeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddress1ActionPerformed
+    }//GEN-LAST:event_txtZipcodeActionPerformed
 
-    private void txtAddress2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddress2ActionPerformed
+    private void txtStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddress2ActionPerformed
+    }//GEN-LAST:event_txtStateActionPerformed
 
-    private void txtAddress3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddress3ActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddress3ActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void txtAddress4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddress4ActionPerformed
+    private void txtSsnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSsnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddress4ActionPerformed
+    }//GEN-LAST:event_txtSsnActionPerformed
 
-    private void txtAddress5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddress5ActionPerformed
+    private void txtHealthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHealthActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddress5ActionPerformed
+    }//GEN-LAST:event_txtHealthActionPerformed
 
-    private void txtAddress6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddress6ActionPerformed
+    private void txtMediicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMediicalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddress6ActionPerformed
+    }//GEN-LAST:event_txtMediicalActionPerformed
 
-    private void txtAddress7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddress7ActionPerformed
+    private void txtLinkedInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLinkedInActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddress7ActionPerformed
+    }//GEN-LAST:event_txtLinkedInActionPerformed
 
-    private void txtAddress8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddress8ActionPerformed
+    private void txtIpAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIpAddressActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddress8ActionPerformed
+    }//GEN-LAST:event_txtIpAddressActionPerformed
 
-    private void validateName(JTextField field, JLabel label) {
-        if (field.getText().length() <= 2) {
-            label.setText("Invalid Name, it should be atleast 3 letters");
-        }
-    };
+    private void dateDobFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dateDobFocusLost
+        // TODO add your handling code here:
+        System.out.println("running validation");
+//        validateDob();
+    }//GEN-LAST:event_dateDobFocusLost
+
+    private void txtZipcodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtZipcodeFocusLost
+        // TODO add your handling code here:
+        validateZipcode();
+    }//GEN-LAST:event_txtZipcodeFocusLost
+
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        // TODO add your handling code here:
+        validateEmailId();
+    }//GEN-LAST:event_txtEmailFocusLost
+
+    private void txtPhoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPhoneFocusLost
+        // TODO add your handling code here:
+        validatePhoneNumber();
+    }//GEN-LAST:event_txtPhoneFocusLost
+
+    private void txtSsnFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSsnFocusLost
+        // TODO add your handling code here:
+        validateSSN();
+    }//GEN-LAST:event_txtSsnFocusLost
+
+    private void txtHealthFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHealthFocusLost
+        // TODO add your handling code here:
+        validateHealthPlanId();
+    }//GEN-LAST:event_txtHealthFocusLost
+
+    private void txtMediicalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMediicalFocusLost
+        // TODO add your handling code here:
+        validateMedicalRecordNumber();
+    }//GEN-LAST:event_txtMediicalFocusLost
+
+    private void txtLinkedInFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLinkedInFocusLost
+        // TODO add your handling code here:
+        validateLinkedIn();
+    }//GEN-LAST:event_txtLinkedInFocusLost
+
+    private void txtIpAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIpAddressFocusLost
+        // TODO add your handling code here:
+        validateIpAddress();
+    }//GEN-LAST:event_txtIpAddressFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelBtn;
-    private com.toedter.calendar.JDateChooser dob;
+    private javax.swing.JButton btnProfile;
+    private com.toedter.calendar.JDateChooser dateDob;
+    private org.jdesktop.swingx.JXImageView imgProfile;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JLabel lblAddress;
-    private javax.swing.JLabel lblAddress1;
-    private javax.swing.JLabel lblAddress2;
-    private javax.swing.JLabel lblAddress3;
-    private javax.swing.JLabel lblAddress4;
-    private javax.swing.JLabel lblAddress5;
-    private javax.swing.JLabel lblAddress6;
-    private javax.swing.JLabel lblAddress7;
-    private javax.swing.JLabel lblAddress8;
     private javax.swing.JLabel lblDob;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblHealth;
+    private javax.swing.JLabel lblIpAddress;
+    private javax.swing.JLabel lblLinkedIn;
+    private javax.swing.JLabel lblMedical;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPhone;
-    private javax.swing.JLabel lblProfile;
-    private org.jdesktop.swingx.JXImageView profilePic;
+    private javax.swing.JLabel lblPhoto;
+    private javax.swing.JLabel lblSsn;
+    private javax.swing.JLabel lblState;
+    private javax.swing.JLabel lblStreet;
+    private javax.swing.JLabel lblZipcode;
     private javax.swing.JButton saveBtn;
     private javax.swing.JLabel title;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtAddress1;
-    private javax.swing.JTextField txtAddress2;
-    private javax.swing.JTextField txtAddress3;
-    private javax.swing.JTextField txtAddress4;
-    private javax.swing.JTextField txtAddress5;
-    private javax.swing.JTextField txtAddress6;
-    private javax.swing.JTextField txtAddress7;
-    private javax.swing.JTextField txtAddress8;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtHealth;
+    private javax.swing.JTextField txtIpAddress;
+    private javax.swing.JTextField txtLinkedIn;
+    private javax.swing.JTextField txtMediical;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhone;
-    private javax.swing.JButton uploadBtn;
+    private javax.swing.JTextField txtSsn;
+    private javax.swing.JTextField txtState;
+    private javax.swing.JTextField txtStreet;
+    private javax.swing.JTextField txtZipcode;
+    private javax.swing.JLabel valDob;
+    private javax.swing.JLabel valEmail;
+    private javax.swing.JLabel valHealth;
+    private javax.swing.JLabel valIPaddr;
+    private javax.swing.JLabel valLinkedin;
+    private javax.swing.JLabel valMedical;
+    private javax.swing.JLabel valName;
+    private javax.swing.JLabel valPhone;
+    private javax.swing.JLabel valPhoto;
+    private javax.swing.JLabel valSsn;
+    private javax.swing.JLabel valState;
+    private javax.swing.JLabel valStreet;
+    private javax.swing.JLabel valZip;
     // End of variables declaration//GEN-END:variables
 
-    Date currentDate = new Date();
+    private void validateName() {
+        String name = txtName.getText();
+        if (name.length() <= 2) {
+            valName.setText("Invalid Name, length <= 2");
+        } else if (name.length() > 25) {
+            valName.setText("Invalid Name, length > 25");
+        } else {
+            valName.setText("");
+        }
+    };
 
-    private void clearProfile() {
-        profile.setName("");
-        profile.setDateOfBirth(currentDate);
-        profile.setAddress("");
+//    private void validateDob() {
+//        Date dob = dateDob.getDate();
+//        Date currentDate = new Date();
+//        System.out.println(dob);
+//        System.out.println(currentDate);
+//        if (dob.before(currentDate)) {
+//            System.out.println("is before current date");
+//        } else {
+//            System.out.println("is after current date");
+//        }
+//    }
+
+    private void validateZipcode() {
+        String zipString = txtZipcode.getText();
+        boolean isValidZip = true;
+        
+        for (int i = 0; i < zipString.length(); i++) {
+            char c = zipString.charAt(i);
+            if (!(c>='0' && c<='9')) {
+                isValidZip = false;
+            }
+        }
+        if (zipString.length()!= 5) {
+            valZip.setText("Invalid zip code, Length should be 5");
+        } else if (zipString.length()==5 && !isValidZip) {
+            valZip.setText("Invalid zip code, No alphabets");
+        } else {
+            valZip.setText("");
+        }
+//        int zipCode = Integer.parseInt(zipString);
+//        System.out.println(zipCode);
+    };
+
+    private void validateEmailId() {
+        String emailId = txtEmail.getText();
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(emailId);
+        if (!matcher.matches()) {
+         valEmail.setText("Invalid Email Id, Please check");
+        } else {
+            valEmail.setText("");
+        }
+    }
+
+    private void validatePhoneNumber() { // self check no regex
+        String phoneString = txtPhone.getText();
+        boolean isValidPhone = true;
+        
+        for (int i = 0; i < phoneString.length(); i++) {
+            char c = phoneString.charAt(i);
+            if (i == 0 && c == '0') {
+                isValidPhone = false;
+            } else if (!(c>='0' && c<='9')) {
+                isValidPhone = false;
+            }
+        }
+        if (phoneString.length()!= 10) {
+            valPhone.setText("Invalid Phone number, Length should be 10");
+        } else if (phoneString.length()==10 && !isValidPhone) {
+            valPhone.setText("Invalid phone number");
+        } else {
+            valPhone.setText("");
+        }
+    }
+
+    private void validateSSN() {
+        String ssnString = txtSsn.getText();
+        boolean isValidSsn = true;
+        
+        for (int i = 0; i < ssnString.length(); i++) {
+            char c = ssnString.charAt(i);
+            if (!(c>='0' && c<='9')) {
+                isValidSsn = false;
+            }
+        }
+        if (ssnString.length()!= 9) {
+            valSsn.setText("Invalid SSN, Length should be 9");
+        } else if (ssnString.length()==9 && !isValidSsn) {
+            valSsn.setText("Invalid Social Security number, no alphabets");
+        } else {
+            valSsn.setText("");
+        }
+    }
+
+    private void validateHealthPlanId() {
+        String healthString = txtHealth.getText();
+        boolean isValidHealth = true;
+        
+        for (int i = 0; i < healthString.length(); i++) {
+            char c = healthString.charAt(i);
+             if (!(c>='0' && c<='9')) {
+                isValidHealth = false;
+            }
+        }
+        if (healthString.length()!= 10) {
+            valHealth.setText("Invalid health id, Length should be 10");
+        } else if (healthString.length()==10 && !isValidHealth) {
+            valHealth.setText("Invalid health id, No alphabets");
+        } else {
+            valHealth.setText("");
+        }
+    }
+
+    private void validateMedicalRecordNumber() {
+        String mrnString = txtMediical.getText();
+        boolean isValidMrn = true;
+        
+        for (int i = 0; i < mrnString.length(); i++) {
+            char c = mrnString.charAt(i);
+             if (!(c>='0' && c<='9')) {
+                isValidMrn = false;
+            }
+        }
+        if (mrnString.length()!= 7) {
+            valMedical.setText("Invalid MRN, length should be 7");
+        } else if (mrnString.length()==7 && !isValidMrn) {
+            valMedical.setText("Invalid MRN, No alphabets");
+        } else {
+            valMedical.setText("");
+        }
+    }
+
+    private void validateLinkedIn() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void validateIpAddress() {
+        String ipAddress = txtIpAddress.getText();
+        String regex = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(ipAddress);
+        if (!matcher.matches()) {
+            valIPaddr.setText("Invalid IP Address, 255.255.255.255 is valid");
+        } else {
+            valIPaddr.setText("");
+        }
+        
     }
     
-    private void displayProfile() {
-        txtName.setText("");
-        txtAddress.setText("");
-        System.out.println(currentDate);
-        dob.setDate(currentDate);
+    private void validatePicture() {
+        // check if the image is present in the 
+        System.out.println(profile.getProfilePicture());
+        if (profile.getProfilePicture() == null) {
+            valPhoto.setText("Image not found");
+        } else {
+            valPhoto.setText("");
+        }
+        
     }
+
+    private void saveProfileInfo() {
+        System.out.println("profile info saved");
+    }
+
 }
 
 // Define a filter for the image types

@@ -114,8 +114,6 @@ public class ViewJpanel1 extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void display() {
-        txtName.setText(profile.getName());
-        txtDob.setText(profile.getDateOfBirth().toString());
-        txtAddress.setText(profile.getAddress());
+        
     }
 }
