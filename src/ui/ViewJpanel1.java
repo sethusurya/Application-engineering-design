@@ -551,16 +551,36 @@ public class ViewJpanel1 extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void display() {
+        String zipCode = "";
+        String phone = "";
+        String ssn = "";
+        String medical = "";
+        String health = "";
+        if (profile.getZipCode() != null) {
+            zipCode = profile.getZipCode().toString();
+        }
+        if (profile.getPhone() != null) {
+            phone = profile.getPhone().toString();
+        }
+        if (profile.getSsn() != null) {
+            ssn = profile.getSsn().toString();
+        }
+        if (profile.getMedicalRecordNumber() != null) {
+            medical = profile.getMedicalRecordNumber().toString();
+        }
+        if (profile.getHealthId() != null) {
+            health = profile.getHealthId().toString();
+        }
         txtName.setText(profile.getName());
         dateDob.setDate(profile.getDob());
         txtStreet.setText(profile.getStreet());
-        txtZipcode.setText(profile.getZipCode().toString());
+        txtZipcode.setText(zipCode);
         txtState.setText(profile.getState());
         txtEmail.setText(profile.getEmailId());
-        txtPhone.setText(profile.getPhone().toString());
-        txtSsn.setText(profile.getSsn().toString());
-        txtHealth.setText(profile.getHealthId().toString());
-        txtMediical.setText(profile.getMedicalRecordNumber().toString());
+        txtPhone.setText(phone);
+        txtSsn.setText(ssn);
+        txtHealth.setText(health);
+        txtMediical.setText(medical);
         txtLinkedIn.setText(profile.getLinkedIn());
         txtIpAddress.setText(profile.getIpAddress());
         imgProfile.setImage(profile.getProfilePicture());
