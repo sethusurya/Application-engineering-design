@@ -20,8 +20,8 @@ public class Car {
     private Boolean maintenance;
     private Double serialNumber;
     private Double modelNumber;
-    private Date manufacturedYear;
-    private int seats;
+    private Integer manufacturedYear;
+    private Integer seats;
 
     public String getCompany() {
         return company;
@@ -87,11 +87,11 @@ public class Car {
         this.modelNumber = modelNumber;
     }
 
-    public Date getManufacturedYear() {
+    public Integer getManufacturedYear() {
         return manufacturedYear;
     }
 
-    public void setManufacturedYear(Date manufacturedYear) {
+    public void setManufacturedYear(Integer manufacturedYear) {
         this.manufacturedYear = manufacturedYear;
     }
 

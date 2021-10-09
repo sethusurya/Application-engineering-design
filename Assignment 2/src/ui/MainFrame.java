@@ -5,17 +5,22 @@
  */
 package ui;
 
+import model.Carlist;
+
 /**
  *
  * @author Sethu
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    Carlist myCarList;
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        
+        myCarList = new Carlist();
     }
 
     /**
@@ -36,8 +41,18 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         create.setText("Create");
+        create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createActionPerformed(evt);
+            }
+        });
 
         view.setText("View");
+        view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
@@ -45,19 +60,19 @@ public class MainFrame extends javax.swing.JFrame {
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(create, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(create, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                     .addComponent(view, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap())
         );
         leftPanelLayout.setVerticalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(create)
-                .addGap(29, 29, 29)
-                .addComponent(view)
-                .addContainerGap(561, Short.MAX_VALUE))
+                .addGap(214, 214, 214)
+                .addComponent(create, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(view, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(467, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(leftPanel);
@@ -70,7 +85,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         rightPanelLayout.setVerticalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 748, Short.MAX_VALUE)
+            .addGap(0, 798, Short.MAX_VALUE)
         );
 
         splitPane.setRightComponent(rightPanel);
@@ -88,6 +103,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
+        CreatePanel myCreatePanel = new CreatePanel(myCarList);
+        splitPane.setRightComponent(myCreatePanel);
+    }//GEN-LAST:event_createActionPerformed
+
+    private void viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewActionPerformed
+        OverviewPanel myOverviewPanel = new OverviewPanel(myCarList);
+        splitPane.setRightComponent(myOverviewPanel);
+    }//GEN-LAST:event_viewActionPerformed
 
     /**
      * @param args the command line arguments

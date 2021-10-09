@@ -5,17 +5,28 @@
  */
 package ui;
 
+import javax.swing.JOptionPane;
+import model.Car;
+import model.Carlist;
+
+
 /**
  *
  * @author Sethu
  */
 public class CreatePanel extends javax.swing.JPanel {
+    
+    Carlist myCarList;
 
     /**
      * Creates new form CreatePanel
      */
-    public CreatePanel() {
+    public CreatePanel(Carlist myCarList) {
         initComponents();
+        this.myCarList = myCarList;
+        
+        btnAvailabilityYes.setSelected(true); // default values
+        btnMaintanenceValid.setSelected(true); // default values
     }
 
     /**
@@ -28,37 +39,254 @@ public class CreatePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         title = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblCompany = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblSerialNumber = new javax.swing.JLabel();
+        lblSeats = new javax.swing.JLabel();
+        lblCity = new javax.swing.JLabel();
+        lblLicense = new javax.swing.JLabel();
+        lblMaintanenceCert = new javax.swing.JLabel();
+        lblAvailability = new javax.swing.JLabel();
+        lblManufacturedYear = new javax.swing.JLabel();
+        lblModelNumber = new javax.swing.JLabel();
+        btinSave = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        btnAvailabilityYes = new javax.swing.JRadioButton();
+        btnAvailabilityNo = new javax.swing.JRadioButton();
+        btnMaintanenceValid = new javax.swing.JRadioButton();
+        btnMaintanenceExpired = new javax.swing.JRadioButton();
+        dateManufacturedYear = new com.toedter.calendar.JYearChooser();
+        txtCompany = new javax.swing.JTextField();
+        txtModelName = new javax.swing.JTextField();
+        txtModelNumber = new javax.swing.JTextField();
+        txtSerialNumber = new javax.swing.JTextField();
+        txtSeats = new javax.swing.JTextField();
+        txtCity = new javax.swing.JTextField();
+        txtLicense = new javax.swing.JTextField();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         title.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("ADD CAR");
+        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 600, 63));
 
-        jLabel1.setText("Company");
+        lblCompany.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblCompany.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblCompany.setText("Company : ");
+        add(lblCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 150, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(885, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 644, Short.MAX_VALUE))
-        );
+        lblName.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblName.setText("Model Name : ");
+        add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 150, 40));
+
+        lblSerialNumber.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSerialNumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSerialNumber.setText("Serial Number : ");
+        add(lblSerialNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 150, 40));
+
+        lblSeats.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSeats.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSeats.setText("No. of Seats : ");
+        add(lblSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 150, 40));
+
+        lblCity.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblCity.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblCity.setText("City : ");
+        add(lblCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 150, 40));
+
+        lblLicense.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblLicense.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblLicense.setText("License Plate No. : ");
+        add(lblLicense, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, 150, 40));
+
+        lblMaintanenceCert.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblMaintanenceCert.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblMaintanenceCert.setText("Maintanence Certificate : ");
+        add(lblMaintanenceCert, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 150, 40));
+
+        lblAvailability.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblAvailability.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblAvailability.setText("Availability : ");
+        add(lblAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, 150, 40));
+
+        lblManufacturedYear.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblManufacturedYear.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblManufacturedYear.setText("Manufactured Year : ");
+        add(lblManufacturedYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 680, 150, 40));
+
+        lblModelNumber.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblModelNumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblModelNumber.setText("Model Number : ");
+        add(lblModelNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 150, 40));
+
+        btinSave.setText("Save");
+        btinSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btinSaveActionPerformed(evt);
+            }
+        });
+        add(btinSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 750, -1, -1));
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 750, -1, -1));
+
+        btnAvailabilityYes.setText("Yes");
+        btnAvailabilityYes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnAvailabilityYesItemStateChanged(evt);
+            }
+        });
+        add(btnAvailabilityYes, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 610, 120, 50));
+
+        btnAvailabilityNo.setText("No");
+        btnAvailabilityNo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnAvailabilityNoItemStateChanged(evt);
+            }
+        });
+        add(btnAvailabilityNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 610, 100, 50));
+
+        btnMaintanenceValid.setText("Valid");
+        btnMaintanenceValid.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnMaintanenceValidItemStateChanged(evt);
+            }
+        });
+        add(btnMaintanenceValid, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 550, 130, 50));
+
+        btnMaintanenceExpired.setText("Expired");
+        btnMaintanenceExpired.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnMaintanenceExpiredItemStateChanged(evt);
+            }
+        });
+        btnMaintanenceExpired.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMaintanenceExpiredActionPerformed(evt);
+            }
+        });
+        add(btnMaintanenceExpired, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 550, 110, 50));
+        add(dateManufacturedYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 680, 250, 50));
+        add(txtCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 250, 50));
+        add(txtModelName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 250, 50));
+        add(txtModelNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 250, 50));
+        add(txtSerialNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 250, 50));
+        add(txtSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 250, 50));
+        add(txtCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 410, 250, 50));
+        add(txtLicense, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, 250, 50));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnMaintanenceExpiredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaintanenceExpiredActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMaintanenceExpiredActionPerformed
+
+    private void btinSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btinSaveActionPerformed
+        Car newCar = new Car();
+        // Need to write validations
+        // if all are valid, then add to carList
+        boolean isValid = validateInputs();
+        if (isValid) {
+            newCar.setCompany(txtCompany.getText().toLowerCase());
+            newCar.setModelName(txtModelName.getText().toLowerCase());
+            newCar.setModelNumber(Double.parseDouble(txtModelNumber.getText()));
+            newCar.setSerialNumber(Double.parseDouble(txtSerialNumber.getText()));
+            newCar.setSeats(Integer.parseInt(txtSeats.getText()));
+            newCar.setCity(txtCity.getText().toLowerCase());
+            newCar.setNumberPlate(txtLicense.getText().toLowerCase());
+            newCar.setManufacturedYear(dateManufacturedYear.getYear());
+            if (btnAvailabilityYes.isSelected()) {
+                newCar.setAvailability(true);
+            } else if (btnAvailabilityNo.isSelected()) {
+                newCar.setAvailability(false);
+            }
+            if (btnMaintanenceValid.isSelected()) {
+                newCar.setMaintenance(true);
+            } else if (btnMaintanenceExpired.isSelected()) {
+                newCar.setMaintenance(false);
+            }
+            
+            myCarList.addCar(newCar); // adding to the array
+            JOptionPane.showMessageDialog(this, "Car Information Saved");
+            clearInputs();
+        } else {
+            JOptionPane.showMessageDialog(this,"Some fields are incorrect, Please check");
+        }
+    }//GEN-LAST:event_btinSaveActionPerformed
+
+    private void btnAvailabilityYesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnAvailabilityYesItemStateChanged
+        // TODO add your handling code here:
+        btnAvailabilityNo.setSelected(!btnAvailabilityYes.isSelected());
+    }//GEN-LAST:event_btnAvailabilityYesItemStateChanged
+
+    private void btnAvailabilityNoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnAvailabilityNoItemStateChanged
+        // TODO add your handling code here:
+        btnAvailabilityYes.setSelected(!btnAvailabilityNo.isSelected());
+    }//GEN-LAST:event_btnAvailabilityNoItemStateChanged
+
+    private void btnMaintanenceExpiredItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnMaintanenceExpiredItemStateChanged
+        // TODO add your handling code here:
+        btnMaintanenceValid.setSelected(!btnMaintanenceExpired.isSelected());
+    }//GEN-LAST:event_btnMaintanenceExpiredItemStateChanged
+
+    private void btnMaintanenceValidItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnMaintanenceValidItemStateChanged
+        // TODO add your handling code here:
+        btnMaintanenceExpired.setSelected(!btnMaintanenceValid.isSelected());
+    }//GEN-LAST:event_btnMaintanenceValidItemStateChanged
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        clearInputs();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private boolean validateInputs () {
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btinSave;
+    private javax.swing.JRadioButton btnAvailabilityNo;
+    private javax.swing.JRadioButton btnAvailabilityYes;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JRadioButton btnMaintanenceExpired;
+    private javax.swing.JRadioButton btnMaintanenceValid;
+    private com.toedter.calendar.JYearChooser dateManufacturedYear;
+    private javax.swing.JLabel lblAvailability;
+    private javax.swing.JLabel lblCity;
+    private javax.swing.JLabel lblCompany;
+    private javax.swing.JLabel lblLicense;
+    private javax.swing.JLabel lblMaintanenceCert;
+    private javax.swing.JLabel lblManufacturedYear;
+    private javax.swing.JLabel lblModelNumber;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblSeats;
+    private javax.swing.JLabel lblSerialNumber;
     private javax.swing.JLabel title;
+    private javax.swing.JTextField txtCity;
+    private javax.swing.JTextField txtCompany;
+    private javax.swing.JTextField txtLicense;
+    private javax.swing.JTextField txtModelName;
+    private javax.swing.JTextField txtModelNumber;
+    private javax.swing.JTextField txtSeats;
+    private javax.swing.JTextField txtSerialNumber;
     // End of variables declaration//GEN-END:variables
+
+    private void clearInputs() {
+        txtCompany.setText("");
+        txtModelName.setText("");
+        txtSerialNumber.setText("");
+        txtModelNumber.setText("");
+        txtCity.setText("");
+        txtSeats.setText("");
+        dateManufacturedYear.setYear(2021);
+        txtLicense.setText("");
+        btnAvailabilityYes.setSelected(true);
+        btnMaintanenceValid.setSelected(true);
+    }
 }
