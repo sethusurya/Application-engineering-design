@@ -66,6 +66,11 @@ public class OverviewPanel extends javax.swing.JPanel {
         lblMaintainenceFtr = new javax.swing.JLabel();
         lblManufacturingYearFtr = new javax.swing.JLabel();
         txtManufacturingYear = new javax.swing.JTextField();
+        lblTotalCars = new javax.swing.JLabel();
+        txtTotalCars = new javax.swing.JTextField();
+        title1 = new javax.swing.JLabel();
+        txtLastUpdate = new javax.swing.JTextField();
+        lblLastUpdate = new javax.swing.JLabel();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -76,15 +81,15 @@ public class OverviewPanel extends javax.swing.JPanel {
 
         title.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("VIEW CARS");
-        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 700, 63));
+        title.setText("FILTERS");
+        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 250, 30));
 
         txtModelNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtModelNumberActionPerformed(evt);
             }
         });
-        add(txtModelNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 166, 44));
+        add(txtModelNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 166, 44));
 
         viewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,7 +128,7 @@ public class OverviewPanel extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 750, -1, -1));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 750, -1, -1));
 
         selCompany.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         selCompany.addActionListener(new java.awt.event.ActionListener() {
@@ -131,19 +136,19 @@ public class OverviewPanel extends javax.swing.JPanel {
                 selCompanyActionPerformed(evt);
             }
         });
-        add(selCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 156, 44));
+        add(selCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 156, 44));
 
         lblCompanyFtr.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCompanyFtr.setText("Company : ");
-        add(lblCompanyFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 73, 44));
+        add(lblCompanyFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 73, 44));
 
         lblModelNumberFtr.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblModelNumberFtr.setText("Model/Serial/License No : ");
-        add(lblModelNumberFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 131, -1));
+        add(lblModelNumberFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 131, -1));
 
         lblModelNameFtr.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblModelNameFtr.setText("Model Name : ");
-        add(lblModelNameFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 73, 44));
+        add(lblModelNameFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 73, 44));
 
         selModelName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         selModelName.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +156,7 @@ public class OverviewPanel extends javax.swing.JPanel {
                 selModelNameActionPerformed(evt);
             }
         });
-        add(selModelName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 156, 44));
+        add(selModelName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 156, 44));
 
         selSeats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         selSeats.addActionListener(new java.awt.event.ActionListener() {
@@ -159,11 +164,11 @@ public class OverviewPanel extends javax.swing.JPanel {
                 selSeatsActionPerformed(evt);
             }
         });
-        add(selSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 156, 44));
+        add(selSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 156, 44));
 
         lblSeatsFtr.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSeatsFtr.setText("Seats : ");
-        add(lblSeatsFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 73, 44));
+        add(lblSeatsFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 73, 44));
 
         btnApplyFtr.setText("Apply Filters");
         btnApplyFtr.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +176,7 @@ public class OverviewPanel extends javax.swing.JPanel {
                 btnApplyFtrActionPerformed(evt);
             }
         });
-        add(btnApplyFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 360, -1, -1));
+        add(btnApplyFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, -1, -1));
 
         btnClearFtr.setText("Clear Filters");
         btnClearFtr.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +184,7 @@ public class OverviewPanel extends javax.swing.JPanel {
                 btnClearFtrActionPerformed(evt);
             }
         });
-        add(btnClearFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, -1, -1));
+        add(btnClearFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, -1, -1));
 
         selCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         selCity.addActionListener(new java.awt.event.ActionListener() {
@@ -187,11 +192,11 @@ public class OverviewPanel extends javax.swing.JPanel {
                 selCityActionPerformed(evt);
             }
         });
-        add(selCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, 165, 44));
+        add(selCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, 165, 44));
 
         lblCityFtr.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCityFtr.setText("City : ");
-        add(lblCityFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 73, 44));
+        add(lblCityFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 73, 44));
 
         selAvailability.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         selAvailability.addActionListener(new java.awt.event.ActionListener() {
@@ -199,11 +204,11 @@ public class OverviewPanel extends javax.swing.JPanel {
                 selAvailabilityActionPerformed(evt);
             }
         });
-        add(selAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 165, 44));
+        add(selAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 165, 44));
 
         lblAvailabilityFtr.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblAvailabilityFtr.setText("Availability : ");
-        add(lblAvailabilityFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, 73, 44));
+        add(lblAvailabilityFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 73, 44));
 
         selMaintenanceCertificate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         selMaintenanceCertificate.addActionListener(new java.awt.event.ActionListener() {
@@ -211,22 +216,50 @@ public class OverviewPanel extends javax.swing.JPanel {
                 selMaintenanceCertificateActionPerformed(evt);
             }
         });
-        add(selMaintenanceCertificate, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, 165, 44));
+        add(selMaintenanceCertificate, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 165, 44));
 
         lblMaintainenceFtr.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblMaintainenceFtr.setText("Maint. Cert :");
-        add(lblMaintainenceFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 73, 44));
+        add(lblMaintainenceFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, 73, 44));
 
         lblManufacturingYearFtr.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblManufacturingYearFtr.setText("Manf. Year : ");
-        add(lblManufacturingYearFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 73, 44));
+        add(lblManufacturingYearFtr, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 73, 44));
 
         txtManufacturingYear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtManufacturingYearActionPerformed(evt);
             }
         });
-        add(txtManufacturingYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 160, 40));
+        add(txtManufacturingYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 160, 40));
+
+        lblTotalCars.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotalCars.setText("TOTAL CARS : ");
+        add(lblTotalCars, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 384, 120, 30));
+
+        txtTotalCars.setEditable(false);
+        txtTotalCars.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalCarsActionPerformed(evt);
+            }
+        });
+        add(txtTotalCars, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 40, 30));
+
+        title1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title1.setText("Cars List");
+        add(title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 230, 30));
+
+        txtLastUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLastUpdateActionPerformed(evt);
+            }
+        });
+        add(txtLastUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 740, 230, 30));
+
+        lblLastUpdate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblLastUpdate.setText("Last Updated at :");
+        add(lblLastUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 740, 150, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtModelNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModelNumberActionPerformed
@@ -398,6 +431,14 @@ public class OverviewPanel extends javax.swing.JPanel {
         populateMenu();
     }//GEN-LAST:event_btnClearFtrActionPerformed
 
+    private void txtTotalCarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalCarsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalCarsActionPerformed
+
+    private void txtLastUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLastUpdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApplyFtr;
@@ -407,11 +448,13 @@ public class OverviewPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblAvailabilityFtr;
     private javax.swing.JLabel lblCityFtr;
     private javax.swing.JLabel lblCompanyFtr;
+    private javax.swing.JLabel lblLastUpdate;
     private javax.swing.JLabel lblMaintainenceFtr;
     private javax.swing.JLabel lblManufacturingYearFtr;
     private javax.swing.JLabel lblModelNameFtr;
     private javax.swing.JLabel lblModelNumberFtr;
     private javax.swing.JLabel lblSeatsFtr;
+    private javax.swing.JLabel lblTotalCars;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JComboBox<String> selAvailability;
     private javax.swing.JComboBox<String> selCity;
@@ -420,8 +463,11 @@ public class OverviewPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> selModelName;
     private javax.swing.JComboBox<String> selSeats;
     private javax.swing.JLabel title;
+    private javax.swing.JLabel title1;
+    private javax.swing.JTextField txtLastUpdate;
     private javax.swing.JTextField txtManufacturingYear;
     private javax.swing.JTextField txtModelNumber;
+    private javax.swing.JTextField txtTotalCars;
     private javax.swing.JTable viewTable;
     // End of variables declaration//GEN-END:variables
 
@@ -438,6 +484,7 @@ public class OverviewPanel extends javax.swing.JPanel {
             
             model.addRow(row);
         }
+        txtTotalCars.setText(String.valueOf(model.getRowCount()));
     }
 
     private void populateMenu() {

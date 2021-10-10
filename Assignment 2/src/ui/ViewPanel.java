@@ -349,9 +349,7 @@ public class ViewPanel extends javax.swing.JPanel {
             CardLayout layout = (CardLayout) rightPanel.getLayout();
             layout.previous(rightPanel);
 //            clearInputs();
-        } else {
-            JOptionPane.showMessageDialog(this,"Some fields are incorrect, Please check");
-        }
+        } 
         
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -403,6 +401,63 @@ public class ViewPanel extends javax.swing.JPanel {
     }
 
     private Boolean checkForValidations() {
-        return true;
+         Boolean validInputs = true;
+        // check company
+        if (txtCompany.getText().length() == 0) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid Company Name");
+            return validInputs;
+        }
+        
+        // check model Name
+        if (txtModelName.getText().length() == 0) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid Model Name");
+            return validInputs;
+        }
+        
+        if (txtModelNumber.getText().length() == 0 || !isValidNumber(txtModelNumber.getText())) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid Model Number");
+            return validInputs;
+        }
+        
+        if (txtSerialNumber.getText().length() == 0 || !isValidNumber(txtSerialNumber.getText())) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid Serial Number");
+            return validInputs;
+        }
+        
+        if (txtSeats.getText().length() == 0 || !isValidNumber(txtSeats.getText())) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid number of seats for the car");
+            return validInputs;
+        }
+        
+        if (txtCity.getText().length() == 0) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid City Name");
+            return validInputs;
+        }
+        
+        if (txtLicense.getText().length() == 0) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid License Plate number");
+            return validInputs;
+        }
+        
+        
+        return validInputs;
+    }
+    
+    private boolean isValidNumber(String numberString) {
+        boolean isValid = true;
+        for (int i = 0; i < numberString.length(); i++) {
+            char c = numberString.charAt(i);
+            if (!(c>='0' && c<='9')) {
+                isValid = false;
+            }
+        }
+        return isValid;
     }
 }

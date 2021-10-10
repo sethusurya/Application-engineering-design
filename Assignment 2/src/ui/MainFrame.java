@@ -6,6 +6,7 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.util.Date;
 import model.Carlist;
 import ui.OverviewPanel;
 
@@ -16,6 +17,7 @@ import ui.OverviewPanel;
 public class MainFrame extends javax.swing.JFrame {
 
     Carlist myCarList;
+    Date lastUpdateTimeStamp = new Date();
     /**
      * Creates new form MainFrame
      */

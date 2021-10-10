@@ -263,10 +263,11 @@ public class CreatePanel extends javax.swing.JPanel {
 
     private void btinSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btinSaveActionPerformed
         Car newCar = new Car();
-        // Need to write validations
         // if all are valid, then add to carList
         boolean isValid = validateInputs();
         if (isValid) {
+            // check the serial number not repeating of the same company
+            // check for the license number not repeating
             newCar.setCompany(txtCompany.getText().toLowerCase());
             newCar.setModelName(txtModelName.getText().toLowerCase());
             newCar.setModelNumber(Long.parseLong(txtModelNumber.getText()));
