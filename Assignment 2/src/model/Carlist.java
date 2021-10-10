@@ -37,4 +37,13 @@ public class Carlist {
         return carArray;
     }
     
+    public ArrayList<Car> modifyCar(int index, Car newCar){
+        carArray.set(index, newCar);
+        return carArray;
+    }
+    
+    public Car getCar(int index){
+        return carArray.get(index);
+    }
+    
 }

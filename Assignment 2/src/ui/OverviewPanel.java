@@ -5,7 +5,9 @@
  */
 package ui;
 
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Car;
 import model.Carlist;
@@ -17,14 +19,18 @@ import model.Carlist;
 public class OverviewPanel extends javax.swing.JPanel {
 
     Carlist myCarList;
+    private JPanel rightPanel;
     /**
      * Creates new form ViewPanel
      */
-    public OverviewPanel(Carlist myCarList) {
+    public OverviewPanel(JPanel myJPanel,Carlist myCarList) {
         initComponents();
         this.myCarList = myCarList;
         
+        rightPanel = myJPanel;
+        
         populateTable();
+        populateMenu();
     }
 
     /**
@@ -43,6 +49,14 @@ public class OverviewPanel extends javax.swing.JPanel {
         viewTable = new javax.swing.JTable();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        selCompany = new javax.swing.JComboBox<>();
+        lblCompany = new javax.swing.JLabel();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         title.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -77,7 +91,12 @@ public class OverviewPanel extends javax.swing.JPanel {
         });
         scrollPane.setViewportView(viewTable);
 
-        btnEdit.setText("Edit");
+        btnEdit.setText("View / Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -86,30 +105,41 @@ public class OverviewPanel extends javax.swing.JPanel {
             }
         });
 
+        selCompany.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selCompany.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selCompanyActionPerformed(evt);
+            }
+        });
+
+        lblCompany.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblCompany.setText("Company : ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSearch)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnEdit)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnDelete)
-                                .addGap(67, 67, 67))))))
-            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEdit)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnDelete))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(lblCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(selCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSearch)
+                        .addGap(55, 55, 55)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,14 +149,16 @@ public class OverviewPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnSearch)
+                    .addComponent(selCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(270, 270, 270)
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEdit)
-                    .addComponent(btnDelete))
-                .addContainerGap(320, Short.MAX_VALUE))
+                    .addComponent(btnDelete)
+                    .addComponent(btnEdit))
+                .addGap(49, 49, 49))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -147,12 +179,39 @@ public class OverviewPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        Integer selectedRow = viewTable.getSelectedRow();
+        if (selectedRow < 0){
+            JOptionPane.showMessageDialog(this, "Please Select a car from table to view or edit its data");
+            return;
+        } else {
+//            Car selectedCar;
+//            selectedCar = myCarList.getCar(selectedRow);
+//            ViewPanel myViewPanel = new ViewPanel(myCarList, selectedRow);
+                ViewPanel myViewPanel = new ViewPanel(rightPanel, myCarList, selectedRow);
+                rightPanel.add("ViewPanel",myViewPanel);
+                CardLayout layout = (CardLayout)rightPanel.getLayout();
+                layout.next(rightPanel);
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        populateTable();
+    }//GEN-LAST:event_formComponentShown
+
+    private void selCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selCompanyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selCompanyActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JLabel lblCompany;
     private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JComboBox<String> selCompany;
     private javax.swing.JLabel title;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTable viewTable;
@@ -171,5 +230,9 @@ public class OverviewPanel extends javax.swing.JPanel {
             
             model.addRow(row);
         }
+    }
+
+    private void populateMenu() {
+        selCompany.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 3", "Item 4", "Item 5" }));
     }
 }

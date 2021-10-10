@@ -5,7 +5,9 @@
  */
 package ui;
 
+import java.awt.CardLayout;
 import model.Carlist;
+import ui.OverviewPanel;
 
 /**
  *
@@ -21,6 +23,10 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         
         myCarList = new Carlist();
+        setSize(1000,900);
+        
+//        rightPanel.add(OverviewPanel);
+//        rightPanel.add(ViewPanel);
     }
 
     /**
@@ -77,17 +83,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         splitPane.setLeftComponent(leftPanel);
 
-        javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
-        rightPanel.setLayout(rightPanelLayout);
-        rightPanelLayout.setHorizontalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 893, Short.MAX_VALUE)
-        );
-        rightPanelLayout.setVerticalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 798, Short.MAX_VALUE)
-        );
-
+        rightPanel.setLayout(new java.awt.CardLayout());
         splitPane.setRightComponent(rightPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -106,12 +102,21 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         CreatePanel myCreatePanel = new CreatePanel(myCarList);
-        splitPane.setRightComponent(myCreatePanel);
+//        splitPane.setRightComponent(myCreatePanel);
+
+//        OverviewPanel myOverviewPanel = new OverviewPanel(rightPanel, myCarList);
+        rightPanel.add("CreatePanel",myCreatePanel);
+        CardLayout layout = (CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_createActionPerformed
 
     private void viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewActionPerformed
-        OverviewPanel myOverviewPanel = new OverviewPanel(myCarList);
-        splitPane.setRightComponent(myOverviewPanel);
+//        OverviewPanel myOverviewPanel = new OverviewPanel(myCarList);
+//        splitPane.setRightComponent(myOverviewPanel);
+        OverviewPanel myOverviewPanel = new OverviewPanel(rightPanel, myCarList);
+        rightPanel.add("OverviewPanel",myOverviewPanel);
+        CardLayout layout = (CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_viewActionPerformed
 
     /**
@@ -148,7 +153,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton create;
     private javax.swing.JPanel leftPanel;
