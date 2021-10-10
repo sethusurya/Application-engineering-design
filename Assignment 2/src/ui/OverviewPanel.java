@@ -251,6 +251,7 @@ public class OverviewPanel extends javax.swing.JPanel {
         title1.setText("Cars List");
         add(title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 230, 30));
 
+        txtLastUpdate.setEditable(false);
         txtLastUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLastUpdateActionPerformed(evt);
