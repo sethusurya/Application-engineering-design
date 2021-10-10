@@ -18,8 +18,8 @@ public class Car {
     private String city;
     private Boolean availability;
     private Boolean maintenance;
-    private Double serialNumber;
-    private Double modelNumber;
+    private Long serialNumber;
+    private Long modelNumber;
     private Integer manufacturedYear;
     private Integer seats;
 
@@ -71,19 +71,19 @@ public class Car {
         this.maintenance = maintenance;
     }
 
-    public Double getSerialNumber() {
+    public Long getSerialNumber() {
         return serialNumber;
     }
 
-    public void setSerialNumber(Double serialNumber) {
+    public void setSerialNumber(Long serialNumber) {
         this.serialNumber = serialNumber;
     }
 
-    public Double getModelNumber() {
+    public Long getModelNumber() {
         return modelNumber;
     }
 
-    public void setModelNumber(Double modelNumber) {
+    public void setModelNumber(Long modelNumber) {
         this.modelNumber = modelNumber;
     }
 

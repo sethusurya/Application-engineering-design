@@ -5,6 +5,10 @@
  */
 package ui;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Car;
 import model.Carlist;
@@ -63,13 +67,20 @@ public class CreatePanel extends javax.swing.JPanel {
         txtSeats = new javax.swing.JTextField();
         txtCity = new javax.swing.JTextField();
         txtLicense = new javax.swing.JTextField();
+        seatsVal = new javax.swing.JLabel();
+        companyVal = new javax.swing.JLabel();
+        modelNameVal = new javax.swing.JLabel();
+        modelNumberVal = new javax.swing.JLabel();
+        SerialNumberVal = new javax.swing.JLabel();
+        cityVal = new javax.swing.JLabel();
+        licenseVal = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         title.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("ADD CAR");
-        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 600, 63));
+        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 63));
 
         lblCompany.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblCompany.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -174,13 +185,76 @@ public class CreatePanel extends javax.swing.JPanel {
         });
         add(btnMaintanenceExpired, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 550, 110, 50));
         add(dateManufacturedYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 680, 250, 50));
+
+        txtCompany.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCompanyFocusLost(evt);
+            }
+        });
         add(txtCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 250, 50));
+
+        txtModelName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtModelNameFocusLost(evt);
+            }
+        });
         add(txtModelName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 250, 50));
+
+        txtModelNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtModelNumberFocusLost(evt);
+            }
+        });
         add(txtModelNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 250, 50));
+
+        txtSerialNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSerialNumberFocusLost(evt);
+            }
+        });
         add(txtSerialNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 250, 50));
-        add(txtSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 250, 50));
+
+        txtSeats.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSeatsFocusLost(evt);
+            }
+        });
+        add(txtSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 250, 40));
+
+        txtCity.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCityFocusLost(evt);
+            }
+        });
         add(txtCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 410, 250, 50));
+
+        txtLicense.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtLicenseFocusLost(evt);
+            }
+        });
         add(txtLicense, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, 250, 50));
+
+        seatsVal.setForeground(new java.awt.Color(255, 51, 51));
+        add(seatsVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 250, 20));
+
+        companyVal.setForeground(new java.awt.Color(255, 51, 51));
+        add(companyVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 250, 20));
+
+        modelNameVal.setForeground(new java.awt.Color(255, 51, 51));
+        add(modelNameVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 250, 20));
+
+        modelNumberVal.setForeground(new java.awt.Color(255, 51, 51));
+        add(modelNumberVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 250, 20));
+
+        SerialNumberVal.setForeground(new java.awt.Color(255, 51, 51));
+        add(SerialNumberVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 250, 20));
+
+        cityVal.setForeground(new java.awt.Color(255, 51, 51));
+        add(cityVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 250, 20));
+
+        licenseVal.setForeground(new java.awt.Color(255, 51, 51));
+        add(licenseVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 250, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMaintanenceExpiredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaintanenceExpiredActionPerformed
@@ -195,8 +269,8 @@ public class CreatePanel extends javax.swing.JPanel {
         if (isValid) {
             newCar.setCompany(txtCompany.getText().toLowerCase());
             newCar.setModelName(txtModelName.getText().toLowerCase());
-            newCar.setModelNumber(Double.parseDouble(txtModelNumber.getText()));
-            newCar.setSerialNumber(Double.parseDouble(txtSerialNumber.getText()));
+            newCar.setModelNumber(Long.parseLong(txtModelNumber.getText()));
+            newCar.setSerialNumber(Long.parseLong(txtSerialNumber.getText()));
             newCar.setSeats(Integer.parseInt(txtSeats.getText()));
             newCar.setCity(txtCity.getText().toLowerCase());
             newCar.setNumberPlate(txtLicense.getText().toLowerCase());
@@ -215,8 +289,6 @@ public class CreatePanel extends javax.swing.JPanel {
             myCarList.addCar(newCar); // adding to the array
             JOptionPane.showMessageDialog(this, "Car Information Saved");
             clearInputs();
-        } else {
-            JOptionPane.showMessageDialog(this,"Some fields are incorrect, Please check");
         }
     }//GEN-LAST:event_btinSaveActionPerformed
 
@@ -245,17 +317,145 @@ public class CreatePanel extends javax.swing.JPanel {
         clearInputs();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void txtCompanyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCompanyFocusLost
+        // TODO add your handling code here:
+       String company = txtCompany.getText();
+       if (company.equals("")) {
+           companyVal.setText("Company Cannot be empty");
+       } else {
+           companyVal.setText("");
+       }
+    }//GEN-LAST:event_txtCompanyFocusLost
+
+    private void txtModelNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtModelNameFocusLost
+        // TODO add your handling code here:
+        String modelName = txtModelName.getText();
+        if (modelName.equals("")) {
+            modelNameVal.setText("Model Name cannot be empty");
+        } else {
+           modelNameVal.setText("");
+       }
+    }//GEN-LAST:event_txtModelNameFocusLost
+
+    private void txtModelNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtModelNumberFocusLost
+        // TODO add your handling code here:
+        String modelNumber = txtModelNumber.getText();
+        Boolean isValid = isValidNumber(modelNumber);
+        if (modelNumber.equals("")) {
+            modelNumberVal.setText("Model Number cannot be empty");
+        } else if (isValid) {
+            modelNumberVal.setText("");
+        } else {
+            modelNumberVal.setText("Invalid Model Number, only numbers are accepted");
+        }
+    }//GEN-LAST:event_txtModelNumberFocusLost
+
+    private void txtSerialNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSerialNumberFocusLost
+        // TODO add your handling code here:
+        String serialNumber = txtSerialNumber.getText();
+        Boolean isValid = isValidNumber(serialNumber);
+        if (serialNumber.equals("")) {
+            SerialNumberVal.setText("Serial Number cannot be empty");
+        } else if (isValid) {
+            SerialNumberVal.setText("");
+        } else {
+            SerialNumberVal.setText("Invalid Serial Number, only numbers are accepted");
+        }
+    }//GEN-LAST:event_txtSerialNumberFocusLost
+
+    private void txtSeatsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSeatsFocusLost
+        // TODO add your handling code here:
+        String seats = txtSeats.getText();
+        Boolean isValid = isValidNumber(seats);
+        if (seats.equals("")) {
+            seatsVal.setText("Number of Seats cannot be empty");
+        } else if (isValid) {
+            seatsVal.setText("");
+        } else {
+            seatsVal.setText("Invalid number of Seats, only numbers are accepted");
+        }
+    }//GEN-LAST:event_txtSeatsFocusLost
+
+    private void txtCityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCityFocusLost
+        // TODO add your handling code here:
+         String city = txtCity.getText();
+        if (city.equals("")) {
+            cityVal.setText("City Name cannot be empty");
+        } else {
+           cityVal.setText("");
+       }
+    }//GEN-LAST:event_txtCityFocusLost
+
+    private void txtLicenseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLicenseFocusLost
+        // TODO add your handling code here:
+         String license = txtLicense.getText();
+        if (license.equals("")) {
+            licenseVal.setText("license cannot be empty");
+        } else {
+           licenseVal.setText("");
+       }
+    }//GEN-LAST:event_txtLicenseFocusLost
+
     private boolean validateInputs () {
-        return true;
+        Boolean validInputs = true;
+        // check company
+        if (txtCompany.getText().length() == 0) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid Company Name");
+            return validInputs;
+        }
+        
+        // check model Name
+        if (txtModelName.getText().length() == 0) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid Model Name");
+            return validInputs;
+        }
+        
+        if (txtModelNumber.getText().length() == 0 || !isValidNumber(txtModelNumber.getText())) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid Model Number");
+            return validInputs;
+        }
+        
+        if (txtSerialNumber.getText().length() == 0 || !isValidNumber(txtSerialNumber.getText())) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid Serial Number");
+            return validInputs;
+        }
+        
+        if (txtSeats.getText().length() == 0 || !isValidNumber(txtSeats.getText())) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid number of seats for the car");
+            return validInputs;
+        }
+        
+        if (txtCity.getText().length() == 0) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid City Name");
+            return validInputs;
+        }
+        
+        if (txtLicense.getText().length() == 0) {
+            validInputs = false;
+            JOptionPane.showMessageDialog(this, "Enter Valid License Plate number");
+            return validInputs;
+        }
+        
+        
+        return validInputs;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel SerialNumberVal;
     private javax.swing.JButton btinSave;
     private javax.swing.JRadioButton btnAvailabilityNo;
     private javax.swing.JRadioButton btnAvailabilityYes;
     private javax.swing.JButton btnCancel;
     private javax.swing.JRadioButton btnMaintanenceExpired;
     private javax.swing.JRadioButton btnMaintanenceValid;
+    private javax.swing.JLabel cityVal;
+    private javax.swing.JLabel companyVal;
     private com.toedter.calendar.JYearChooser dateManufacturedYear;
     private javax.swing.JLabel lblAvailability;
     private javax.swing.JLabel lblCity;
@@ -267,6 +467,10 @@ public class CreatePanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSeats;
     private javax.swing.JLabel lblSerialNumber;
+    private javax.swing.JLabel licenseVal;
+    private javax.swing.JLabel modelNameVal;
+    private javax.swing.JLabel modelNumberVal;
+    private javax.swing.JLabel seatsVal;
     private javax.swing.JLabel title;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtCompany;
@@ -288,5 +492,16 @@ public class CreatePanel extends javax.swing.JPanel {
         txtLicense.setText("");
         btnAvailabilityYes.setSelected(true);
         btnMaintanenceValid.setSelected(true);
+    }
+    
+    private boolean isValidNumber(String numberString) {
+        boolean isValid = true;
+        for (int i = 0; i < numberString.length(); i++) {
+            char c = numberString.charAt(i);
+            if (!(c>='0' && c<='9')) {
+                isValid = false;
+            }
+        }
+        return isValid;
     }
 }

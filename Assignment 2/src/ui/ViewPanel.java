@@ -325,8 +325,8 @@ public class ViewPanel extends javax.swing.JPanel {
         if (isValid) {
             newCar.setCompany(txtCompany.getText().toLowerCase());
             newCar.setModelName(txtModelName.getText().toLowerCase());
-            newCar.setModelNumber(Double.parseDouble(txtModelNumber.getText()));
-            newCar.setSerialNumber(Double.parseDouble(txtSerialNumber.getText()));
+            newCar.setModelNumber(Long.parseLong(txtModelNumber.getText()));
+            newCar.setSerialNumber(Long.parseLong(txtSerialNumber.getText()));
             newCar.setSeats(Integer.parseInt(txtSeats.getText()));
             newCar.setCity(txtCity.getText().toLowerCase());
             newCar.setNumberPlate(txtLicense.getText().toLowerCase());
