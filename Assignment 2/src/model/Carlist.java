@@ -32,6 +32,14 @@ public class Carlist {
         return carArray;
     }
     
+    public void add(Car newCar){
+        carArray.add(newCar);
+    }
+    
+    public void remove(Car newCar){
+        carArray.remove(newCar);
+    }
+    
     public ArrayList<Car> removeCar(int index){
         carArray.remove(index);
         return carArray;
