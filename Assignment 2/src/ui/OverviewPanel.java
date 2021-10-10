@@ -252,10 +252,11 @@ public class OverviewPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please Select a car from table to view or edit its data");
             return;
         } else {
-//            Car selectedCar
+            DefaultTableModel model = (DefaultTableModel) viewTable.getModel();
+            Car selectedCar = (Car) model.getValueAt(selectedRow, 0);
 //            selectedCar = myCarList.getCar(selectedRow);
 //            ViewPanel myViewPanel = new ViewPanel(myCarList, selectedRow);
-                ViewPanel myViewPanel = new ViewPanel(rightPanel, myCarList, selectedRow);
+                ViewPanel myViewPanel = new ViewPanel(rightPanel, myCarList, selectedCar);
                 rightPanel.add("ViewPanel",myViewPanel);
                 CardLayout layout = (CardLayout)rightPanel.getLayout();
                 layout.next(rightPanel);
@@ -304,6 +305,14 @@ public class OverviewPanel extends javax.swing.JPanel {
        String city = selCity.getSelectedItem().toString();
        String availability = selAvailability.getSelectedItem().toString();
        String maintenance = selMaintenanceCertificate.getSelectedItem().toString();
+       String manufacturedYear = txtManufacturingYear.getText();
+       String search = txtModelNumber.getText();
+       
+       // checking if the input into year field is valid or not
+       if (!manufacturedYear.equals("") && !isValidNumber(manufacturedYear)){
+           JOptionPane.showMessageDialog(this, "Manufacturing Year cannot have alphabets or symbols");
+           return;
+       }
        
        // company filter
        Carlist filteredCarList = new Carlist();
@@ -357,6 +366,24 @@ public class OverviewPanel extends javax.swing.JPanel {
             }
        }
         filteredCarList = newFilterList5;
+        
+        // manufacturing year filter
+        Carlist newFilterList6 = new Carlist();
+        for(Car c: filteredCarList.getCarArray()){
+            if (String.valueOf(c.getManufacturedYear()).equals(manufacturedYear)|| manufacturedYear.equals("")) {
+                newFilterList6.add(c);
+            }
+       }
+        filteredCarList = newFilterList6;
+        
+        // serialNumber, modelNumber or license filter
+        Carlist newFilterList7 = new Carlist();
+        for(Car c: filteredCarList.getCarArray()){
+            if (String.valueOf(c.getModelNumber()).equals(search) || String.valueOf(c.getSerialNumber()).equals(search) || c.getNumberPlate().equals(search) || search.equals("")) {
+                newFilterList7.add(c);
+            }
+       }
+        filteredCarList = newFilterList7;
        
        // Final Table
        populateTable(filteredCarList);
@@ -404,7 +431,7 @@ public class OverviewPanel extends javax.swing.JPanel {
         
         for(Car c: newCarlist.getCarArray()){
             Object[] row = new Object[4];
-            row[0] = c.getCompany();
+            row[0] = c;
             row[1] = c.getModelName();
             row[2] = c.getSeats();
             row[3] = c.getCity();
@@ -457,5 +484,18 @@ public class OverviewPanel extends javax.swing.JPanel {
         selSeats.setModel(new javax.swing.DefaultComboBoxModel<>(seats));
         selAvailability.setModel(new javax.swing.DefaultComboBoxModel<>(availabilities));
         selMaintenanceCertificate.setModel(new javax.swing.DefaultComboBoxModel<>(maintenanceCertoptions));
+        txtManufacturingYear.setText("");
+        txtModelNumber.setText("");
+    }
+
+    private boolean isValidNumber(String numberString) {
+        boolean isValid = true;
+        for (int i = 0; i < numberString.length(); i++) {
+            char c = numberString.charAt(i);
+            if (!(c>='0' && c<='9')) {
+                isValid = false;
+            }
+        }
+        return isValid;
     }
 }

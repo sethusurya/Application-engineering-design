@@ -19,17 +19,17 @@ public class ViewPanel extends javax.swing.JPanel {
 
     private JPanel rightPanel;
     Carlist myCarList;
-    private Integer selectedCarIndex;
+    private Car selectedCar;
     /**
      * Creates new form ViewPanel
      */
-    public ViewPanel(JPanel myJPanel, Carlist myCarList, Integer index) {
+    public ViewPanel(JPanel myJPanel, Carlist myCarList, Car selectedCar) {
         initComponents();
         
 //        myCarList = new Carlist();
         this.myCarList = myCarList;
         rightPanel = myJPanel;
-        selectedCarIndex = index;
+        this.selectedCar = selectedCar;
         
         populateData();
     }
@@ -342,6 +342,7 @@ public class ViewPanel extends javax.swing.JPanel {
                 newCar.setMaintenance(false);
             }
             
+            int selectedCarIndex = myCarList.getCarArray().indexOf(selectedCar); // get the index in the main array.
             myCarList.modifyCar(selectedCarIndex, newCar); // adding to the array
             JOptionPane.showMessageDialog(this, "Car Information Saved");
             rightPanel.remove(this);
@@ -385,11 +386,11 @@ public class ViewPanel extends javax.swing.JPanel {
 
     private void populateData() {
         // show the data here
-        Car selectedCar = myCarList.getCar(selectedCarIndex);
+//        Car selectedCar = myCarList.getCar(selectedCarIndex);
         txtCompany.setText(selectedCar.getCompany());
         txtModelName.setText(selectedCar.getModelName());
         txtSerialNumber.setText(selectedCar.getSerialNumber().toString());
-        txtModelNumber.setText(selectedCar.getModelNumber().toString());
+        txtModelNumber.setText(String.valueOf(selectedCar.getModelNumber()));
         txtCity.setText(selectedCar.getCity());
         txtSeats.setText(String.valueOf(selectedCar.getSeats()));
         dateManufacturedYear.setYear(selectedCar.getManufacturedYear());

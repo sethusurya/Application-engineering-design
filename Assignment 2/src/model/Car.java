@@ -103,5 +103,10 @@ public class Car {
         this.seats = seats;
     }
     
+    @Override
+    public String toString(){
+        return company;
+    }
+    
     
 }
