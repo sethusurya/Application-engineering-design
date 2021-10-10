@@ -6,6 +6,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -13,6 +14,16 @@ import java.util.ArrayList;
  */
 public class Carlist {
     
+    public static Long lastUpdateTimeStamp = new Date().getTime();
+
+    public static Long getLastUpdateTimeStamp() {
+        return lastUpdateTimeStamp;
+    }
+
+    public static void setLastUpdateTimeStamp(Long lastUpdateTimeStamp) {
+        Carlist.lastUpdateTimeStamp = lastUpdateTimeStamp;
+    }
+
     private ArrayList<Car> carArray;
     
     public Carlist () {

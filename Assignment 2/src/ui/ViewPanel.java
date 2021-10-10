@@ -6,6 +6,7 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Car;
@@ -344,6 +345,7 @@ public class ViewPanel extends javax.swing.JPanel {
             
             int selectedCarIndex = myCarList.getCarArray().indexOf(selectedCar); // get the index in the main array.
             myCarList.modifyCar(selectedCarIndex, newCar); // adding to the array
+            Carlist.setLastUpdateTimeStamp(new Date().getTime());
             JOptionPane.showMessageDialog(this, "Car Information Saved");
             rightPanel.remove(this);
             CardLayout layout = (CardLayout) rightPanel.getLayout();

@@ -7,6 +7,7 @@ package ui;
 
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -485,6 +486,7 @@ public class OverviewPanel extends javax.swing.JPanel {
             model.addRow(row);
         }
         txtTotalCars.setText(String.valueOf(model.getRowCount()));
+        txtLastUpdate.setText(new Date(Carlist.getLastUpdateTimeStamp()).toString());
     }
 
     private void populateMenu() {
