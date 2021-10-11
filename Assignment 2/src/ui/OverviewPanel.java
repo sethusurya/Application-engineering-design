@@ -278,6 +278,7 @@ public class OverviewPanel extends javax.swing.JPanel {
             myCarList.removeCar(selectedRow);
             JOptionPane.showMessageDialog(this,"Row deleted");
             populateTable(myCarList);
+            populateMenu();
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 

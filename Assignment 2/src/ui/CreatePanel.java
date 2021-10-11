@@ -7,10 +7,14 @@ package ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import model.Car;
 import model.Carlist;
 
@@ -75,6 +79,7 @@ public class CreatePanel extends javax.swing.JPanel {
         SerialNumberVal = new javax.swing.JLabel();
         cityVal = new javax.swing.JLabel();
         licenseVal = new javax.swing.JLabel();
+        btnBulkUpload = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -256,6 +261,14 @@ public class CreatePanel extends javax.swing.JPanel {
 
         licenseVal.setForeground(new java.awt.Color(255, 51, 51));
         add(licenseVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 250, 20));
+
+        btnBulkUpload.setText("Bulk Add");
+        btnBulkUpload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBulkUploadActionPerformed(evt);
+            }
+        });
+        add(btnBulkUpload, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 750, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMaintanenceExpiredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaintanenceExpiredActionPerformed
@@ -399,6 +412,29 @@ public class CreatePanel extends javax.swing.JPanel {
        }
     }//GEN-LAST:event_txtLicenseFocusLost
 
+    private void btnBulkUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBulkUploadActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Feature Still Work in progress, you can see the csv data on console but not as car objects");
+        JFileChooser chooser  = new JFileChooser(); // creating new file picker
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV", "csv");
+        chooser.setFileFilter(filter);
+//        chooser.addChoosableFileFilter(new ImageFilter()); // adding filter to display only supported image types
+        chooser.setAcceptAllFileFilterUsed(false); // for disabling other type of files other than image
+        chooser.showOpenDialog(null);
+        try {
+           File selectedFile = chooser.getSelectedFile();
+           Scanner sc = new Scanner(selectedFile);  
+            sc.useDelimiter(",");   //sets the delimiter pattern  
+            while (sc.hasNext())  //returns a boolean value  
+            {  
+                System.out.print(sc.next()+ " | ");  //find and returns the next complete token from this scanner
+            }
+            sc.close();  //closes the scanner    
+        } catch(Exception e) {
+            System.out.println("error selecting file");
+        }
+    }//GEN-LAST:event_btnBulkUploadActionPerformed
+
     private boolean validateInputs () {
         Boolean validInputs = true;
         // check company
@@ -454,6 +490,7 @@ public class CreatePanel extends javax.swing.JPanel {
     private javax.swing.JButton btinSave;
     private javax.swing.JRadioButton btnAvailabilityNo;
     private javax.swing.JRadioButton btnAvailabilityYes;
+    private javax.swing.JButton btnBulkUpload;
     private javax.swing.JButton btnCancel;
     private javax.swing.JRadioButton btnMaintanenceExpired;
     private javax.swing.JRadioButton btnMaintanenceValid;
