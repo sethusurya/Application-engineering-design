@@ -5,10 +5,17 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.City;
+import model.Encounter;
+import model.EncounterHistory;
 import model.Person;
 import model.PersonsList;
+import model.Vitals;
 
 /**
  *
@@ -172,7 +179,45 @@ public class CreateEncounter extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         
-        // save things first and go back
+        // save things first and go back & person is selected person here
+        double newBloodPressure = Double.parseDouble(txtBloodPressure.getText());
+        double newTemperature = Double.parseDouble(txtTemperature.getText());
+        int newPulse = Integer.parseInt(txtPulse.getText());
+        
+        LocalDate newDate;
+        newDate = dtDate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        for (Encounter e: person.getEncounterHistory().getEncounterHistory()){
+            if (e.getDate().compareTo(newDate) == 0) { // compared makes it 0
+                JOptionPane.showMessageDialog(this, "Vitals for this day have been already entered");
+                return;
+            }
+        }
+                
+        
+        Vitals newVitals = new Vitals();
+        newVitals.setBloodPressure(newBloodPressure);
+        newVitals.setTemperature(newTemperature);
+        newVitals.setPulse(newPulse);
+        
+        Encounter newEncounter = new Encounter();
+        newEncounter.setDate(newDate);
+        newEncounter.setVitals(newVitals);
+        
+        EncounterHistory newEncounterHistory = person.getEncounterHistory();
+        
+        // find the index where this date falls in
+        int index = 0;
+        for (int i = 0; i < person.getEncounterHistory().getEncounterHistory().size(); i++) {
+            LocalDate currentDate = person.getEncounterHistory().getEncounterHistory().get(i).getDate();
+            if(newDate.compareTo(currentDate) > 0) {
+                index = i;
+                break;
+            }
+        }
+        newEncounterHistory.addEncounter(index,newEncounter); // add new encounter to the person
+        
+        person.setEncounterHistory(newEncounterHistory);
         goBack();
     }//GEN-LAST:event_btnSaveActionPerformed
 

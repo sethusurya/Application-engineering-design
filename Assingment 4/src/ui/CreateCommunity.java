@@ -121,12 +121,17 @@ public class CreateCommunity extends javax.swing.JPanel {
 
        city.add(newCommunity); // add the new community to city
        
-       JOptionPane.showMessageDialog(this,"Community Successfully added");
+//       JOptionPane.showMessageDialog(this,"Community Successfully added");
        
        // Navigate back
       rightPanel.remove(this);
       CardLayout layout = (CardLayout) rightPanel.getLayout();
-      layout.previous(rightPanel);  
+      layout.previous(rightPanel);
+      
+      // Navigate into community for entering houses details
+      ViewHouses myViewHouses = new ViewHouses(rightPanel, city, newCommunity);
+      rightPanel.add("ViewHouses", myViewHouses);
+      layout.next(rightPanel);
     }//GEN-LAST:event_btnSaveActionPerformed
 
 

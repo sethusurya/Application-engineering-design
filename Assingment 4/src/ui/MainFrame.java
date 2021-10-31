@@ -28,6 +28,7 @@ public class MainFrame extends javax.swing.JFrame {
         personsList = new PersonsList();
         patientsList = new PatientsList();
         setSize(800, 600);
+        setHome();
     }
 
     /**
@@ -182,4 +183,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel rightPanel;
     private javax.swing.JSplitPane splitPane;
     // End of variables declaration//GEN-END:variables
+
+    private void setHome() {
+        HomePanel myHomePanel = new HomePanel();
+       rightPanel.add("HomePanel", myHomePanel);
+       CardLayout layout = (CardLayout) rightPanel.getLayout();
+       layout.next(rightPanel);
+    }
 }

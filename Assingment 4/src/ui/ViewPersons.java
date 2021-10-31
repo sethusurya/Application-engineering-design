@@ -5,10 +5,13 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.City;
+import model.Community;
+import model.House;
 import model.PatientsList;
 import model.Person;
 import model.PersonsList;
@@ -34,6 +37,7 @@ public class ViewPersons extends javax.swing.JPanel {
         this.patientsList = patientsList;
         
         populateTable(personsList);
+        populateFilter();
     }
 
     /**
@@ -50,6 +54,11 @@ public class ViewPersons extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         title = new javax.swing.JLabel();
+        selCommunity = new javax.swing.JComboBox<>();
+        lblCommunity = new javax.swing.JLabel();
+        title1 = new javax.swing.JLabel();
+        btnApplyFilter = new javax.swing.JButton();
+        btnClearFilter = new javax.swing.JButton();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -101,40 +110,85 @@ public class ViewPersons extends javax.swing.JPanel {
 
         title.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("List of Persons");
+        title.setText("Filter");
+
+        selCommunity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblCommunity.setText("Community : ");
+
+        title1.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
+        title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title1.setText("List of Persons");
+
+        btnApplyFilter.setText("Apply");
+        btnApplyFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyFilterActionPerformed(evt);
+            }
+        });
+
+        btnClearFilter.setText("Clear");
+        btnClearFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearFilterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBack)
-                        .addGap(35, 35, 35)
-                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addComponent(title1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAdd)
+                        .addGap(19, 19, 19))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnClearFilter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAdd)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(btnApplyFilter))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(selCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(131, 131, 131))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnApplyFilter)
+                    .addComponent(btnClearFilter))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnBack, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                    .addComponent(btnBack)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(title1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAdd)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -156,15 +210,52 @@ public class ViewPersons extends javax.swing.JPanel {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
         populateTable(personsList);
+        populateFilter();
     }//GEN-LAST:event_formComponentShown
+
+    private void btnClearFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearFilterActionPerformed
+        // TODO add your handling code here:
+        populateTable(personsList);
+    }//GEN-LAST:event_btnClearFilterActionPerformed
+
+    private void btnApplyFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyFilterActionPerformed
+        // TODO add your handling code here:
+        PersonsList filteredPersonsList = new PersonsList();
+        if (selCommunity.getSelectedItem().toString().equals("")){
+            filteredPersonsList = personsList;
+            // do nothing
+        } else {
+            String selectedCommunityName = selCommunity.getSelectedItem().toString();
+            Community newSelectedCommunity = new Community();
+            for (Community c:city.getCommunities()){
+                if (c.getName().equals(selectedCommunityName)){
+                    newSelectedCommunity = c;
+                    break;
+                }
+            }
+            
+            for (Person p:personsList.getPersonsList()){
+             House h = p.getHouse();
+             if (newSelectedCommunity.getHousesList().size() > 0 && checkHouseCommunityConnection(newSelectedCommunity, h)) {
+                 filteredPersonsList.add(p);
+             }
+            }
+        }
+        populateTable(filteredPersonsList);
+    }//GEN-LAST:event_btnApplyFilterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnApplyFilter;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnClearFilter;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCommunity;
     private javax.swing.JTable personsTable;
+    private javax.swing.JComboBox<String> selCommunity;
     private javax.swing.JLabel title;
+    private javax.swing.JLabel title1;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable(PersonsList personsList) {
@@ -180,5 +271,30 @@ public class ViewPersons extends javax.swing.JPanel {
            
            model.addRow(row);
         }
+    }
+
+    private void populateFilter() {
+        ArrayList<String> myCommunityList = new ArrayList<String>();
+        myCommunityList.add("");
+        
+        for(Community c : city.getCommunities()) {
+            // check if it is already present in the list before trying to add it to list
+            if (!myCommunityList.contains(c.getName()))myCommunityList.add(c.getName());
+        }
+        
+        // convert arraylist to array
+        String[] myCommunities = myCommunityList.toArray(new String[0]);
+        
+        // populating the menus
+        selCommunity.setModel(new javax.swing.DefaultComboBoxModel<>(myCommunities));
+    }
+    private boolean checkHouseCommunityConnection(Community community, House house){
+        boolean isIn = false;
+        for (House h:community.getHousesList()){
+            if (h.getHouseNumber() == house.getHouseNumber() && h.getStreetName().equals(house.getStreetName()) && h.getZipCode() == house.getZipCode()) {
+                isIn = true;
+            }
+        }
+        return isIn;
     }
 }

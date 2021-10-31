@@ -25,6 +25,12 @@ public class EncounterHistory {
     public void setEncounterHistory(ArrayList<Encounter> encounterHistory) {
         this.encounterHistory = encounterHistory;
     }
+
+    public ArrayList<Encounter> addEncounter(int index,Encounter newEncounter) {
+        ArrayList<Encounter> newEncounterHistory = encounterHistory;
+        newEncounterHistory.add(index,newEncounter);
+        return newEncounterHistory;
+    }
     
     
 }

@@ -4,36 +4,37 @@
  */
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
+//import java.util.Date;
 
 /**
  *
  * @author sethu
  */
 public class Encounter {
-    private Person person;
-    private Date date;
+//    private Person person;
+    private LocalDate date;
     private Vitals vitals;
     
-    public Encounter(){
-        person = new Person();
-        vitals = new Vitals();
-    }
+//    public Encounter(){
+//        person = new Person();
+//        vitals = new Vitals();
+//    }
+//
+//    public Person getPerson() {
+//        return person;
+//    }
+//
+//    public void setPerson(Person person) {
+//        this.person = person;
+//    }
 
-    public Person getPerson() {
-        return person;
-    }
 
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -5,6 +5,7 @@
 package ui;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.City;
 import model.Community;
@@ -135,6 +136,26 @@ public class CreateHouse extends javax.swing.JPanel {
         newHouse.setHouseNumber(Integer.parseInt(txtHouseNumber.getText()));
         newHouse.setStreetName(txtStreetName.getText());
         newHouse.setZipCode(Long.parseLong(txtZip.getText()));
+        
+        for(House h: selectedCommunity.getHousesList()){ // checking for the same house entered twice
+            if (h.getHouseNumber() == newHouse.getHouseNumber() && h.getStreetName().equals(newHouse.getStreetName()) && h.getZipCode() == newHouse.getZipCode()) {
+                JOptionPane.showMessageDialog(this, "The House information is already entered");
+                return;
+            }
+        }
+        
+        for (Community c: city.getCommunities()){
+            if (!c.getName().equals(selectedCommunity.getName())) {
+                for (House h:c.getHousesList()){
+                    if (h.getZipCode() == newHouse.getZipCode()) {
+                        JOptionPane.showMessageDialog(this, "Two different Communities cannot have same zipcode, Community " +c.getName()+" has the same zipcode");
+                        return;
+                    }
+                }
+            }
+        }
+        
+        
         
        Community newCommunity = selectedCommunity;
        newCommunity.add(newHouse); // adding a house to selectedCommunity

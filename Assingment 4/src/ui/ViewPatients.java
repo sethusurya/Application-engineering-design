@@ -238,10 +238,12 @@ public class ViewPatients extends javax.swing.JPanel {
 
     private void btnApplyFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyFilterActionPerformed
         // TODO add your handling code here:
-        if (selCommunity.equals("")){
+        PersonsList filteredPersonsList = new PersonsList();
+        PersonsList initialList = new PersonsList();
+        if (selCommunity.getSelectedItem().toString().equals("")){
+            initialList = personsList;
             // do nothing
         } else {
-            PersonsList filteredPersonsList = new PersonsList();
             String selectedCommunityName = selCommunity.getSelectedItem().toString();
             Community newSelectedCommunity = new Community();
             for (Community c:city.getCommunities()){
@@ -254,12 +256,26 @@ public class ViewPatients extends javax.swing.JPanel {
             for (Person p:personsList.getPersonsList()){
              House h = p.getHouse();
              if (newSelectedCommunity.getHousesList().size() > 0 && checkHouseCommunityConnection(newSelectedCommunity, h)) {
-                 filteredPersonsList.add(p);
+                 initialList.add(p);
              }
             }
-            
-            populateTable(filteredPersonsList);
         }
+        
+        if (txtBloodPressure.getText().equals("")) { // bp filter
+            // do nothing or filter nothing
+            filteredPersonsList = initialList;
+        } else {
+            Double bp = Double.parseDouble(txtBloodPressure.getText());
+            for (Person p: initialList.getPersonsList()){
+                if (p.getEncounterHistory().getEncounterHistory().size() > 0) {
+                    if (p.getEncounterHistory().getEncounterHistory().get(0).getVitals().getBloodPressure() > bp){
+                        filteredPersonsList.add(p);
+                    }
+                }
+            }
+        }
+        
+      populateTable(filteredPersonsList);
     }//GEN-LAST:event_btnApplyFilterActionPerformed
 
     private void btnCancelFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelFilterActionPerformed
