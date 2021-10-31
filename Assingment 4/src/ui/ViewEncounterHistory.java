@@ -4,36 +4,17 @@
  */
 package ui;
 
-import java.awt.CardLayout;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
-import model.City;
-import model.PatientsList;
-import model.Person;
-import model.PersonsList;
-
 /**
  *
  * @author sethu
  */
-public class ViewPersons extends javax.swing.JPanel {
+public class ViewEncounterHistory extends javax.swing.JPanel {
 
-    public City city;
-    public JPanel rightPanel;
-    public PersonsList personsList;
-    public PatientsList patientsList;
     /**
-     * Creates new form ViewPersons
+     * Creates new form ViewEncounterHistory
      */
-    public ViewPersons(JPanel rightPanel, City city, PersonsList personsList, PatientsList patientsList) {
+    public ViewEncounterHistory() {
         initComponents();
-        this.city = city;
-        this.rightPanel = rightPanel;
-        this.personsList = personsList;
-        this.patientsList = patientsList;
-        
-        populateTable(personsList);
     }
 
     /**
@@ -45,12 +26,23 @@ public class ViewPersons extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnBack = new javax.swing.JButton();
+        title = new javax.swing.JLabel();
         btnEdit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         personsTable = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
-        title = new javax.swing.JLabel();
+
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        title.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title.setText("List of Encounters");
 
         btnEdit.setText("View / Edit");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -61,20 +53,20 @@ public class ViewPersons extends javax.swing.JPanel {
 
         personsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Name", "Age", "Sex", "House Address"
+                "Date", "Blood Pressure", "Temperature"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -93,17 +85,6 @@ public class ViewPersons extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-
-        btnBack.setText("<< Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
-        title.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
-        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("List of Persons");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -144,35 +125,35 @@ public class ViewPersons extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        //        rightPanel.remove(this);
+        //        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        //        layout.previous(rightPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex = personsTable.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please Select a row to View or Edit");
+//            JOptionPane.showMessageDialog(this, "Please Select a row to View or Edit");
         } else {
             // do something with this row of data
-//            Community selectedCommunity = city.getCommunities().get(selectedRowIndex);
-//            ViewHouses myViewHouses = new ViewHouses(rightPanel, city, selectedCommunity);
-//            rightPanel.add("ViewHouses", myViewHouses);
-//            CardLayout layout = (CardLayout)rightPanel.getLayout();
-//            layout.next(rightPanel);
+            //            Community selectedCommunity = city.getCommunities().get(selectedRowIndex);
+            //            ViewHouses myViewHouses = new ViewHouses(rightPanel, city, selectedCommunity);
+            //            rightPanel.add("ViewHouses", myViewHouses);
+            //            CardLayout layout = (CardLayout)rightPanel.getLayout();
+            //            layout.next(rightPanel);
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        CreatePerson myCreatePerson = new CreatePerson(rightPanel, city);
-        rightPanel.add("CreatePerson", myCreatePerson);
-        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-//        rightPanel.remove(this);
+//        CreatePerson myCreatePerson = new CreatePerson(rightPanel, city);
+//        rightPanel.add("CreatePerson", myCreatePerson);
 //        CardLayout layout = (CardLayout) rightPanel.getLayout();
-//        layout.previous(rightPanel);
-    }//GEN-LAST:event_btnBackActionPerformed
+//        layout.next(rightPanel);
+    }//GEN-LAST:event_btnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -183,19 +164,4 @@ public class ViewPersons extends javax.swing.JPanel {
     private javax.swing.JTable personsTable;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
-
-    private void populateTable(PersonsList personsList) {
-        DefaultTableModel model = (DefaultTableModel) personsTable.getModel();
-        model.setRowCount(0);
-        
-        for(Person p:personsList.getPersonsList()) {
-           Object[] row = new Object[3];
-           row[0] = p;
-           row[1] = p.getAge();
-           row[2] = p.getSex();
-           row[3] = p.getHouseAddr();
-           
-           model.addRow(row);
-        }
-    }
 }

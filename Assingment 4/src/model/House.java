@@ -39,6 +39,10 @@ public class House {
         this.zipCode = zipCode;
     }
     
+    public String getHouseAddress(){
+        return String.valueOf(houseNumber)+","+StreetName;
+    }
+    
     @Override
     public String toString() {
         return String.valueOf(houseNumber);

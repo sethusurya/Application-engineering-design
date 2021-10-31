@@ -5,7 +5,10 @@
 package ui;
 
 import java.awt.CardLayout;
+import javax.swing.JPanel;
 import model.City;
+import model.PatientsList;
+import model.PersonsList;
 
 /**
  *
@@ -14,12 +17,16 @@ import model.City;
 public class MainFrame extends javax.swing.JFrame {
     
     public City city;
+    public PersonsList personsList;
+    public PatientsList patientsList;
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
         city = new City();
+        personsList = new PersonsList();
+        patientsList = new PatientsList();
         setSize(800, 600);
     }
 
@@ -110,7 +117,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnPersonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonsActionPerformed
         // TODO add your handling code here:
-       ViewPersons myPersons = new ViewPersons();
+       ViewPersons myPersons = new ViewPersons(rightPanel,city,personsList,patientsList);
        rightPanel.add("ViewPersons", myPersons);
        CardLayout layout = (CardLayout) rightPanel.getLayout();
        layout.next(rightPanel);
@@ -126,7 +133,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientsActionPerformed
         // TODO add your handling code here:
-       ViewPatients myPatients = new ViewPatients();
+       ViewPatients myPatients = new ViewPatients(rightPanel,city,personsList,patientsList);
        rightPanel.add("ViewPatients", myPatients);
        CardLayout layout = (CardLayout) rightPanel.getLayout();
        layout.next(rightPanel);

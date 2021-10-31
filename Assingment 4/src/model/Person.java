@@ -65,5 +65,16 @@ public class Person {
         this.contactNumber = contactNumber;
     }
     
+    public String getHouseAddr() {
+        int HouseNumber = house.getHouseNumber();
+        String StreetName = house.getStreetName();
+        String HouseAddress = String.valueOf(HouseNumber)+","+StreetName;
+        return HouseAddress;
+    }
+    
+    @Override
+    public String toString(){
+        return name;
+    }
     
 }
