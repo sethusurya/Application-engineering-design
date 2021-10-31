@@ -67,6 +67,7 @@ public class ViewPatients extends javax.swing.JPanel {
                 formComponentShown(evt);
             }
         });
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnEdit.setText("View Encounters");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -74,23 +75,24 @@ public class ViewPatients extends javax.swing.JPanel {
                 btnEditActionPerformed(evt);
             }
         });
+        add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 416, -1, -1));
 
         patientsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Age", "Sex", "Patient ID"
+                "Name", "Age", "Sex", "Patient ID", "Blood Pressure", "Rec. Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -103,26 +105,35 @@ public class ViewPatients extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(patientsTable);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 234, 594, 171));
+
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, -1));
 
         title.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("Filters");
+        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 18, 339, 27));
 
         title1.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title1.setText("List of Patients");
+        add(title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 188, 308, 35));
 
         lblCommunity.setText("Community");
+        add(lblCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 63, 90, 26));
 
         selCommunity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(selCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 63, 104, 26));
 
         lblBloodPressure.setText("Blood Pressure  > ");
+        add(lblBloodPressure, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 100, -1, 26));
+        add(txtBloodPressure, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 104, 26));
 
         btnApplyFilter.setText("Apply Filter");
         btnApplyFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +141,7 @@ public class ViewPatients extends javax.swing.JPanel {
                 btnApplyFilterActionPerformed(evt);
             }
         });
+        add(btnApplyFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 144, -1, -1));
 
         btnCancelFilter.setText("Clear Filter");
         btnCancelFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -137,74 +149,7 @@ public class ViewPatients extends javax.swing.JPanel {
                 btnCancelFilterActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblCommunity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblBloodPressure, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtBloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(168, 168, 168))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(481, 481, 481)
-                                .addComponent(btnEdit))
-                            .addComponent(btnBack, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(title1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(121, 121, 121))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(btnCancelFilter)
-                            .addGap(115, 115, 115)
-                            .addComponent(btnApplyFilter)
-                            .addGap(139, 139, 139)))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(selCommunity)
-                    .addComponent(lblCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtBloodPressure)
-                    .addComponent(lblBloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnApplyFilter)
-                    .addComponent(btnCancelFilter))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(title1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEdit)
-                .addContainerGap())
-        );
+        add(btnCancelFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 144, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -281,6 +226,8 @@ public class ViewPatients extends javax.swing.JPanel {
     private void btnCancelFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelFilterActionPerformed
         // TODO add your handling code here:
         populateTable(personsList);
+        selCommunity.setSelectedItem("");
+        txtBloodPressure.setText("");
     }//GEN-LAST:event_btnCancelFilterActionPerformed
 
 
@@ -304,11 +251,18 @@ public class ViewPatients extends javax.swing.JPanel {
         model.setRowCount(0);
         
         for(Person p:personsList.getPersonsList()) {
-           Object[] row = new Object[4];
+           Object[] row = new Object[6];
            row[0] = p;
            row[1] = p.getAge();
            row[2] = p.getSex();
            row[3] = p.getPatientId();
+           if (p.getEncounterHistory().getEncounterHistory().size()> 0){
+               row[4] = p.getEncounterHistory().getEncounterHistory().get(0).getVitals().getBloodPressure();
+               row[5] = p.getEncounterHistory().getEncounterHistory().get(0).getDate();
+           } else {
+               row[4] = "-";
+               row[5] = "-";
+           }
            
            model.addRow(row);
         }
