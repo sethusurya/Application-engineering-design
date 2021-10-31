@@ -4,10 +4,16 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import model.City;
+import model.Community;
+import model.House;
 import model.PatientsList;
+import model.Person;
 import model.PersonsList;
 
 /**
@@ -29,6 +35,9 @@ public class ViewPatients extends javax.swing.JPanel {
         this.rightPanel = rightPanel;
         this.personsList = personsList;
         this.patientsList = patientsList;
+        
+        populateTable(personsList);
+        populateFilter();
     }
 
     /**
@@ -46,14 +55,20 @@ public class ViewPatients extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         title = new javax.swing.JLabel();
         title1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        lblCommunity = new javax.swing.JLabel();
+        selCommunity = new javax.swing.JComboBox<>();
+        lblBloodPressure = new javax.swing.JLabel();
+        txtBloodPressure = new javax.swing.JTextField();
+        btnApplyFilter = new javax.swing.JButton();
+        btnCancelFilter = new javax.swing.JButton();
 
-        btnEdit.setText("View / Edit");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
+
+        btnEdit.setText("View Encounters");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -68,11 +83,11 @@ public class ViewPatients extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Patient ID", "Name", "Age", "Sex"
+                "Name", "Age", "Sex", "Patient ID"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -103,15 +118,25 @@ public class ViewPatients extends javax.swing.JPanel {
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title1.setText("List of Patients");
 
-        jLabel1.setText("Community");
+        lblCommunity.setText("Community");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selCommunity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel2.setText("Blood Pressure  > ");
+        lblBloodPressure.setText("Blood Pressure  > ");
 
-        jButton1.setText("Apply Filter");
+        btnApplyFilter.setText("Apply Filter");
+        btnApplyFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyFilterActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Clear Filter");
+        btnCancelFilter.setText("Clear Filter");
+        btnCancelFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelFilterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -124,12 +149,12 @@ public class ViewPatients extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblCommunity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblBloodPressure, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(selCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(168, 168, 168))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -148,9 +173,9 @@ public class ViewPatients extends javax.swing.JPanel {
                             .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(121, 121, 121))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jButton2)
+                            .addComponent(btnCancelFilter)
                             .addGap(115, 115, 115)
-                            .addComponent(jButton1)
+                            .addComponent(btnApplyFilter)
                             .addGap(139, 139, 139)))))
         );
         layout.setVerticalGroup(
@@ -160,16 +185,16 @@ public class ViewPatients extends javax.swing.JPanel {
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selCommunity)
+                    .addComponent(lblCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBloodPressure)
+                    .addComponent(lblBloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnApplyFilter)
+                    .addComponent(btnCancelFilter))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
@@ -186,37 +211,116 @@ public class ViewPatients extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRowIndex = patientsTable.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please Select a row to View or Edit");
+            JOptionPane.showMessageDialog(this, "Please Select a row to View or Add Encounters");
         } else {
+            DefaultTableModel model = (DefaultTableModel) patientsTable.getModel();
+            Person selectedPerson = (Person) model.getValueAt(selectedRowIndex, 0);
             // do something with this row of data
-//            Community selectedCommunity = city.getCommunities().get(selectedRowIndex);
-//            ViewHouses myViewHouses = new ViewHouses(rightPanel, city, selectedCommunity);
-//            rightPanel.add("ViewHouses", myViewHouses);
-//            CardLayout layout = (CardLayout)rightPanel.getLayout();
-//            layout.next(rightPanel);
+            ViewEncounterHistory myViewHistory = new ViewEncounterHistory(rightPanel, city, personsList, selectedPerson);
+            rightPanel.add("viewHistory", myViewHistory);
+            CardLayout layout = (CardLayout)rightPanel.getLayout();
+            layout.next(rightPanel);
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-//        rightPanel.remove(this);
-//        CardLayout layout = (CardLayout) rightPanel.getLayout();
-//        layout.previous(rightPanel);
+        rightPanel.remove(this);
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.previous(rightPanel);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        populateTable(personsList);
+        populateFilter();
+    }//GEN-LAST:event_formComponentShown
+
+    private void btnApplyFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyFilterActionPerformed
+        // TODO add your handling code here:
+        if (selCommunity.equals("")){
+            // do nothing
+        } else {
+            PersonsList filteredPersonsList = new PersonsList();
+            String selectedCommunityName = selCommunity.getSelectedItem().toString();
+            Community newSelectedCommunity = new Community();
+            for (Community c:city.getCommunities()){
+                if (c.getName().equals(selectedCommunityName)){
+                    newSelectedCommunity = c;
+                    break;
+                }
+            }
+            
+            for (Person p:personsList.getPersonsList()){
+             House h = p.getHouse();
+             if (newSelectedCommunity.getHousesList().size() > 0 && checkHouseCommunityConnection(newSelectedCommunity, h)) {
+                 filteredPersonsList.add(p);
+             }
+            }
+            
+            populateTable(filteredPersonsList);
+        }
+    }//GEN-LAST:event_btnApplyFilterActionPerformed
+
+    private void btnCancelFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelFilterActionPerformed
+        // TODO add your handling code here:
+        populateTable(personsList);
+    }//GEN-LAST:event_btnCancelFilterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnApplyFilter;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnCancelFilter;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblBloodPressure;
+    private javax.swing.JLabel lblCommunity;
     private javax.swing.JTable patientsTable;
+    private javax.swing.JComboBox<String> selCommunity;
     private javax.swing.JLabel title;
     private javax.swing.JLabel title1;
+    private javax.swing.JTextField txtBloodPressure;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable(PersonsList personsList) {
+        DefaultTableModel model = (DefaultTableModel) patientsTable.getModel();
+        model.setRowCount(0);
+        
+        for(Person p:personsList.getPersonsList()) {
+           Object[] row = new Object[4];
+           row[0] = p;
+           row[1] = p.getAge();
+           row[2] = p.getSex();
+           row[3] = p.getPatientId();
+           
+           model.addRow(row);
+        }
+    }
+    
+    private void populateFilter() {
+        ArrayList<String> myCommunityList = new ArrayList<String>();
+        myCommunityList.add("");
+        
+        for(Community c : city.getCommunities()) {
+            // check if it is already present in the list before trying to add it to list
+            if (!myCommunityList.contains(c.getName()))myCommunityList.add(c.getName());
+        }
+        
+        // convert arraylist to array
+        String[] myCommunities = myCommunityList.toArray(new String[0]);
+        
+        // populating the menus
+        selCommunity.setModel(new javax.swing.DefaultComboBoxModel<>(myCommunities));
+    }
+    
+    private boolean checkHouseCommunityConnection(Community community, House house){
+        boolean isIn = false;
+        for (House h:community.getHousesList()){
+            if (h.getHouseNumber() == house.getHouseNumber() && h.getStreetName().equals(house.getStreetName()) && h.getZipCode() == house.getZipCode()) {
+                isIn = true;
+            }
+        }
+        return isIn;
+    }
 }

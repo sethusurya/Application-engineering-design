@@ -4,17 +4,38 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.City;
+import model.Encounter;
+import model.EncounterHistory;
+import model.Person;
+import model.PersonsList;
+
 /**
  *
  * @author sethu
  */
 public class ViewEncounterHistory extends javax.swing.JPanel {
 
+    public JPanel rightPanel;
+    public City city;
+    public PersonsList personsList;
+    public Person person;
     /**
      * Creates new form ViewEncounterHistory
      */
-    public ViewEncounterHistory() {
+    public ViewEncounterHistory(JPanel rightPanel,City city,PersonsList personsList,Person person) {
         initComponents();
+        
+        this.rightPanel = rightPanel;
+        this.city = city;
+        this.personsList = personsList;
+        this.person = person;
+        
+        populateTable(person.getEncounterHistory());
     }
 
     /**
@@ -30,8 +51,14 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
         title = new javax.swing.JLabel();
         btnEdit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        personsTable = new javax.swing.JTable();
+        encountersTable = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -51,22 +78,22 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
             }
         });
 
-        personsTable.setModel(new javax.swing.table.DefaultTableModel(
+        encountersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Date", "Blood Pressure", "Temperature"
+                "Pulse", "Blood Pressure", "Temperature", "Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -77,7 +104,7 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(personsTable);
+        jScrollPane1.setViewportView(encountersTable);
 
         btnAdd.setText("+ Add New");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -127,16 +154,14 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        //        rightPanel.remove(this);
-        //        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        //        layout.previous(rightPanel);
+        goBack();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-        int selectedRowIndex = personsTable.getSelectedRow();
+        int selectedRowIndex = encountersTable.getSelectedRow();
         if (selectedRowIndex < 0) {
-//            JOptionPane.showMessageDialog(this, "Please Select a row to View or Edit");
+            JOptionPane.showMessageDialog(this, "Please Select a row to View or Edit");
         } else {
             // do something with this row of data
             //            Community selectedCommunity = city.getCommunities().get(selectedRowIndex);
@@ -149,19 +174,45 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-//        CreatePerson myCreatePerson = new CreatePerson(rightPanel, city);
-//        rightPanel.add("CreatePerson", myCreatePerson);
-//        CardLayout layout = (CardLayout) rightPanel.getLayout();
-//        layout.next(rightPanel);
+        CreateEncounter myCreateEncounter = new CreateEncounter(rightPanel, city, personsList, person);
+        rightPanel.add("CreateEncounter", myCreateEncounter);
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        populateTable(person.getEncounterHistory());
+    }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JTable encountersTable;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable personsTable;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable(EncounterHistory encounterHistory) {
+        DefaultTableModel model = (DefaultTableModel) encountersTable.getModel();
+        model.setRowCount(0);
+        
+        for(Encounter e:encounterHistory.getEncounterHistory()) {
+           Object[] row = new Object[4];
+           row[0] = e;
+           row[2] = e.getVitals().getTemperature();
+           row[1] = e.getVitals().getBloodPressure();
+           row[3] = e.getDate();
+           
+           model.addRow(row);
+        }
+    }
+
+    private void goBack() {
+                rightPanel.remove(this);
+                CardLayout layout = (CardLayout) rightPanel.getLayout();
+                layout.previous(rightPanel);
+    }
 }

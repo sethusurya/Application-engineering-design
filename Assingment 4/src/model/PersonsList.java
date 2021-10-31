@@ -24,6 +24,11 @@ public class PersonsList {
     public void setPersonsList(ArrayList<Person> personsList) {
         this.personsList = personsList;
     }
-    
-    
+
+    public ArrayList<Person> add(Person newPerson) {
+        ArrayList<Person> newPersonsList = personsList;
+        newPersonsList.add(newPerson);
+        return newPersonsList;
+    }
+      
 }

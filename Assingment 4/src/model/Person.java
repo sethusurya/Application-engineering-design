@@ -14,16 +14,24 @@ public class Person {
     private String sex;
     private int age;
     private House house;
-    private Community community;
+    private String patientId;
+    private EncounterHistory encounterHistory;
 
-    public Community getCommunity() {
-        return community;
+    public EncounterHistory getEncounterHistory() {
+        return encounterHistory;
     }
 
-    public void setCommunity(Community community) {
-        this.community = community;
+    public void setEncounterHistory(EncounterHistory encounterHistory) {
+        this.encounterHistory = encounterHistory;
     }
-    private long contactNumber;
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
 
     public String getName() {
         return name;
@@ -55,14 +63,6 @@ public class Person {
 
     public void setHouse(House house) {
         this.house = house;
-    }
-
-    public long getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(long contactNumber) {
-        this.contactNumber = contactNumber;
     }
     
     public String getHouseAddr() {

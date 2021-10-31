@@ -6,10 +6,14 @@ package ui;
 
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.City;
 import model.Community;
+import model.EncounterHistory;
 import model.House;
+import model.Person;
+import model.PersonsList;
 
 /**
  *
@@ -19,13 +23,15 @@ public class CreatePerson extends javax.swing.JPanel {
 
     public JPanel rightPanel;
     public City city;
+    public PersonsList personsList;
     /**
      * Creates new form CreatePerson
      */
-    public CreatePerson(JPanel rightPanel, City city) {
+    public CreatePerson(JPanel rightPanel, City city,PersonsList personsList) {
         initComponents();
         this.rightPanel = rightPanel;
         this.city = city;
+        this.personsList = personsList;
         
         populateSelect();
         
@@ -186,9 +192,7 @@ public class CreatePerson extends javax.swing.JPanel {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        rightPanel.remove(this);
-        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        layout.previous(rightPanel);
+        goBack();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void selHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selHouseActionPerformed
@@ -198,6 +202,53 @@ public class CreatePerson extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         // take the input values and save it to db
+        String newName = txtName.getText();
+        int newAge = Integer.parseInt(txtAge.getText());
+        String newSex = txtSex.getText();
+        String newPatientId = txtPatientId.getText();
+        
+        for(Person p:personsList.getPersonsList()){
+            if (p.getPatientId().equals(newPatientId)) {
+                JOptionPane.showMessageDialog(this, "PatientId is already exists, Please assign new One");
+                return;
+            }
+        }
+        String newCommunityName = selCommunity.getSelectedItem().toString();
+        String newHouseAddr = selHouse.getSelectedItem().toString();
+        
+        String[] newHouseArr = newHouseAddr.split(",");
+        Community newCommunity = new Community();
+        House newHouse = new House();
+        for(Community c: city.getCommunities()){
+            if (c.getName() == newCommunityName) {
+                newCommunity = c;
+                break;
+            }
+        }
+        if(newHouseArr.length > 0 && newCommunity.getHousesList().size() > 0) { // houses list is not empty and newHouse is proper string
+            int newHouseNumber = Integer.parseInt(newHouseArr[0]);
+            String newStreetName = newHouseArr[1];
+            
+            for(House h: newCommunity.getHousesList()){
+                if (h.getHouseNumber() == newHouseNumber && h.getStreetName().equals(newStreetName)) {
+                    newHouse = h;
+                    break;
+                }
+            }   
+        }
+        
+        EncounterHistory NewEncounterHistory = new EncounterHistory();
+        
+        Person newPerson = new Person();
+        newPerson.setName(newName);
+        newPerson.setAge(newAge);
+        newPerson.setSex(newSex);
+        newPerson.setPatientId(newPatientId);
+        newPerson.setHouse(newHouse);
+        newPerson.setEncounterHistory(NewEncounterHistory);
+        personsList.add(newPerson);
+        
+        goBack();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void selCommunityItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selCommunityItemStateChanged
@@ -205,6 +256,7 @@ public class CreatePerson extends javax.swing.JPanel {
         String selectedCommunityName = selCommunity.getSelectedItem().toString();
         if (selectedCommunityName == ""){
             // do nothing
+           selHouse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[0])); // clearing house selections
         } else {
             Community selectedCommunity = new Community();
             for (Community c: city.getCommunities()){
@@ -267,4 +319,12 @@ public class CreatePerson extends javax.swing.JPanel {
         // populating the menus
         selHouse.setModel(new javax.swing.DefaultComboBoxModel<>(myHouses));
     }
+
+    private void goBack() {
+        rightPanel.remove(this);
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.previous(rightPanel);
+    }
+    
+    
 }

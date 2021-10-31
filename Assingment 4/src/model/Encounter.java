@@ -11,22 +11,23 @@ import java.util.Date;
  * @author sethu
  */
 public class Encounter {
-    private Patient patient;
+    private Person person;
     private Date date;
     private Vitals vitals;
     
     public Encounter(){
-        patient = new Patient();
+        person = new Person();
         vitals = new Vitals();
     }
 
-    public Patient getPatient() {
-        return patient;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPerson(Person person) {
+        this.person = person;
     }
+
 
     public Date getDate() {
         return date;
@@ -44,6 +45,10 @@ public class Encounter {
         this.vitals = vitals;
     }
     
+    @Override
+    public String toString(){
+        return String.valueOf(vitals.getPulse());
+    }
     
     
 }

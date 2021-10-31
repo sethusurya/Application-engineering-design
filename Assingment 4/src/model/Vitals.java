@@ -16,7 +16,6 @@ public class Vitals {
     private double temperature;
     private double bloodPressure;
     private int pulse;
-    private Date date;
 
     public double getTemperature() {
         return temperature;
@@ -40,14 +39,6 @@ public class Vitals {
 
     public void setPulse(int pulse) {
         this.pulse = pulse;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
     
     

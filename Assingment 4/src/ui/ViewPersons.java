@@ -45,17 +45,15 @@ public class ViewPersons extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnEdit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         personsTable = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         title = new javax.swing.JLabel();
 
-        btnEdit.setText("View / Edit");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
             }
         });
 
@@ -112,9 +110,7 @@ public class ViewPersons extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnEdit)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBack)
                         .addGap(35, 35, 35)
@@ -138,30 +134,13 @@ public class ViewPersons extends javax.swing.JPanel {
                             .addComponent(btnBack, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEdit)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-        int selectedRowIndex = personsTable.getSelectedRow();
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please Select a row to View or Edit");
-        } else {
-            // do something with this row of data
-//            Community selectedCommunity = city.getCommunities().get(selectedRowIndex);
-//            ViewHouses myViewHouses = new ViewHouses(rightPanel, city, selectedCommunity);
-//            rightPanel.add("ViewHouses", myViewHouses);
-//            CardLayout layout = (CardLayout)rightPanel.getLayout();
-//            layout.next(rightPanel);
-        }
-    }//GEN-LAST:event_btnEditActionPerformed
-
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        CreatePerson myCreatePerson = new CreatePerson(rightPanel, city);
+        CreatePerson myCreatePerson = new CreatePerson(rightPanel, city, personsList);
         rightPanel.add("CreatePerson", myCreatePerson);
         CardLayout layout = (CardLayout) rightPanel.getLayout();
         layout.next(rightPanel);
@@ -169,16 +148,20 @@ public class ViewPersons extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-//        rightPanel.remove(this);
-//        CardLayout layout = (CardLayout) rightPanel.getLayout();
-//        layout.previous(rightPanel);
+        rightPanel.remove(this);
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.previous(rightPanel);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        populateTable(personsList);
+    }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnEdit;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable personsTable;
     private javax.swing.JLabel title;
@@ -189,7 +172,7 @@ public class ViewPersons extends javax.swing.JPanel {
         model.setRowCount(0);
         
         for(Person p:personsList.getPersonsList()) {
-           Object[] row = new Object[3];
+           Object[] row = new Object[4];
            row[0] = p;
            row[1] = p.getAge();
            row[2] = p.getSex();
