@@ -63,10 +63,17 @@ public class CreatePerson extends javax.swing.JPanel {
         btnCancel = new javax.swing.JButton();
         txtPatientId = new javax.swing.JTextField();
         lblPatientId = new javax.swing.JLabel();
+        btnNewHouse = new javax.swing.JButton();
+        btnNewCommunity = new javax.swing.JButton();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTitle.setFont(new java.awt.Font("Kristen ITC", 3, 18)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Create Person");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 42));
@@ -94,6 +101,11 @@ public class CreatePerson extends javax.swing.JPanel {
         selCommunity.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 selCommunityItemStateChanged(evt);
+            }
+        });
+        selCommunity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selCommunityActionPerformed(evt);
             }
         });
         add(selCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 259, 252, 40));
@@ -130,6 +142,22 @@ public class CreatePerson extends javax.swing.JPanel {
         lblPatientId.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPatientId.setText("Medical ID : ");
         add(lblPatientId, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 218, 101, 32));
+
+        btnNewHouse.setText("+ New House");
+        btnNewHouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewHouseActionPerformed(evt);
+            }
+        });
+        add(btnNewHouse, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, 100, -1));
+
+        btnNewCommunity.setText("+ New Community");
+        btnNewCommunity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewCommunityActionPerformed(evt);
+            }
+        });
+        add(btnNewCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 270, 100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -143,12 +171,27 @@ public class CreatePerson extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        // take the input values and save it to db
+        
+        // get data from the inputs
         String newName = txtName.getText();
         int newAge = Integer.parseInt(txtAge.getText());
         String newSex = txtSex.getText();
         String newPatientId = txtPatientId.getText();
         
+        // check if all the inputs are filled
+        if(newName.equals("") || txtAge.getText().equals("") || newSex.equals("") || newPatientId.equals("") || selCommunity.getSelectedItem().toString().equals("") || selHouse.getSelectedItem().toString().equals("")){
+            JOptionPane.showMessageDialog(this, "One or more field is left empty, Please correct it");
+            return;
+        }
+        
+        // check for number inputs in Age
+        if(!isValidNumber(txtAge.getText())){
+            JOptionPane.showMessageDialog(this, "Age is supposed to be in numbers(FYI)");
+            return;
+        }
+        
+        
+        // check if the patient already exists
         for(Person p:personsList.getPersonsList()){
             if (p.getPatientId().equals(newPatientId)) {
                 JOptionPane.showMessageDialog(this, "PatientId is already exists, Please assign new One");
@@ -211,9 +254,49 @@ public class CreatePerson extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_selCommunityItemStateChanged
 
+    private void selCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selCommunityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selCommunityActionPerformed
+
+    private void btnNewHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewHouseActionPerformed
+        // TODO add your handling code here:
+        String newCommunityName = selCommunity.getSelectedItem().toString();
+        if (newCommunityName.equals("")) {
+            JOptionPane.showMessageDialog(this, "Please select community to add houses");
+            return;
+        } else {
+           Community newCommunity = new Community();
+           for(Community c: city.getCommunities()){
+               if(c.getName().equals(newCommunityName)){
+                   newCommunity = c;
+               }
+           };
+        // navigating to create home page 
+        CreateHouse myCreateHouse = new CreateHouse(rightPanel, city, newCommunity);
+        rightPanel.add("CreateHouse", myCreateHouse);
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
+        }
+    }//GEN-LAST:event_btnNewHouseActionPerformed
+
+    private void btnNewCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewCommunityActionPerformed
+        // TODO add your handling code here:
+       CreateCommunity myCreateCommunity = new CreateCommunity(rightPanel, city);
+       rightPanel.add("CreateCommunity", myCreateCommunity);
+       CardLayout layout = (CardLayout) rightPanel.getLayout();
+       layout.next(rightPanel);
+    }//GEN-LAST:event_btnNewCommunityActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+      populateSelect();
+    }//GEN-LAST:event_formComponentShown
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnNewCommunity;
+    private javax.swing.JButton btnNewHouse;
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblCommunity;
@@ -268,5 +351,15 @@ public class CreatePerson extends javax.swing.JPanel {
         layout.previous(rightPanel);
     }
     
+    private boolean isValidNumber(String numberString) {
+        boolean isValid = true;
+        for (int i = 0; i < numberString.length(); i++) {
+            char c = numberString.charAt(i);
+            if (!(c>='0' && c<='9')) {
+                isValid = false;
+            }
+        }
+        return isValid;
+    }
     
 }

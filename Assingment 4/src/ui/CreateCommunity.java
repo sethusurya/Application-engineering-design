@@ -46,7 +46,7 @@ public class CreateCommunity extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTitle.setFont(new java.awt.Font("Kristen ITC", 3, 24)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Create New Community");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 59, 600, 63));
@@ -83,19 +83,31 @@ public class CreateCommunity extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-       Community newCommunity = new Community(); // create new community
        
-       String communityName = txtName.getText(); // get name from field
+        String communityName = txtName.getText(); // get name from field
+
+        // check if the community name is given
+        if (communityName.equals("")) {
+            JOptionPane.showMessageDialog(this,"Community name cannot be blank");
+            return;
+        }
+        
+        // check if the community with same name exists in the city
+        for(Community c: city.getCommunities()){
+            if(c.getName().toLowerCase().equals(communityName.toLowerCase())) {
+                JOptionPane.showMessageDialog(this, "Community with the same name already exists");
+                return;
+            }
+        }
+        
+       Community newCommunity = new Community(); // create new community 
        ArrayList<House> myHousesList = new ArrayList<House>();// create arraylist of 0 houses
-       
        newCommunity.setName(communityName); // set name for community
        newCommunity.setHousesList(myHousesList); // set Houses list for community
 
        city.add(newCommunity); // add the new community to city
        
-//       JOptionPane.showMessageDialog(this,"Community Successfully added");
-       
-       // Navigate back
+      // Navigate back
       rightPanel.remove(this);
       CardLayout layout = (CardLayout) rightPanel.getLayout();
       layout.previous(rightPanel);

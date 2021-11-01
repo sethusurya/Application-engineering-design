@@ -31,12 +31,12 @@ public class HomePanel extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        title.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
+        title.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("Welcome");
         add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 116, 600, 27));
 
-        title1.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
+        title1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title1.setText("Use the buttons on Left side to Navigate");
         add(title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 216, 580, 27));

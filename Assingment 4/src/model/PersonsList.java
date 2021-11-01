@@ -30,5 +30,11 @@ public class PersonsList {
         newPersonsList.add(newPerson);
         return newPersonsList;
     }
+
+    public ArrayList<Person> remove(Person newSelectedPerson) {
+        ArrayList<Person> newPersonsList = personsList;
+        newPersonsList.remove(newSelectedPerson);
+        return newPersonsList;
+    }
       
 }

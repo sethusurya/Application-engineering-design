@@ -96,10 +96,10 @@ public class ViewHouses extends javax.swing.JPanel {
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        lblTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("List of Houses");
-        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 21, 535, 28));
+        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 21, 320, 28));
 
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblName.setText("Community Name : ");

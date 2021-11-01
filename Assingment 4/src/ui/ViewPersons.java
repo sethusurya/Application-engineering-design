@@ -59,6 +59,7 @@ public class ViewPersons extends javax.swing.JPanel {
         title1 = new javax.swing.JLabel();
         btnApplyFilter = new javax.swing.JButton();
         btnClearFilter = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -95,7 +96,7 @@ public class ViewPersons extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(personsTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 219, 572, 220));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 219, 570, 190));
 
         btnAdd.setText("+ Add New");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +114,7 @@ public class ViewPersons extends javax.swing.JPanel {
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        title.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
+        title.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("Filter");
         add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 23, 339, 27));
@@ -124,7 +125,7 @@ public class ViewPersons extends javax.swing.JPanel {
         lblCommunity.setText("Community : ");
         add(lblCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 68, 98, 26));
 
-        title1.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
+        title1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title1.setText("List of Persons");
         add(title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 174, 339, 27));
@@ -144,6 +145,14 @@ public class ViewPersons extends javax.swing.JPanel {
             }
         });
         add(btnClearFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 112, -1, -1));
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -198,12 +207,29 @@ public class ViewPersons extends javax.swing.JPanel {
         populateTable(filteredPersonsList);
     }//GEN-LAST:event_btnApplyFilterActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = personsTable.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a person(Row) to delete");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) personsTable.getModel();
+        Person newSelectedPerson = (Person) model.getValueAt(selectedRowIndex, 0);
+        // delete the person from persons db
+        personsList.remove(newSelectedPerson);
+        
+        //refresh the screen
+        populateTable(personsList);
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnApplyFilter;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnClearFilter;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCommunity;
     private javax.swing.JTable personsTable;

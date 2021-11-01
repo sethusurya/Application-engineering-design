@@ -51,10 +51,10 @@ public class CreateHouse extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTitle.setFont(new java.awt.Font("Kristen ITC", 3, 24)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Create New House");
-        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 28, 615, 50));
+        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 28, 600, 50));
 
         lblHouseNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHouseNumber.setText("House Number : ");
@@ -91,18 +91,36 @@ public class CreateHouse extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         
+        // check for empty fields
+        if (txtHouseNumber.getText().equals("") || txtStreetName.getText().equals("")|| txtZip.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "One or more field(s) is left blank");
+            return;
+        }
+        
+        // check if the houseNumber of zip is only numbers
+        if (!isValidNumber(txtHouseNumber.getText())) {
+           JOptionPane.showMessageDialog(this, "House number has alphabets or specials characters, Please provide number");
+           return;
+        }
+        if (!isValidNumber(txtZip.getText())){
+           JOptionPane.showMessageDialog(this, "Zip cannot have alphabets");
+           return;
+        }
+        
         House newHouse = new House();
         newHouse.setHouseNumber(Integer.parseInt(txtHouseNumber.getText()));
         newHouse.setStreetName(txtStreetName.getText());
         newHouse.setZipCode(Long.parseLong(txtZip.getText()));
         
-        for(House h: selectedCommunity.getHousesList()){ // checking for the same house entered twice
+        // checking for the same house entered twice
+        for(House h: selectedCommunity.getHousesList()){ 
             if (h.getHouseNumber() == newHouse.getHouseNumber() && h.getStreetName().equals(newHouse.getStreetName()) && h.getZipCode() == newHouse.getZipCode()) {
                 JOptionPane.showMessageDialog(this, "The House information is already entered");
                 return;
             }
         }
         
+        // checking if the zip code of one community is matching with zip of any other
         for (Community c: city.getCommunities()){
             if (!c.getName().equals(selectedCommunity.getName())) {
                 for (House h:c.getHousesList()){
@@ -143,4 +161,17 @@ public class CreateHouse extends javax.swing.JPanel {
     private javax.swing.JTextField txtStreetName;
     private javax.swing.JTextField txtZip;
     // End of variables declaration//GEN-END:variables
+
+
+    private boolean isValidNumber(String numberString) {
+        boolean isValid = true;
+        for (int i = 0; i < numberString.length(); i++) {
+            char c = numberString.charAt(i);
+            if (!(c>='0' && c<='9')) {
+                isValid = false;
+            }
+        }
+        return isValid;
+    }
+
 }

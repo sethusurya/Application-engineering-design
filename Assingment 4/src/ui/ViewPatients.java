@@ -115,12 +115,12 @@ public class ViewPatients extends javax.swing.JPanel {
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, -1));
 
-        title.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
+        title.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("Filters");
         add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 18, 339, 27));
 
-        title1.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
+        title1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title1.setText("List of Patients");
         add(title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 188, 308, 35));
@@ -183,6 +183,13 @@ public class ViewPatients extends javax.swing.JPanel {
 
     private void btnApplyFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyFilterActionPerformed
         // TODO add your handling code here:
+        
+        // check for validations
+        if (!isValidDoubleNumber(txtBloodPressure.getText())) {
+            JOptionPane.showMessageDialog(this,"Blood Pressure needs numbers to filter");
+            return;
+        }
+        
         PersonsList filteredPersonsList = new PersonsList();
         PersonsList initialList = new PersonsList();
         if (selCommunity.getSelectedItem().toString().equals("")){
@@ -219,8 +226,12 @@ public class ViewPatients extends javax.swing.JPanel {
                 }
             }
         }
-        
+      
       populateTable(filteredPersonsList);
+      
+      if(filteredPersonsList.getPersonsList().size() == 0){
+           JOptionPane.showMessageDialog(this,"No Persons Found matching criteria");
+      }
     }//GEN-LAST:event_btnApplyFilterActionPerformed
 
     private void btnCancelFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelFilterActionPerformed
@@ -292,5 +303,18 @@ public class ViewPatients extends javax.swing.JPanel {
             }
         }
         return isIn;
+    }
+    
+    private boolean isValidDoubleNumber(String numberString) {
+        boolean isValid = true;
+        for (int i = 0; i < numberString.length(); i++) {
+            char c = numberString.charAt(i);
+            if (c == '.' || (c>='0' && c<='9')) {
+               isValid = true; 
+            } else {
+                isValid = false;
+            }
+        }
+        return isValid;
     }
 }

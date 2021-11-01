@@ -37,6 +37,9 @@ public class CreateEncounter extends javax.swing.JPanel {
         this.personsList = personsList;
         this.person = person;
         
+        // initiate the date value by default
+        dtDate.setDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        
         txtPatientId.setText(person.getPatientId());
     }
 
@@ -65,7 +68,7 @@ public class CreateEncounter extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTitle.setFont(new java.awt.Font("Kristen ITC", 3, 24)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Create New Encounter");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, 583, 50));
@@ -122,10 +125,32 @@ public class CreateEncounter extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         
+        // check if all the inputs are provided or not
+        if (txtPulse.getText().equals("") || txtBloodPressure.getText().equals("") || txtTemperature.getText().equals("") || dtDate.getDate() == null) {
+            JOptionPane.showMessageDialog(this,"One or more inputs is left blank, Please provide them to proceed");
+            return;
+        }
+        
+        // check for valid number data
+        if (!isValidNumber(txtPulse.getText())) {
+            JOptionPane.showMessageDialog(this,"Pulse is not in number, Please correct the data");
+            return;
+        }
+        if (!isValidDoubleNumber(txtBloodPressure.getText())) {
+            JOptionPane.showMessageDialog(this, "Blood pressure cannot have alphabets and stuff");
+            return;
+        }
+        if (!isValidDoubleNumber(txtTemperature.getText())){
+            JOptionPane.showMessageDialog(this, "Temperature cannot be string(FYI)");
+            return;
+        }
+        
         // save things first and go back & person is selected person here
         double newBloodPressure = Double.parseDouble(txtBloodPressure.getText());
         double newTemperature = Double.parseDouble(txtTemperature.getText());
         int newPulse = Integer.parseInt(txtPulse.getText());
+        
+        System.out.println("get date : "+ dtDate.getDate());
         
         LocalDate newDate;
         newDate = dtDate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -185,5 +210,29 @@ public class CreateEncounter extends javax.swing.JPanel {
         rightPanel.remove(this);
         CardLayout layout = (CardLayout) rightPanel.getLayout();
         layout.previous(rightPanel);
+    }
+    
+    private boolean isValidNumber(String numberString) {
+        boolean isValid = true;
+        for (int i = 0; i < numberString.length(); i++) {
+            char c = numberString.charAt(i);
+            if (!(c>='0' && c<='9')) {
+                isValid = false;
+            }
+        }
+        return isValid;
+    }
+    
+    private boolean isValidDoubleNumber(String numberString) {
+        boolean isValid = true;
+        for (int i = 0; i < numberString.length(); i++) {
+            char c = numberString.charAt(i);
+            if (c == '.' || (c>='0' && c<='9')) {
+               isValid = true; 
+            } else {
+                isValid = false;
+            }
+        }
+        return isValid;
     }
 }

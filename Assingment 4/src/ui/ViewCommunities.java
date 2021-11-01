@@ -91,7 +91,7 @@ public class ViewCommunities extends javax.swing.JPanel {
         });
         add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, -1, -1));
 
-        title.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
+        title.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("List of Communities");
         add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 339, 40));

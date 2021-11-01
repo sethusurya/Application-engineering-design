@@ -31,6 +31,12 @@ public class EncounterHistory {
         newEncounterHistory.add(index,newEncounter);
         return newEncounterHistory;
     }
+
+    public ArrayList<Encounter> remove(Encounter newEncounter) {
+        ArrayList<Encounter> newEncounterHistory = encounterHistory;
+        newEncounterHistory.remove(newEncounter);
+        return newEncounterHistory;
+    }
     
     
 }

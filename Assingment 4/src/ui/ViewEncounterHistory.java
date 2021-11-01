@@ -52,6 +52,7 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         encountersTable = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -68,7 +69,7 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
-        title.setFont(new java.awt.Font("Kristen ITC", 1, 14)); // NOI18N
+        title.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("List of Encounters");
         add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 27, 339, 27));
@@ -110,6 +111,14 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
             }
         });
         add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 130, -1, -1));
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -130,10 +139,27 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
         populateTable(person.getEncounterHistory());
     }//GEN-LAST:event_formComponentShown
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = encountersTable.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an encounter(Row) to delete");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) encountersTable.getModel();
+        Encounter newEncounter = (Encounter) model.getValueAt(selectedRowIndex, 0);
+        // delete the person from persons db
+        person.getEncounterHistory().remove(newEncounter);
+        
+        //refresh the screen
+        populateTable(person.getEncounterHistory());
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JTable encountersTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel title;
