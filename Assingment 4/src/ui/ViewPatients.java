@@ -49,6 +49,7 @@ public class ViewPatients extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnEdit1 = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         patientsTable = new javax.swing.JTable();
@@ -61,6 +62,16 @@ public class ViewPatients extends javax.swing.JPanel {
         txtBloodPressure = new javax.swing.JTextField();
         btnApplyFilter = new javax.swing.JButton();
         btnCancelFilter = new javax.swing.JButton();
+        btnAddVitals = new javax.swing.JButton();
+
+        btnEdit1.setBackground(new java.awt.Color(0, 102, 102));
+        btnEdit1.setForeground(new java.awt.Color(255, 255, 255));
+        btnEdit1.setText("View Encounters");
+        btnEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEdit1ActionPerformed(evt);
+            }
+        });
 
         setBackground(new java.awt.Color(51, 51, 51));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -78,7 +89,7 @@ public class ViewPatients extends javax.swing.JPanel {
                 btnEditActionPerformed(evt);
             }
         });
-        add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 416, -1, -1));
+        add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, -1, -1));
 
         patientsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,6 +174,16 @@ public class ViewPatients extends javax.swing.JPanel {
             }
         });
         add(btnCancelFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 144, -1, -1));
+
+        btnAddVitals.setBackground(new java.awt.Color(0, 102, 102));
+        btnAddVitals.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddVitals.setText("+ ADD Encounter");
+        btnAddVitals.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddVitalsActionPerformed(evt);
+            }
+        });
+        add(btnAddVitals, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -254,12 +275,34 @@ public class ViewPatients extends javax.swing.JPanel {
         txtBloodPressure.setText("");
     }//GEN-LAST:event_btnCancelFilterActionPerformed
 
+    private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEdit1ActionPerformed
+
+    private void btnAddVitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddVitalsActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = patientsTable.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please Select a row to Add New Encounters");
+        } else {
+            DefaultTableModel model = (DefaultTableModel) patientsTable.getModel();
+            Person selectedPerson = (Person) model.getValueAt(selectedRowIndex, 0);
+            
+            CreateEncounter myCreateEncounter = new CreateEncounter(rightPanel, city, personsList, selectedPerson);
+            rightPanel.add("CreateEncounter", myCreateEncounter);
+            CardLayout layout = (CardLayout) rightPanel.getLayout();
+            layout.next(rightPanel);
+        }
+    }//GEN-LAST:event_btnAddVitalsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddVitals;
     private javax.swing.JButton btnApplyFilter;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCancelFilter;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnEdit1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBloodPressure;
     private javax.swing.JLabel lblCommunity;
