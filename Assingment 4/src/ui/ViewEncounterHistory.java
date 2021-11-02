@@ -53,6 +53,7 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
         encountersTable = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 51, 51));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -106,7 +107,7 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(encountersTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 171, 564, 205));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 171, 610, 250));
 
         btnAdd.setBackground(new java.awt.Color(0, 102, 102));
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
@@ -116,9 +117,9 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 130, -1, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, -1, -1));
 
-        btnDelete.setBackground(new java.awt.Color(0, 102, 102));
+        btnDelete.setBackground(new java.awt.Color(255, 51, 51));
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +127,17 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 80, -1));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 430, 80, -1));
+
+        btnEdit.setBackground(new java.awt.Color(0, 102, 102));
+        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
+        btnEdit.setText("View / Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+        add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -163,11 +174,28 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
         populateTable(person.getEncounterHistory());
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = encountersTable.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an encounter(Row) to View / Edit");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) encountersTable.getModel();
+        Encounter newEncounter = (Encounter) model.getValueAt(selectedRowIndex, 0);
+        // do something with this encounter
+        EditEncounter myEditEncounter = new EditEncounter(rightPanel, city, personsList, person, newEncounter);
+        rightPanel.add("EditEncounter", myEditEncounter);
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_btnEditActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JTable encountersTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel title;

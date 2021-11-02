@@ -21,26 +21,25 @@ import model.Vitals;
  *
  * @author sethu
  */
-public class CreateEncounter extends javax.swing.JPanel {
+public class EditEncounter extends javax.swing.JPanel {
 
     public JPanel rightPanel;
     public City city;
     public PersonsList personsList;
     public Person person;
+    public Encounter encounter;
     /**
-     * Creates new form CreateEncounter
+     * Creates new form EditEncounter
      */
-    public CreateEncounter(JPanel rightPanel, City city, PersonsList personsList, Person person) {
+    public EditEncounter(JPanel rightPanel, City city, PersonsList personsList, Person person, Encounter encounter) {
         initComponents();
         this.rightPanel = rightPanel;
         this.city = city;
         this.personsList = personsList;
         this.person = person;
+        this.encounter = encounter;
         
-        // initiate the date value by default
-        dtDate.setDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        
-        txtPatientId.setText(person.getPatientId());
+        populateData();
     }
 
     /**
@@ -72,7 +71,7 @@ public class CreateEncounter extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Create New Encounter");
+        lblTitle.setText("View / Edit Encounter");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, 583, 50));
 
         lblPatientId.setForeground(new java.awt.Color(255, 255, 255));
@@ -105,11 +104,13 @@ public class CreateEncounter extends javax.swing.JPanel {
         lblDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblDate.setText("Date : ");
         add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 264, 82, 29));
+
+        dtDate.setEnabled(false);
         add(dtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 264, 213, 30));
 
         btnSave.setBackground(new java.awt.Color(0, 102, 102));
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
-        btnSave.setText("Save");
+        btnSave.setText("Update");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -128,20 +129,15 @@ public class CreateEncounter extends javax.swing.JPanel {
         add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 338, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
-        goBack();
-    }//GEN-LAST:event_btnCancelActionPerformed
-
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        
+
         // check if all the inputs are provided or not
         if (txtPulse.getText().equals("") || txtBloodPressure.getText().equals("") || txtTemperature.getText().equals("") || dtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this,"One or more inputs is left blank, Please provide them to proceed");
             return;
         }
-        
+
         // check for valid number data
         if (!isValidNumber(txtPulse.getText())) {
             JOptionPane.showMessageDialog(this,"Pulse is not in number, Please correct the data");
@@ -155,50 +151,58 @@ public class CreateEncounter extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Temperature cannot be string(FYI)");
             return;
         }
-        
+
         // save things first and go back & person is selected person here
         double newBloodPressure = Double.parseDouble(txtBloodPressure.getText());
         double newTemperature = Double.parseDouble(txtTemperature.getText());
         int newPulse = Integer.parseInt(txtPulse.getText());
-        
+
         System.out.println("get date : "+ dtDate.getDate());
-        
+
         LocalDate newDate;
         newDate = dtDate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        
-        for (Encounter e: person.getEncounterHistory().getEncounterHistory()){
-            if (e.getDate().compareTo(newDate) == 0) { // compared makes it 0
-                JOptionPane.showMessageDialog(this, "Vitals for this day have been already entered");
-                return;
-            }
-        }
-                
-        
+
+
         Vitals newVitals = new Vitals();
         newVitals.setBloodPressure(newBloodPressure);
         newVitals.setTemperature(newTemperature);
         newVitals.setPulse(newPulse);
-        
+
         Encounter newEncounter = new Encounter();
         newEncounter.setDate(newDate);
         newEncounter.setVitals(newVitals);
-        
+
         EncounterHistory newEncounterHistory = person.getEncounterHistory();
-        
+
         // find the index where this date falls in
-        int index = person.getEncounterHistory().getEncounterHistory().size();
-        for (int i = 0; i < person.getEncounterHistory().getEncounterHistory().size(); i++) {
-            LocalDate currentDate = person.getEncounterHistory().getEncounterHistory().get(i).getDate();
-            if(newDate.compareTo(currentDate) > 0) {
+        int index = -1;
+        int length = person.getEncounterHistory().getEncounterHistory().size();
+        for (int i = 0; i < length; i++) {
+            Encounter tempEncounter = person.getEncounterHistory().getEncounterHistory().get(i);
+            Vitals tempVitals = tempEncounter.getVitals();
+            LocalDate tempDate = tempEncounter.getDate();
+            Vitals temp2Vitals = encounter.getVitals();
+            LocalDate temp2Date = encounter.getDate();
+            if (tempDate.compareTo(temp2Date) == 0 && tempVitals.getBloodPressure() == temp2Vitals.getBloodPressure() && temp2Vitals.getPulse()== tempVitals.getPulse() &&  temp2Vitals.getTemperature()== tempVitals.getTemperature()) {
                 index = i;
-                break;
             }
         }
-        newEncounterHistory.addEncounter(index,newEncounter); // add new encounter to the person
+        if (index > -1) {
+                newEncounterHistory.editEncounter(index,newEncounter); // add new encounter to the person
+                person.setEncounterHistory(newEncounterHistory);
+                goBack();
+        } else {
+            JOptionPane.showMessageDialog(this, "Something went wrong");
+            return;
+        }
+
         
-        person.setEncounterHistory(newEncounterHistory);
-        goBack();
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        goBack();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -246,4 +250,13 @@ public class CreateEncounter extends javax.swing.JPanel {
         }
         return isValid;
     }
+
+    private void populateData() {
+        txtPatientId.setText(person.getPatientId());
+        txtBloodPressure.setText(String.valueOf(encounter.getVitals().getBloodPressure()));
+        txtTemperature.setText(String.valueOf(encounter.getVitals().getTemperature()));
+        txtPulse.setText(String.valueOf(encounter.getVitals().getPulse()));
+        dtDate.setDate(Date.from(encounter.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+    }
+
 }
