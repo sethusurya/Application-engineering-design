@@ -66,6 +66,7 @@ public class CreatePerson extends javax.swing.JPanel {
         btnNewHouse = new javax.swing.JButton();
         btnNewCommunity = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -74,25 +75,30 @@ public class CreatePerson extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Create Person");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 42));
 
+        lblName.setForeground(new java.awt.Color(255, 255, 255));
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblName.setText("Name : ");
         add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 89, 101, 32));
         add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 87, 252, 37));
         add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 130, 252, 37));
 
+        lblAge.setForeground(new java.awt.Color(255, 255, 255));
         lblAge.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblAge.setText("Age : ");
         add(lblAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 130, 101, 32));
         add(txtSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 173, 252, 37));
 
+        lblSex.setForeground(new java.awt.Color(255, 255, 255));
         lblSex.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSex.setText("Sex : ");
         add(lblSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 175, 101, 32));
 
+        lblCommunity.setForeground(new java.awt.Color(255, 255, 255));
         lblCommunity.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCommunity.setText("Community : ");
         add(lblCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 263, 101, 32));
@@ -110,6 +116,7 @@ public class CreatePerson extends javax.swing.JPanel {
         });
         add(selCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 259, 252, 40));
 
+        lblHouse.setForeground(new java.awt.Color(255, 255, 255));
         lblHouse.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblHouse.setText("House : ");
         add(lblHouse, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 309, 101, 32));
@@ -122,6 +129,8 @@ public class CreatePerson extends javax.swing.JPanel {
         });
         add(selHouse, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 305, 252, 40));
 
+        btnSave.setBackground(new java.awt.Color(0, 102, 102));
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,6 +139,8 @@ public class CreatePerson extends javax.swing.JPanel {
         });
         add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(438, 394, -1, -1));
 
+        btnCancel.setBackground(new java.awt.Color(0, 102, 102));
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,10 +150,13 @@ public class CreatePerson extends javax.swing.JPanel {
         add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 394, -1, -1));
         add(txtPatientId, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 216, 252, 37));
 
+        lblPatientId.setForeground(new java.awt.Color(255, 255, 255));
         lblPatientId.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPatientId.setText("Medical ID : ");
         add(lblPatientId, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 218, 101, 32));
 
+        btnNewHouse.setBackground(new java.awt.Color(0, 102, 102));
+        btnNewHouse.setForeground(new java.awt.Color(255, 255, 255));
         btnNewHouse.setText("+ New House");
         btnNewHouse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +165,8 @@ public class CreatePerson extends javax.swing.JPanel {
         });
         add(btnNewHouse, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, 100, -1));
 
+        btnNewCommunity.setBackground(new java.awt.Color(0, 102, 102));
+        btnNewCommunity.setForeground(new java.awt.Color(255, 255, 255));
         btnNewCommunity.setText("+ New Community");
         btnNewCommunity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -44,19 +44,24 @@ public class CreateCommunity extends javax.swing.JPanel {
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Create New Community");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 59, 600, 63));
 
         lblName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblName.setForeground(new java.awt.Color(255, 255, 255));
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblName.setText("Name : ");
         add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 184, 94, 33));
         add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 175, 265, 54));
 
+        btnSave.setBackground(new java.awt.Color(0, 102, 102));
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText(" Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,6 +70,8 @@ public class CreateCommunity extends javax.swing.JPanel {
         });
         add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, -1, -1));
 
+        btnCancel.setBackground(new java.awt.Color(0, 102, 102));
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cacel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

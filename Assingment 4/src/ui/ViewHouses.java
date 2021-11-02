@@ -50,6 +50,7 @@ public class ViewHouses extends javax.swing.JPanel {
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(51, 51, 51));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -78,16 +79,20 @@ public class ViewHouses extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(housesTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 154, 535, 241));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 154, 560, 280));
 
+        btnAdd.setBackground(new java.awt.Color(0, 102, 102));
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("+ Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(504, 125, -1, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, -1, -1));
 
+        btnBack.setBackground(new java.awt.Color(255, 51, 51));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,10 +102,12 @@ public class ViewHouses extends javax.swing.JPanel {
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("List of Houses");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 21, 320, 28));
 
+        lblName.setForeground(new java.awt.Color(255, 255, 255));
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblName.setText("Community Name : ");
         add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 113, 37));

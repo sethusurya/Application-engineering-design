@@ -27,24 +27,27 @@ public class HomePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         title = new javax.swing.JLabel();
-        title1 = new javax.swing.JLabel();
+        title2 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(51, 51, 51));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         title.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        title.setForeground(new java.awt.Color(255, 255, 255));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("Welcome");
-        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 116, 600, 27));
+        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 600, 27));
 
-        title1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
-        title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title1.setText("Use the buttons on Left side to Navigate");
-        add(title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 216, 580, 27));
+        title2.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        title2.setForeground(new java.awt.Color(255, 255, 255));
+        title2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title2.setText("Use the buttons on Left side to Navigate");
+        add(title2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 580, 27));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel title;
-    private javax.swing.JLabel title1;
+    private javax.swing.JLabel title2;
     // End of variables declaration//GEN-END:variables
 }

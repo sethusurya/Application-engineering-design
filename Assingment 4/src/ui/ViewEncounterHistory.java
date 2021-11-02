@@ -54,6 +54,7 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -61,6 +62,8 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
         });
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnBack.setBackground(new java.awt.Color(255, 51, 51));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +73,7 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         title.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        title.setForeground(new java.awt.Color(255, 255, 255));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("List of Encounters");
         add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 27, 339, 27));
@@ -104,6 +108,8 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 171, 564, 205));
 
+        btnAdd.setBackground(new java.awt.Color(0, 102, 102));
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("+ Add New");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +118,8 @@ public class ViewEncounterHistory extends javax.swing.JPanel {
         });
         add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 130, -1, -1));
 
+        btnDelete.setBackground(new java.awt.Color(0, 102, 102));
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

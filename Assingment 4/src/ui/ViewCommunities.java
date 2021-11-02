@@ -46,6 +46,8 @@ public class ViewCommunities extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
+        setToolTipText("");
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -81,29 +83,37 @@ public class ViewCommunities extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(communityTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 564, 230));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 570, 230));
 
+        btnEdit.setBackground(new java.awt.Color(0, 102, 102));
+        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setText("View / Edit");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
             }
         });
-        add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, -1, -1));
+        add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 400, -1, -1));
 
+        title.setBackground(new java.awt.Color(0, 153, 153));
         title.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        title.setForeground(new java.awt.Color(255, 255, 255));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("List of Communities");
-        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 339, 40));
+        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 339, 40));
 
+        btnAdd.setBackground(new java.awt.Color(0, 102, 102));
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("+ Add New");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, -1, -1));
 
+        btnBack.setBackground(new java.awt.Color(255, 51, 51));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

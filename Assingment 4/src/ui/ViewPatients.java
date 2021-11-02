@@ -62,6 +62,7 @@ public class ViewPatients extends javax.swing.JPanel {
         btnApplyFilter = new javax.swing.JButton();
         btnCancelFilter = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -69,6 +70,8 @@ public class ViewPatients extends javax.swing.JPanel {
         });
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnEdit.setBackground(new java.awt.Color(0, 102, 102));
+        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setText("View Encounters");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +110,8 @@ public class ViewPatients extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 234, 594, 171));
 
+        btnBack.setBackground(new java.awt.Color(255, 51, 51));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,25 +121,31 @@ public class ViewPatients extends javax.swing.JPanel {
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, -1));
 
         title.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        title.setForeground(new java.awt.Color(255, 255, 255));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("Filters");
         add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 18, 339, 27));
 
         title1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        title1.setForeground(new java.awt.Color(255, 255, 255));
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title1.setText("List of Patients");
         add(title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 188, 308, 35));
 
+        lblCommunity.setForeground(new java.awt.Color(255, 255, 255));
         lblCommunity.setText("Community");
         add(lblCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 63, 90, 26));
 
         selCommunity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(selCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 63, 104, 26));
 
+        lblBloodPressure.setForeground(new java.awt.Color(255, 255, 255));
         lblBloodPressure.setText("Blood Pressure  > ");
         add(lblBloodPressure, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 100, -1, 26));
         add(txtBloodPressure, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 104, 26));
 
+        btnApplyFilter.setBackground(new java.awt.Color(0, 102, 102));
+        btnApplyFilter.setForeground(new java.awt.Color(255, 255, 255));
         btnApplyFilter.setText("Apply Filter");
         btnApplyFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +154,8 @@ public class ViewPatients extends javax.swing.JPanel {
         });
         add(btnApplyFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 144, -1, -1));
 
+        btnCancelFilter.setBackground(new java.awt.Color(255, 51, 51));
+        btnCancelFilter.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelFilter.setText("Clear Filter");
         btnCancelFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

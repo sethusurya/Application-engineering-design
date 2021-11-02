@@ -49,15 +49,21 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        leftPanel.setBackground(new java.awt.Color(102, 102, 102));
+
+        btnCity.setBackground(new java.awt.Color(0, 102, 102));
         btnCity.setFont(new java.awt.Font("Kristen ITC", 0, 11)); // NOI18N
-        btnCity.setText("City");
+        btnCity.setForeground(new java.awt.Color(255, 255, 255));
+        btnCity.setText("Boston City");
         btnCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCityActionPerformed(evt);
             }
         });
 
+        btnPersons.setBackground(new java.awt.Color(0, 102, 102));
         btnPersons.setFont(new java.awt.Font("Kristen ITC", 0, 11)); // NOI18N
+        btnPersons.setForeground(new java.awt.Color(255, 255, 255));
         btnPersons.setText("Persons");
         btnPersons.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,7 +71,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btnPatients.setBackground(new java.awt.Color(0, 102, 102));
         btnPatients.setFont(new java.awt.Font("Kristen ITC", 0, 11)); // NOI18N
+        btnPatients.setForeground(new java.awt.Color(255, 255, 255));
         btnPatients.setText("Patients");
         btnPatients.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,7 +89,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPersons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPatients, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                    .addComponent(btnPatients, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );

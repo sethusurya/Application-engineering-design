@@ -49,28 +49,35 @@ public class CreateHouse extends javax.swing.JPanel {
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Create New House");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 28, 600, 50));
 
+        lblHouseNumber.setForeground(new java.awt.Color(255, 255, 255));
         lblHouseNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHouseNumber.setText("House Number : ");
         add(lblHouseNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 117, 94, 42));
         add(txtHouseNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 117, 468, 42));
         add(txtStreetName, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 191, 468, 42));
 
+        lblStreetName.setForeground(new java.awt.Color(255, 255, 255));
         lblStreetName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblStreetName.setText("Street Name : ");
         add(lblStreetName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 191, 94, 42));
         add(txtZip, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 263, 468, 42));
 
+        lblZip.setForeground(new java.awt.Color(255, 255, 255));
         lblZip.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblZip.setText("Zip : ");
         add(lblZip, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 263, 94, 42));
 
+        btnSave.setBackground(new java.awt.Color(0, 102, 102));
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +86,8 @@ public class CreateHouse extends javax.swing.JPanel {
         });
         add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 392, -1, -1));
 
+        btnCancel.setBackground(new java.awt.Color(0, 102, 102));
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

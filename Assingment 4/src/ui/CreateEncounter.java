@@ -66,13 +66,16 @@ public class CreateEncounter extends javax.swing.JPanel {
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Create New Encounter");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, 583, 50));
 
+        lblPatientId.setForeground(new java.awt.Color(255, 255, 255));
         lblPatientId.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPatientId.setText("Patient ID : ");
         add(lblPatientId, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 104, 82, 29));
@@ -80,26 +83,32 @@ public class CreateEncounter extends javax.swing.JPanel {
         txtPatientId.setEditable(false);
         add(txtPatientId, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 104, 213, 29));
 
+        lblBloodPressure.setForeground(new java.awt.Color(255, 255, 255));
         lblBloodPressure.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblBloodPressure.setText("Blood Pressure : ");
         add(lblBloodPressure, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 144, -1, 29));
         add(txtBloodPressure, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 144, 213, 29));
 
+        lblTemperature.setForeground(new java.awt.Color(255, 255, 255));
         lblTemperature.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTemperature.setText("Temperature : ");
         add(lblTemperature, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 184, 82, 29));
         add(txtTemperature, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 184, 213, 29));
 
+        lblPulse.setForeground(new java.awt.Color(255, 255, 255));
         lblPulse.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPulse.setText("Pulse : ");
         add(lblPulse, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 224, 82, 29));
         add(txtPulse, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 224, 213, 29));
 
+        lblDate.setForeground(new java.awt.Color(255, 255, 255));
         lblDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblDate.setText("Date : ");
         add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 264, 82, 29));
         add(dtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 264, 213, 30));
 
+        btnSave.setBackground(new java.awt.Color(0, 102, 102));
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +117,8 @@ public class CreateEncounter extends javax.swing.JPanel {
         });
         add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 338, -1, -1));
 
+        btnCancel.setBackground(new java.awt.Color(0, 102, 102));
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

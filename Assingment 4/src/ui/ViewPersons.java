@@ -61,6 +61,7 @@ public class ViewPersons extends javax.swing.JPanel {
         btnClearFilter = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -98,14 +99,18 @@ public class ViewPersons extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 219, 570, 190));
 
+        btnAdd.setBackground(new java.awt.Color(0, 102, 102));
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("+ Add New");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(484, 177, -1, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, -1, -1));
 
+        btnBack.setBackground(new java.awt.Color(255, 51, 51));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +120,7 @@ public class ViewPersons extends javax.swing.JPanel {
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         title.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        title.setForeground(new java.awt.Color(255, 255, 255));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("Filter");
         add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 23, 339, 27));
@@ -122,14 +128,18 @@ public class ViewPersons extends javax.swing.JPanel {
         selCommunity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(selCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 68, 186, 26));
 
+        lblCommunity.setForeground(new java.awt.Color(255, 255, 255));
         lblCommunity.setText("Community : ");
         add(lblCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 68, 98, 26));
 
         title1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        title1.setForeground(new java.awt.Color(255, 255, 255));
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title1.setText("List of Persons");
         add(title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 174, 339, 27));
 
+        btnApplyFilter.setBackground(new java.awt.Color(0, 102, 102));
+        btnApplyFilter.setForeground(new java.awt.Color(255, 255, 255));
         btnApplyFilter.setText("Apply");
         btnApplyFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +148,8 @@ public class ViewPersons extends javax.swing.JPanel {
         });
         add(btnApplyFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 112, -1, -1));
 
+        btnClearFilter.setBackground(new java.awt.Color(255, 51, 51));
+        btnClearFilter.setForeground(new java.awt.Color(255, 255, 255));
         btnClearFilter.setText("Clear");
         btnClearFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,13 +158,15 @@ public class ViewPersons extends javax.swing.JPanel {
         });
         add(btnClearFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 112, -1, -1));
 
+        btnDelete.setBackground(new java.awt.Color(255, 51, 51));
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, -1, -1));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
