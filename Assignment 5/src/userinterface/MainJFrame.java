@@ -132,7 +132,14 @@ public class MainJFrame extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "Invalid Credentials");
            return;
        } else {
-           JOptionPane.showMessageDialog(this, "Identified User Creating page please wait");
+            // identify the user role and create respective Jpanel
+           container.add("userPage", userAccount.getRole().createWorkArea(container, userAccount, system));
+           CardLayout layout = (CardLayout) container.getLayout();
+           layout.next(container);
+           loginJButton.setEnabled(false);
+           userNameField.setEnabled(false);
+           passwordField.setEnabled(false);
+           logoutJButton.setEnabled(true);
        }
        
        
