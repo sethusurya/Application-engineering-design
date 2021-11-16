@@ -50,7 +50,7 @@ public class ManageRestaurants extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Name", "Menu Items"
+                "Name", "No. of Menu Items"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
