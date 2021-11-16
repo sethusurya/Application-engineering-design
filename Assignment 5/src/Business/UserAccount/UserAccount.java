@@ -18,11 +18,7 @@ public class UserAccount {
     private String password;
     private Employee employee;
     private Role role;
-    private WorkQueue workQueue;
 
-    public UserAccount() {
-        workQueue = new WorkQueue();
-    }
     
     
     
@@ -56,10 +52,6 @@ public class UserAccount {
 
     public Employee getEmployee() {
         return employee;
-    }
-
-    public WorkQueue getWorkQueue() {
-        return workQueue;
     }
 
     
