@@ -4,17 +4,30 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import Business.EcoSystem;
+import Business.Restaurant.MenuItem;
+import Business.Restaurant.Restaurant;
+import Business.Restaurant.RestaurantDirectory;
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author sethu
  */
 public class CreateRestaurant_1 extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
+    EcoSystem ecosystem;
     /**
      * Creates new form CreateRestaurant
      */
-    public CreateRestaurant_1() {
+    public CreateRestaurant_1(JPanel userProcessContainer,EcoSystem ecosystem) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.ecosystem=ecosystem;
     }
 
     /**
@@ -40,8 +53,18 @@ public class CreateRestaurant_1 extends javax.swing.JPanel {
         lblName.setText("Name : ");
 
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,6 +101,35 @@ public class CreateRestaurant_1 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        goBack();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        String name = txtName.getText();
+        if (name.equals("") || name == null) {
+            JOptionPane.showMessageDialog(this, "Restaurant needs a unique name to be saved");
+            return;
+        } else {
+            RestaurantDirectory RD = ecosystem.getRestaurantDirectory();
+            if (RD.checkForUniqueName(name)) { // checking for unique name
+                // save with empty menu
+                ArrayList<MenuItem> newMenuItems = new ArrayList<MenuItem>();
+                Restaurant newRestaurant = new Restaurant();
+                newRestaurant.setName(name);
+                newRestaurant.setMenu(newMenuItems);
+                RD.addRestaurant(newRestaurant);
+                // navigate back
+                goBack();
+            } else {
+                JOptionPane.showMessageDialog(this, "Restaurant with same name already exists");
+                return;
+            }
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
@@ -86,4 +138,10 @@ public class CreateRestaurant_1 extends javax.swing.JPanel {
     private javax.swing.JLabel title;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
+
+    private void goBack() {
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }
 }

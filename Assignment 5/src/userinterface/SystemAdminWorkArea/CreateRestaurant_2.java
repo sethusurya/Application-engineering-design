@@ -4,17 +4,39 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Employee.EmployeeDirectory;
+import Business.Restaurant.MenuItem;
+import Business.Restaurant.Restaurant;
+import Business.Restaurant.RestaurantDirectory;
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author sethu
  */
 public class CreateRestaurant_2 extends javax.swing.JPanel {
-
+    
+    JPanel userProcessContainer;
+    EcoSystem ecosystem;
+    Restaurant restaurant;
     /**
      * Creates new form CreateRestaurant_2
      */
-    public CreateRestaurant_2() {
+    public CreateRestaurant_2(JPanel userProcessContainer,EcoSystem ecosystem, Restaurant restaurant) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.ecosystem=ecosystem;
+        this.restaurant = restaurant;
+        
+        populateInfo(restaurant.getName());
+        populateMenuTable(restaurant.getMenu());
+        populateAdminTable(ecosystem.getEmployeeDirectory());
     }
 
     /**
@@ -27,27 +49,41 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
     private void initComponents() {
 
         txtName = new javax.swing.JTextField();
-        btnSave = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
+        btnEditItem = new javax.swing.JButton();
+        btnDeleteItem = new javax.swing.JButton();
         title = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        btnSave1 = new javax.swing.JButton();
-        btnSave2 = new javax.swing.JButton();
+        menuTable = new javax.swing.JTable();
+        btnAddMenuItem = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         title1 = new javax.swing.JLabel();
         title2 = new javax.swing.JLabel();
-        btnSave3 = new javax.swing.JButton();
+        btnAddAdmin = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        btnCancel1 = new javax.swing.JButton();
+        adminTable = new javax.swing.JTable();
+        btnDeleteAdmin = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
-        txtName.setEnabled(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
-        btnSave.setText("View / Edit Item");
+        btnEditItem.setText("View / Edit Item");
+        btnEditItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditItemActionPerformed(evt);
+            }
+        });
 
-        btnCancel.setText("Delete Item");
+        btnDeleteItem.setText("Delete Item");
+        btnDeleteItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteItemActionPerformed(evt);
+            }
+        });
 
         title.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -56,7 +92,7 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblName.setText("Name : ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        menuTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -67,16 +103,26 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
                 "Name", "Description", "Quantity", "Cost"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Description");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("Quantity");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Cost");
+        jScrollPane1.setViewportView(menuTable);
+        if (menuTable.getColumnModel().getColumnCount() > 0) {
+            menuTable.getColumnModel().getColumn(1).setHeaderValue("Description");
+            menuTable.getColumnModel().getColumn(2).setHeaderValue("Quantity");
+            menuTable.getColumnModel().getColumn(3).setHeaderValue("Cost");
         }
 
-        btnSave1.setText("+ Add New Item");
+        btnAddMenuItem.setText("+ Add New Item");
+        btnAddMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddMenuItemActionPerformed(evt);
+            }
+        });
 
-        btnSave2.setText("<< Back");
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         title1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -86,9 +132,14 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
         title2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title2.setText("Restaurant Admins");
 
-        btnSave3.setText("+ Add New Admin");
+        btnAddAdmin.setText("+ Add New Admin");
+        btnAddAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddAdminActionPerformed(evt);
+            }
+        });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        adminTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -99,9 +150,14 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
                 "Name"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(adminTable);
 
-        btnCancel1.setText("Delete Admin");
+        btnDeleteAdmin.setText("Delete Admin");
+        btnDeleteAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteAdminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,7 +165,7 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(title, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(btnSave2)
+                .addComponent(btnBack)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(title1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
@@ -121,27 +177,27 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
                         .addComponent(title2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 402, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(218, 218, 218))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 673, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCancel)
+                        .addComponent(btnDeleteItem)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSave))
-                    .addComponent(btnSave1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCancel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSave3, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addComponent(btnEditItem))
+                    .addComponent(btnAddMenuItem, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDeleteAdmin, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAddAdmin, javax.swing.GroupLayout.Alignment.TRAILING)))
             .addComponent(jScrollPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(btnSave2)
+                .addComponent(btnBack)
                 .addGap(29, 29, 29)
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -149,46 +205,147 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
                     .addComponent(txtName)
                     .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
-                .addComponent(btnSave1)
+                .addComponent(btnAddMenuItem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(title1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnCancel))
+                    .addComponent(btnEditItem)
+                    .addComponent(btnDeleteItem))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
-                .addComponent(btnSave3)
+                .addComponent(btnAddAdmin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(title2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancel1)
+                .addComponent(btnDeleteAdmin)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        populateInfo(restaurant.getName());
+        populateMenuTable(restaurant.getMenu());
+        populateAdminTable(ecosystem.getEmployeeDirectory());
+    }//GEN-LAST:event_formComponentShown
+
+    private void btnAddMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMenuItemActionPerformed
+        // TODO add your handling code here:
+        CreateMenuItem newMenuItem = new CreateMenuItem(userProcessContainer, ecosystem, restaurant, null);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("CreateMenuItem", newMenuItem);
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnAddMenuItemActionPerformed
+
+    private void btnEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditItemActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = menuTable.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel)menuTable.getModel();
+        MenuItem selectedMenuItem = (MenuItem) model.getValueAt(selectedRowIndex, 0);
+        
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Select a Row to view / Edit");
+            return;
+        } else {
+            CreateMenuItem myMenuItem = new CreateMenuItem(userProcessContainer, ecosystem, restaurant, selectedMenuItem);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            userProcessContainer.add("myMenuItem", myMenuItem);
+            layout.next(userProcessContainer);
+        }
+    }//GEN-LAST:event_btnEditItemActionPerformed
+
+    private void btnDeleteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteItemActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = menuTable.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel)menuTable.getModel();
+        MenuItem selectedMenuItem = (MenuItem) model.getValueAt(selectedRowIndex, 0);
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Select a Row to Delete");
+            return;
+        } else {
+            // @to-do: cancel all the existing orders for this menuItem
+            restaurant.getMenu().remove(selectedMenuItem);
+            populateMenuTable(restaurant.getMenu()); // refresh the list
+        }
+    }//GEN-LAST:event_btnDeleteItemActionPerformed
+
+    private void btnAddAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAdminActionPerformed
+        // TODO add your handling code here:
+        CreateAdminUser newAdminUserPanel = new CreateAdminUser(userProcessContainer, ecosystem, restaurant);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("newAdminUserPanel", newAdminUserPanel);
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnAddAdminActionPerformed
+
+    private void btnDeleteAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteAdminActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnCancel1;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnSave1;
-    private javax.swing.JButton btnSave2;
-    private javax.swing.JButton btnSave3;
+    private javax.swing.JTable adminTable;
+    private javax.swing.JButton btnAddAdmin;
+    private javax.swing.JButton btnAddMenuItem;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDeleteAdmin;
+    private javax.swing.JButton btnDeleteItem;
+    private javax.swing.JButton btnEditItem;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblName;
+    private javax.swing.JTable menuTable;
     private javax.swing.JLabel title;
     private javax.swing.JLabel title1;
     private javax.swing.JLabel title2;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
+
+    private void populateMenuTable(ArrayList<MenuItem> menu) {
+        DefaultTableModel model = (DefaultTableModel)menuTable.getModel();
+        model.setRowCount(0);
+        
+        for(MenuItem p:menu) {
+           Object[] row = new Object[4];
+           row[0] = p;
+           row[1] = p.getDescription();
+           row[2] = p.getQuantity();
+           row[3] = p.getCost();
+           
+           model.addRow(row);
+        }
+    }
+
+    private void populateInfo(String name) {
+        txtName.setText(name);
+        txtName.setEditable(false);
+    }
+
+    private void populateAdminTable(EmployeeDirectory employeeDirectory) {
+        DefaultTableModel model = (DefaultTableModel)adminTable.getModel();
+        model.setRowCount(0);
+        
+        for(Employee p:employeeDirectory.getEmployeeList()) {
+            if (p.getCompanyName() != null && p.getCompanyName().toLowerCase().equals(restaurant.getName().toLowerCase())) {
+             Object[] row = new Object[1];
+             row[0] = p;
+           
+             model.addRow(row);
+            }
+        }
+    }
+
 }

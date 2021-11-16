@@ -35,6 +35,15 @@ public class Restaurant {
         this.name = name;
     }
     
+    public Boolean checkUniqueMenuItemName(String name) {
+        for(MenuItem m: getMenu()) {
+            if (m.getName().toLowerCase().equals(name.toLowerCase())) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     @Override
     public String toString() {
         return name;

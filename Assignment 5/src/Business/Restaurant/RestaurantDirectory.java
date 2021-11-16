@@ -36,4 +36,13 @@ public class RestaurantDirectory {
         restaurantDirectory.remove(newRestaurant);
         return restaurantDirectory;
     }
+    
+    public Boolean checkForUniqueName(String restaurantName) {
+        for(Restaurant r: restaurantDirectory) {
+            if (r.getName().toLowerCase().equals(restaurantName.toLowerCase())){
+                return false;
+            }
+        }
+        return true;
+    } 
 }
