@@ -5,10 +5,14 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Restaurant.Restaurant;
 import Business.Role.AdminRole;
 import Business.Role.Role;
+import Business.Role.SystemAdminRole;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -28,6 +32,8 @@ public class CreateAdminUser extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
         this.restaurant = restaurant;
+        
+        populateInfo(restaurant);
     }
 
     /**
@@ -39,7 +45,7 @@ public class CreateAdminUser extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblEmployee = new javax.swing.JLabel();
+        lblCompany = new javax.swing.JLabel();
         txtRole = new javax.swing.JTextField();
         lblRole = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
@@ -48,11 +54,13 @@ public class CreateAdminUser extends javax.swing.JPanel {
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
-        txtEmployee = new javax.swing.JTextField();
+        txtCompany = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
 
-        lblEmployee.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblEmployee.setText("Employee :");
+        lblCompany.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblCompany.setText("Company :");
+
+        txtRole.setEditable(false);
 
         lblRole.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblRole.setText("Role :");
@@ -73,13 +81,15 @@ public class CreateAdminUser extends javax.swing.JPanel {
 
         title.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("Add / Edit Admin Users");
+        title.setText("Add Admin Users");
 
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblName.setText("Name : ");
 
         lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPassword.setText("Password : ");
+
+        txtCompany.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,9 +109,9 @@ public class CreateAdminUser extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(txtEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -129,8 +139,8 @@ public class CreateAdminUser extends javax.swing.JPanel {
                     .addComponent(txtPassword))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtEmployee)
-                    .addComponent(lblEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCompany)
+                    .addComponent(lblCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtRole)
@@ -151,22 +161,33 @@ public class CreateAdminUser extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         // check for unique names as usernames
+        
         String name = txtName.getText();
+        String companyName = restaurant.getName();
         char[] passwordArray = txtPassword.getPassword();
         String password = String.valueOf(passwordArray); // reconstruct password
         Role role = new AdminRole();
+        if (ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(name)) {
+            Employee newEmployee = ecosystem.getEmployeeDirectory().createEmployee(name, companyName);
+            UserAccount ua = ecosystem.getUserAccountDirectory().createUserAccount(name, password, newEmployee, role);
+            
+            goBack();
+        } else {
+            JOptionPane.showMessageDialog(this, "User with same username already exists");
+            return;
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
-    private javax.swing.JLabel lblEmployee;
+    private javax.swing.JLabel lblCompany;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblRole;
     private javax.swing.JLabel title;
-    private javax.swing.JTextField txtEmployee;
+    private javax.swing.JTextField txtCompany;
     private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtRole;
@@ -176,5 +197,10 @@ public class CreateAdminUser extends javax.swing.JPanel {
         userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
+    }
+
+    private void populateInfo(Restaurant restaurant) {
+        txtCompany.setText(restaurant.getName());
+        txtRole.setText("Restaurant Admin");
     }
 }

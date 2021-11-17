@@ -4,6 +4,8 @@
  */
 package Business;
 
+import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Employee.EmployeeDirectory;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
@@ -22,6 +24,8 @@ public abstract class Organization {
     private RestaurantDirectory restaurantDirectory;
     private EmployeeDirectory employeeDirectory;
     private UserAccountDirectory userAccountDirectory;
+    private DeliveryManDirectory deliveryManDirectory;
+    private CustomerDirectory customerDirectory;
     private int organizationID;
     private static int counter=0;
     
@@ -45,6 +49,8 @@ public abstract class Organization {
         workQueue = new WorkQueue();
         restaurantDirectory = new RestaurantDirectory();
         employeeDirectory = new EmployeeDirectory();
+        customerDirectory = new CustomerDirectory();
+        deliveryManDirectory = new DeliveryManDirectory();
         userAccountDirectory = new UserAccountDirectory();
         organizationID = counter;
         ++counter;
@@ -90,6 +96,23 @@ public abstract class Organization {
         this.restaurantDirectory = restaurantDirectory;
     }
 
+    public DeliveryManDirectory getDeliveryManDirectory() {
+        return deliveryManDirectory;
+    }
+
+    public void setDeliveryManDirectory(DeliveryManDirectory deliveryManDirectory) {
+        this.deliveryManDirectory = deliveryManDirectory;
+    }
+
+    public CustomerDirectory getCustomerDirectory() {
+        return customerDirectory;
+    }
+
+    public void setCustomerDirectory(CustomerDirectory customerDirectory) {
+        this.customerDirectory = customerDirectory;
+    }
+
+    
     @Override
     public String toString() {
         return name;

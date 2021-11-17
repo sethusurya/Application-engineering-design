@@ -7,6 +7,7 @@ package Business.Role;
 import Business.EcoSystem;
 
 import Business.Organization;
+import Business.Restaurant.Restaurant;
 import Business.UserAccount.UserAccount;
 import userinterface.RestaurantAdminRole.AdminWorkAreaJPanel;
 import javax.swing.JPanel;
@@ -19,7 +20,13 @@ public class AdminRole extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new AdminWorkAreaJPanel(userProcessContainer);
+        Restaurant restaurant = new Restaurant();
+        for (Restaurant r: business.getRestaurantDirectory().getRestaurantDirectory()) {
+            if (account.getEmployee().getCompanyName().equals(r.getName())) {
+                restaurant = r;
+            }
+        }
+        return new AdminWorkAreaJPanel(userProcessContainer, business, restaurant);
     }
 
     

@@ -32,9 +32,9 @@
                           <Component id="txtRole" min="-2" pref="142" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblEmployee" min="-2" pref="91" max="-2" attributes="0"/>
+                          <Component id="lblCompany" min="-2" pref="91" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtEmployee" min="-2" pref="142" max="-2" attributes="0"/>
+                          <Component id="txtCompany" min="-2" pref="142" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -74,8 +74,8 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="txtEmployee" alignment="0" max="32767" attributes="0"/>
-                  <Component id="lblEmployee" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="txtCompany" alignment="0" max="32767" attributes="0"/>
+                  <Component id="lblCompany" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -93,13 +93,16 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblEmployee">
+    <Component class="javax.swing.JLabel" name="lblCompany">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Employee :"/>
+        <Property name="text" type="java.lang.String" value="Company :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtRole">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblRole">
       <Properties>
@@ -129,7 +132,7 @@
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Add / Edit Admin Users"/>
+        <Property name="text" type="java.lang.String" value="Add Admin Users"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblName">
@@ -146,7 +149,10 @@
         <Property name="text" type="java.lang.String" value="Password : "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEmployee">
+    <Component class="javax.swing.JTextField" name="txtCompany">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtPassword">
     </Component>

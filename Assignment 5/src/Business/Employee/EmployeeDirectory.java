@@ -22,16 +22,22 @@ public class EmployeeDirectory {
         return employeeList;
     }
     
-    public Employee createEmployee(String name, String companyName){
+    public Employee createEmployee(String name, String companyName ){
         Employee employee = new Employee();
         employee.setName(name);
         employee.setCompanyName(companyName);
         employeeList.add(employee);
         return employee;
     }
+    
 
     public void setEmployeeList(ArrayList<Employee> employeeList) {
         this.employeeList = employeeList;
+    }
+    
+    public ArrayList<Employee> removeEmployee(Employee newEmployee) {
+       employeeList.remove(newEmployee);
+       return employeeList;
     }
 
 }

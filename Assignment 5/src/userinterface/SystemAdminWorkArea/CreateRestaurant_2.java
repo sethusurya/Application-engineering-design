@@ -10,6 +10,7 @@ import Business.Employee.EmployeeDirectory;
 import Business.Restaurant.MenuItem;
 import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -254,12 +255,12 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRowIndex = menuTable.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel)menuTable.getModel();
-        MenuItem selectedMenuItem = (MenuItem) model.getValueAt(selectedRowIndex, 0);
         
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this,"Select a Row to view / Edit");
             return;
         } else {
+            MenuItem selectedMenuItem = (MenuItem) model.getValueAt(selectedRowIndex, 0);
             CreateMenuItem myMenuItem = new CreateMenuItem(userProcessContainer, ecosystem, restaurant, selectedMenuItem);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             userProcessContainer.add("myMenuItem", myMenuItem);
@@ -292,6 +293,27 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
 
     private void btnDeleteAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAdminActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)adminTable.getModel();
+        int index = adminTable.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Select a user to delete");
+            return;
+        } else {
+            // remove from employee directory
+            // remove from userAccount based on name
+            Employee selectedEmployee = (Employee) model.getValueAt(index, 0);
+            UserAccount AccountToRemove = null;
+            for (UserAccount ua: ecosystem.getUserAccountDirectory().getUserAccountList()) {
+                if (ua.getUsername() != null  && ua.getUsername().equals(selectedEmployee.getName())) {
+                    AccountToRemove = ua;
+                }
+            }
+            if (AccountToRemove != null) {
+                ecosystem.getUserAccountDirectory().removeUserAccount(AccountToRemove); //as employee name is same as username in useraccount
+                ecosystem.getEmployeeDirectory().removeEmployee(selectedEmployee); // delete employee from employee directory  
+                populateAdminTable(ecosystem.getEmployeeDirectory());
+            }
+        }
     }//GEN-LAST:event_btnDeleteAdminActionPerformed
 
 
