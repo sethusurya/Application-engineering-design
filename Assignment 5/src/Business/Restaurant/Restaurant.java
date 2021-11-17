@@ -44,6 +44,15 @@ public class Restaurant {
         return true;
     }
     
+    public MenuItem findMenuItem(String menuItemName){
+        for(MenuItem m: menu) {
+            if (m.getName().toLowerCase().equals(menuItemName.toLowerCase())) {
+                return m;
+            }
+        }
+        return null;
+    }
+    
     @Override
     public String toString() {
         return name;

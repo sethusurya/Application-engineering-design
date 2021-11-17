@@ -5,10 +5,15 @@
 package userinterface.CustomerRole;
 
 import Business.EcoSystem;
+import Business.Order.Order;
 import Business.Restaurant.MenuItem;
 import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
+import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -19,15 +24,18 @@ public class CreateOrder extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     EcoSystem ecosystem;
+    UserAccount account;
     /**
      * Creates new form CreateOrder
      */
-    public CreateOrder(JPanel userProcessContainer,EcoSystem ecosystem) {
+    public CreateOrder(JPanel userProcessContainer,EcoSystem ecosystem, UserAccount account) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
+        this.account = account;
         
         populateRestaurants(ecosystem.getRestaurantDirectory());
+        menuMenuItem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[0]));
     }
 
     /**
@@ -69,6 +77,11 @@ public class CreateOrder extends javax.swing.JPanel {
         lblMenuItem.setText("Menu Item :");
 
         menuMenuItem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        menuMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuMenuItemActionPerformed(evt);
+            }
+        });
 
         btnSave.setText("Place Order");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -155,17 +168,45 @@ public class CreateOrder extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        // Create order Time
+        // Form an object and save it
+        String restaurantName = menuRestaurant.getSelectedItem().toString();
+        String menuItemName = menuMenuItem.getSelectedItem().toString();
+        Restaurant selectedRestaurant = ecosystem.getRestaurantDirectory().findRestaurant(restaurantName);
+        MenuItem selectedMenuItem = selectedRestaurant.findMenuItem(menuItemName);
+        ArrayList<String> itemList = new ArrayList<String>();
+        if (!restaurantName.equals("") && !menuItemName.equals("") && selectedMenuItem != null) {
+          itemList.add(selectedMenuItem.getName());
+          Order myNewOrder = new Order();
+          myNewOrder.setRestaurantName(restaurantName);
+          myNewOrder.setCustomerName(account.getUsername());
+          myNewOrder.setOrderTime(new Date());
+          myNewOrder.setOrderList(itemList);
+          myNewOrder.setStatus("Initialized");
+          System.out.print(myNewOrder);
+          
+          // add this order to system
+          ecosystem.getOrderDirectory().addOrder(myNewOrder);
+          goBack();
+        } else {
+            JOptionPane.showMessageDialog(this, "Select Restaurant and Menu item to place an order");
+            return;
+        }  
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
+        menuRestaurant.setSelectedItem("");
+        menuMenuItem.setSelectedItem("");
+        goBack();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void menuRestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRestaurantActionPerformed
         // TODO add your handling code here:
         String restaurantNameTemp = menuRestaurant.getSelectedItem().toString();
         if (restaurantNameTemp.equals("")) {
-            populateMenu(new ArrayList<MenuItem>());
+            // empty the list
+            menuMenuItem.setSelectedItem("");
         } else {
             Restaurant selectedRestaurant = new Restaurant();
             for (Restaurant r: ecosystem.getRestaurantDirectory().getRestaurantDirectory()){
@@ -173,9 +214,44 @@ public class CreateOrder extends javax.swing.JPanel {
                     selectedRestaurant = r;
                 }
             }
-            populateMenu(selectedRestaurant.getMenu());
+            populateMenu(selectedRestaurant);
         }
     }//GEN-LAST:event_menuRestaurantActionPerformed
+
+    private void menuMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMenuItemActionPerformed
+        // TODO add your handling code here:
+        String menuItemTemp = menuMenuItem.getSelectedItem().toString();
+        String restaurantNameTemp = menuRestaurant.getSelectedItem().toString();
+        String cost = "0.0";
+        String quantity = "0.0";
+        if (restaurantNameTemp.equals("")) {
+            // empty the list
+        } else {
+            Restaurant selectedRestaurant = new Restaurant();
+            MenuItem selectedMenuItem = new MenuItem();
+            for (Restaurant r: ecosystem.getRestaurantDirectory().getRestaurantDirectory()){
+                if (r.getName().equals(restaurantNameTemp)) {
+                    selectedRestaurant = r;
+                }
+            }
+            for (MenuItem m: selectedRestaurant.getMenu()) {
+                if (m.getName().equals(menuItemTemp)) {
+                    selectedMenuItem = m;
+                }
+            }
+//                cost = String.valueOf(selectedMenuItem.getCost());
+//                quantity = String.valueOf(selectedMenuItem.getQuantity());
+            try {
+                cost = String.valueOf(selectedMenuItem.getCost());
+                quantity = String.valueOf(selectedMenuItem.getQuantity());
+                inpCost.setText(cost);
+                inpQuantity.setText(quantity);
+            }
+            catch (Exception e){
+                JOptionPane.showMessageDialog(this,"Error fetching Menu Item, Item might have been removed");
+            }
+        }
+    }//GEN-LAST:event_menuMenuItemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -193,6 +269,10 @@ public class CreateOrder extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateRestaurants(RestaurantDirectory restaurantDirectory) {
+        // do populate cost and Quantity
+        inpCost.setText("0.0");
+        inpQuantity.setText("0.0");
+        // populate menu
         ArrayList<String> RestaurantsList = new ArrayList<String>();
         RestaurantsList.add("");
         for(Restaurant r: restaurantDirectory.getRestaurantDirectory()){
@@ -202,14 +282,20 @@ public class CreateOrder extends javax.swing.JPanel {
         menuRestaurant.setModel(new javax.swing.DefaultComboBoxModel<>(Restaurants));
     }
 
-    private void populateMenu(ArrayList<MenuItem> arrayList) {
+    private void populateMenu(Restaurant selectedRestaurant) {
         // populate menu
-//        ArrayList<String> MenuList = new ArrayList<String>();
-//        MenuList.add("");
-//        for(MenuItem r: arrayList){
-//            RestaurantsList.add(r.getName());
-//        }
-//        String[] Restaurants = RestaurantsList.toArray(new String[0]);
-//        menuRestaurant.setModel(new javax.swing.DefaultComboBoxModel<>(Restaurants));
+        ArrayList<String> MenuList = new ArrayList<String>();
+        MenuList.add("");
+        for(MenuItem r: selectedRestaurant.getMenu()){
+            MenuList.add(r.getName());
+        }
+        String[] myMenu = MenuList.toArray(new String[0]);
+        menuMenuItem.setModel(new javax.swing.DefaultComboBoxModel<>(myMenu));
+    }
+
+    private void goBack() {
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }
 }

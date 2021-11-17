@@ -11,6 +11,7 @@ import Business.Order.OrderDirectory;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,16 +40,17 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     public void populateRequestTable(OrderDirectory orderDirectory){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
-        
         for(Order p:orderDirectory.getOrderDirectory()) {
+            if (userAccount.getUsername().equals(p.getCustomerName())) {
              Object[] row = new Object[5];
              row[0] = p;
-             row[1] = p.getRestaurantName();
-             row[2] = p.getOrderTime();
+             row[1] = p.getOrderTime();
+             row[2] = p.getStatus();
              row[3] = p.getDeliveryTime();
-             row[4] = p.getDeliveryMan().getName();
+             row[4] = p.getDeliveryManName();
            
              model.addRow(row);
+            }
         }
     }
 
@@ -87,7 +89,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Restaurant Name", "Order Time", "Delivery Time", "Delivery Man"
+                "Restaurant Name", "Order Time", "Status", "Delivery Time", "Delivery Man"
             }
         ));
         jScrollPane1.setViewportView(table);
@@ -147,11 +149,25 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
 
     private void btnViewOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewOrderActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRowIndex = table.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Select an order to view");
+            return;
+        } else {
+            Order selectedOrder =(Order) table.getValueAt(selectedRowIndex, 0);
+            
+            // navigate to the selected order
+            ViewOrder viewMyOrder = new ViewOrder(userProcessContainer,ecosystem, userAccount, selectedOrder);
+            userProcessContainer.add("viewMyOrder", viewMyOrder);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        }
     }//GEN-LAST:event_btnViewOrderActionPerformed
 
     private void btnNewOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewOrderActionPerformed
         // TODO add your handling code here:
-        CreateOrder newOrder = new CreateOrder(userProcessContainer,ecosystem);
+        CreateOrder newOrder = new CreateOrder(userProcessContainer,ecosystem, userAccount);
         userProcessContainer.add("newOrder", newOrder);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

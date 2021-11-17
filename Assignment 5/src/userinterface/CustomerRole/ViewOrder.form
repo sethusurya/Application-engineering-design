@@ -132,8 +132,11 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnAddComment">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add Comment"/>
+        <Property name="text" type="java.lang.String" value="Save Comment"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddCommentActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="title">
       <Properties>
@@ -160,6 +163,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;&lt; Back"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCost">
       <Properties>

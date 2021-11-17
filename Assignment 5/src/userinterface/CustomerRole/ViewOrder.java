@@ -4,17 +4,36 @@
  */
 package userinterface.CustomerRole;
 
+import Business.EcoSystem;
+import Business.Order.Order;
+import Business.Restaurant.MenuItem;
+import Business.Restaurant.Restaurant;
+import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author sethu
  */
 public class ViewOrder extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
+    EcoSystem ecosystem;
+    UserAccount account;
+    Order order;
     /**
      * Creates new form ViewOrder
      */
-    public ViewOrder() {
+    public ViewOrder(JPanel userProcessContainer,EcoSystem ecosystem, UserAccount account, Order order) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.ecosystem = ecosystem;
+        this.account = account;
+        this.order = order;
+        
+        populateData();
     }
 
     /**
@@ -45,7 +64,12 @@ public class ViewOrder extends javax.swing.JPanel {
         lblDeliveryManName = new javax.swing.JLabel();
         txtComment = new javax.swing.JTextField();
 
-        btnAddComment.setText("Add Comment");
+        btnAddComment.setText("Save Comment");
+        btnAddComment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCommentActionPerformed(evt);
+            }
+        });
 
         title.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -58,6 +82,11 @@ public class ViewOrder extends javax.swing.JPanel {
         lblMenuItem.setText("Menu Item :");
 
         jButton1.setText("<< Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         lblCost.setText("Cost ($) : ");
 
@@ -178,6 +207,33 @@ public class ViewOrder extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        goBack();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnAddCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCommentActionPerformed
+        // TODO add your handling code here:
+        String comment = txtComment.getText();
+        Order myNewOrder = order;
+        myNewOrder.setComment(comment);
+        int index = -1;
+        for (int i = 0; i < ecosystem.getOrderDirectory().getOrderDirectory().size(); i++) {
+            Order tempOrder = ecosystem.getOrderDirectory().getOrderDirectory().get(i);
+            Order tempOrder2 = order;
+            if (tempOrder2.getCustomerName().equals(tempOrder.getCustomerName()) && tempOrder2.getOrderTime().equals(tempOrder.getOrderTime())) {
+                index = i;
+            }
+        }
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Unable to add comment");
+            return;
+        } else {
+            ecosystem.getOrderDirectory().modifyOrder(index, myNewOrder); // add comment to order
+            goBack();
+        }
+    }//GEN-LAST:event_btnAddCommentActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddComment;
@@ -199,4 +255,61 @@ public class ViewOrder extends javax.swing.JPanel {
     private javax.swing.JTextField txtOrderDate;
     private javax.swing.JTextField txtRestaurant;
     // End of variables declaration//GEN-END:variables
+
+    private void populateData() {
+        // fill the text fields
+        String RestaurantName = "N/A";
+        String MenuItemName = "N/A";
+        String orderDate = "N/A";
+        String deliveryDate = "N/A";
+        String deliveryMan = "N/A";
+        String Status = "N/A";
+        String Cost = "N/A";
+        String Quantity = "N/A";
+        String comment = "";
+        MenuItem myMenuItem = new MenuItem();
+        Restaurant myRestaurant = new Restaurant();
+        if (order.getRestaurantName() != null) {
+            RestaurantName = order.getRestaurantName();
+        }
+        if (order.getOrderList().size() == 1) {
+            myRestaurant = ecosystem.getRestaurantDirectory().findRestaurant(RestaurantName);
+            if (myRestaurant != null) {
+                MenuItemName = order.getOrderList().get(0);
+                myMenuItem = myRestaurant.findMenuItem(MenuItemName);
+                Cost = String.valueOf(myMenuItem.getCost());
+                Quantity = String.valueOf(myMenuItem.getQuantity());
+            }
+        }
+        if (order.getOrderTime() != null) {
+            orderDate = order.getOrderTime().toString();
+        }
+        if (order.getDeliveryTime() != null) {
+            deliveryDate = order.getDeliveryTime().toString();
+        }
+        if (order.getDeliveryManName() != null) {
+            deliveryMan = order.getDeliveryManName();
+        }
+        if (order.getStatus() != null){
+            Status = order.getStatus();
+        }
+        if (order.getComment() != null) {
+            comment = order.getComment();
+        }
+        
+        txtRestaurant.setText(RestaurantName);
+        txtMenuItem.setText(MenuItemName);
+        txtOrderDate.setText(orderDate);
+        txtDeliveryDate.setText(deliveryDate);
+        txtDeliveryManName.setText(deliveryMan);
+        inpCost.setText(Cost);
+        inpQuantity.setText(Quantity);
+        txtComment.setText(comment);
+    }
+
+    private void goBack() {
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }
 }

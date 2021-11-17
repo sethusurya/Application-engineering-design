@@ -45,4 +45,13 @@ public class RestaurantDirectory {
         }
         return true;
     } 
+    
+    public Restaurant findRestaurant(String restaurantName) {
+        for(Restaurant r: restaurantDirectory) {
+            if (r.getName().toLowerCase().equals(restaurantName.toLowerCase())){
+               return r;
+            }
+        }
+        return null;
+    }
 }

@@ -19,10 +19,11 @@ public class Order {
     private Date orderTime;
     private String status;
     private Date deliveryTime;
-    private DeliveryMan deliveryMan; // assign or null
+    private String deliveryManName; // assign or null
+    private String customerName; 
     private String comment; // can be null
     private String restaurantName; // select the restaurant name
-    private ArrayList<MenuItem> orderList; // can be repeated
+    private ArrayList<String> orderList; // can be repeated
     
     public Order(){
         id = count;
@@ -69,13 +70,22 @@ public class Order {
         this.deliveryTime = deliveryTime;
     }
 
-    public DeliveryMan getDeliveryMan() {
-        return deliveryMan;
+    public String getDeliveryManName() {
+        return deliveryManName;
     }
 
-    public void setDeliveryMan(DeliveryMan deliveryMan) {
-        this.deliveryMan = deliveryMan;
+    public void setDeliveryManName(String deliveryManName) {
+        this.deliveryManName = deliveryManName;
     }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
 
     public String getComment() {
         return comment;
@@ -93,17 +103,17 @@ public class Order {
         this.restaurantName = restaurantName;
     }
 
-    public ArrayList<MenuItem> getOrderList() {
+    public ArrayList<String> getOrderList() {
         return orderList;
     }
 
-    public void setOrderList(ArrayList<MenuItem> orderList) {
+    public void setOrderList(ArrayList<String> orderList) {
         this.orderList = orderList;
     }
-    
+        
     @Override
     public String toString() {
-        return String.valueOf(count);
+        return restaurantName;
     }
     
     
