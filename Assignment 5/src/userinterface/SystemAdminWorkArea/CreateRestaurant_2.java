@@ -71,27 +71,36 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
                 formComponentShown(evt);
             }
         });
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 104, 195, 30));
 
-        btnEditItem.setText("View / Edit Item");
+        btnEditItem.setForeground(new java.awt.Color(0, 51, 204));
+        btnEditItem.setText("👁️ View / Edit Item");
         btnEditItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditItemActionPerformed(evt);
             }
         });
+        add(btnEditItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(667, 366, -1, -1));
 
-        btnDeleteItem.setText("Delete Item");
+        btnDeleteItem.setForeground(new java.awt.Color(255, 51, 51));
+        btnDeleteItem.setText("🗑️Delete Item");
         btnDeleteItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteItemActionPerformed(evt);
             }
         });
+        add(btnDeleteItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(529, 366, -1, -1));
 
-        title.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        title.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        title.setForeground(new java.awt.Color(0, 102, 102));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("View / Edit Restaurant");
+        title.setText("VIEW RESTAURANT");
+        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 800, 41));
 
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblName.setText("Name : ");
+        add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 104, 96, 30));
 
         menuTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -111,34 +120,46 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
             menuTable.getColumnModel().getColumn(3).setHeaderValue("Cost");
         }
 
-        btnAddMenuItem.setText("+ Add New Item");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 216, 800, 139));
+
+        btnAddMenuItem.setForeground(new java.awt.Color(0, 51, 204));
+        btnAddMenuItem.setText("➕ Add New Item");
         btnAddMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddMenuItemActionPerformed(evt);
             }
         });
+        add(btnAddMenuItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 140, -1, -1));
 
-        btnBack.setText("<< Back");
+        btnBack.setForeground(new java.awt.Color(255, 51, 51));
+        btnBack.setText("🔙 Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        title1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        title1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        title1.setForeground(new java.awt.Color(0, 102, 102));
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title1.setText("Menu Items");
+        title1.setText("MENU ITEMS");
+        add(title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 169, 800, 41));
 
-        title2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        title2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        title2.setForeground(new java.awt.Color(0, 102, 102));
         title2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title2.setText("Restaurant Admins");
+        title2.setText("RESTAURANT ADMINS");
+        add(title2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 486, 800, 41));
 
-        btnAddAdmin.setText("+ Add New Admin");
+        btnAddAdmin.setForeground(new java.awt.Color(0, 51, 204));
+        btnAddAdmin.setText("➕ Add New Admin");
         btnAddAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddAdminActionPerformed(evt);
             }
         });
+        add(btnAddAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(667, 452, -1, -1));
 
         adminTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -153,80 +174,17 @@ public class CreateRestaurant_2 extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(adminTable);
 
-        btnDeleteAdmin.setText("Delete Admin");
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 533, 800, 193));
+
+        btnDeleteAdmin.setForeground(new java.awt.Color(255, 51, 51));
+        btnDeleteAdmin.setText("🗑️ Delete Admin");
         btnDeleteAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteAdminActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(title, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btnBack)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(title1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
-            .addComponent(jSeparator1)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(title2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(218, 218, 218))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 673, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnDeleteItem)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditItem))
-                    .addComponent(btnAddMenuItem, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnDeleteAdmin, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAddAdmin, javax.swing.GroupLayout.Alignment.TRAILING)))
-            .addComponent(jScrollPane2)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btnBack)
-                .addGap(29, 29, 29)
-                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtName)
-                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addComponent(btnAddMenuItem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(title1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditItem)
-                    .addComponent(btnDeleteItem))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(btnAddAdmin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(title2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDeleteAdmin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        add(btnDeleteAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(683, 744, -1, -1));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 415, 800, 10));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

@@ -52,9 +52,13 @@ public class ManageOrders extends javax.swing.JPanel {
         btnDeclineOrdr = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
-        title.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        title.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        title.setForeground(new java.awt.Color(0, 102, 102));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("Our Orders");
+        title.setText("OUR ORDERS");
+        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 51, 800, 46));
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,69 +73,44 @@ public class ManageOrders extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(table);
 
-        btnAcceptOrder.setText("Accept Order");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 164, 800, 480));
+
+        btnAcceptOrder.setForeground(new java.awt.Color(0, 102, 204));
+        btnAcceptOrder.setText("✔ View & ️Accept Order");
         btnAcceptOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAcceptOrderActionPerformed(evt);
             }
         });
+        add(btnAcceptOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 660, -1, -1));
 
+        btnRefresh.setForeground(new java.awt.Color(0, 102, 204));
         btnRefresh.setText("🔃Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefreshActionPerformed(evt);
             }
         });
+        add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, -1, -1));
 
-        btnDeclineOrdr.setText("Decline Order");
+        btnDeclineOrdr.setForeground(new java.awt.Color(255, 51, 51));
+        btnDeclineOrdr.setText("❌ Decline Order");
         btnDeclineOrdr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeclineOrdrActionPerformed(evt);
             }
         });
+        add(btnDeclineOrdr, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 660, 120, -1));
 
+        btnBack.setBackground(new java.awt.Color(255, 255, 255));
+        btnBack.setForeground(new java.awt.Color(255, 51, 51));
         btnBack.setText("🔙Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRefresh, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnDeclineOrdr, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAcceptOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btnBack)
-                .addGap(28, 28, 28)
-                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnRefresh)
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAcceptOrder)
-                    .addComponent(btnDeclineOrdr))
-                .addContainerGap(68, Short.MAX_VALUE))
-        );
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 107, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptOrderActionPerformed

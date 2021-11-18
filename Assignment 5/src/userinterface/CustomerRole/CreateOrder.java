@@ -59,12 +59,17 @@ public class CreateOrder extends javax.swing.JPanel {
         inpQuantity = new javax.swing.JLabel();
         lblQuantity = new javax.swing.JLabel();
 
-        title.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        title.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        title.setForeground(new java.awt.Color(0, 102, 102));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("Create New Order");
+        title.setText("CREATE NEW ORDER");
+        add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 48));
 
         lblRestaurant.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblRestaurant.setText("Restaurant :");
+        add(lblRestaurant, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 103, 97, 26));
 
         menuRestaurant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         menuRestaurant.addActionListener(new java.awt.event.ActionListener() {
@@ -72,9 +77,11 @@ public class CreateOrder extends javax.swing.JPanel {
                 menuRestaurantActionPerformed(evt);
             }
         });
+        add(menuRestaurant, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 99, 198, 35));
 
         lblMenuItem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblMenuItem.setText("Menu Item :");
+        add(lblMenuItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 149, 97, 26));
 
         menuMenuItem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         menuMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -82,88 +89,37 @@ public class CreateOrder extends javax.swing.JPanel {
                 menuMenuItemActionPerformed(evt);
             }
         });
+        add(menuMenuItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 145, 198, 35));
 
-        btnSave.setText("Place Order");
+        btnSave.setForeground(new java.awt.Color(0, 51, 204));
+        btnSave.setText("✔ ️Place Order");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
+        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 254, -1, -1));
 
-        btnCancel.setText("Cancel");
+        btnCancel.setForeground(new java.awt.Color(255, 0, 0));
+        btnCancel.setText("❌ Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
+        add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 254, -1, -1));
 
         lblCost.setText("Cost ($) : ");
+        add(lblCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 198, 66, 22));
 
         inpCost.setText("<Cost>");
+        add(inpCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(479, 202, 82, -1));
 
         inpQuantity.setText("<Quantity>");
+        add(inpQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(479, 230, 82, -1));
 
         lblQuantity.setText("Quantity (lbs) : ");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCancel)
-                                .addGap(131, 131, 131)
-                                .addComponent(btnSave))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblMenuItem, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(menuMenuItem, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(menuRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(296, 296, 296)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCost, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inpCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(inpQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))))
-                .addContainerGap(215, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menuRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMenuItem, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menuMenuItem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCost, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inpCost))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inpQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnCancel))
-                .addGap(0, 285, Short.MAX_VALUE))
-        );
+        add(lblQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 226, 88, 22));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed

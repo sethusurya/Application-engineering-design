@@ -77,10 +77,11 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("My Assigned Deliveries");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 40));
+        jLabel1.setText("MY ASSIGNED DELIVERIES");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 40));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,31 +96,34 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 740, 230));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 800, 460));
 
+        jButton1.setForeground(new java.awt.Color(0, 102, 0));
         jButton1.setText("✔️ Mark Delivered");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 620, -1, -1));
 
-        jButton2.setText("🚚 Mark in-progress");
+        jButton2.setForeground(new java.awt.Color(102, 102, 0));
+        jButton2.setText("🚚 Mark Out For Delivery");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, -1, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 620, -1, -1));
 
+        jButton3.setForeground(new java.awt.Color(0, 51, 153));
         jButton3.setText("🔃 Refresh");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 100, 120, -1));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 90, 120, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
